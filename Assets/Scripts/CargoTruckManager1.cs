@@ -17,14 +17,17 @@ public class CargoTruckManager1 : MonoBehaviour
         _completePanel,
         _finalCamera,
         _failPanel,
-        _levelsPanel;
+        _levelsPanel,
+        _timelineOut;
 
     public GameObject[] _levels, _levelsStartPoint, _levelsPoints, _levelsAnimation;
 
     public GameObject _pausePanel;
 
+
     private void Awake()
     {
+        _link = this;
         _levels[PlayerPrefs.GetInt("Level")].SetActive(true);
         _car.transform.SetPositionAndRotation(_levelsStartPoint[PlayerPrefs.GetInt("Level")].transform.position, _levelsStartPoint[PlayerPrefs.GetInt("Level")].transform.rotation);
 
@@ -45,19 +48,31 @@ public class CargoTruckManager1 : MonoBehaviour
         
     }
 
-    public void OpenTruckTransportBack()
+    public void OpenTruckTransportBack(GameObject _btn)
     {
         _truckTransportBackAnimator.SetBool("Open", true);
+        _timelineOut.GetComponent<PlayableDirector>().Resume();
+        _btn.SetActive(false);
     }
 
 
     public void ResumeTimeLine()
     {
-
+        _timelineOut.GetComponent<PlayableDirector>().Pause();
     }
-    public void PauseTimeLine(PlayableDirector _timeline)
+    public void PauseTimeLine(GameObject _timeline)
     {
-        _timeline.Pause();
+        _timelineOut = _timeline;
+        _timeline.GetComponent<PlayableDirector>().Pause();
     }
+    public void MoveForwardUp()
+    {
+        _timelineOut.GetComponent<PlayableDirector>().Pause();
+    }
+    public void MoveForwardDown(GameObject _timelin)
 
+    {
+        _timelineOut = _timelin;
+        _timelin.GetComponent<PlayableDirector>().Resume();
+    }
 }
