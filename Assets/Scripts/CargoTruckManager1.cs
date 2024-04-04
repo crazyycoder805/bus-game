@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
+
 
 
 public class CargoTruckManager1 : MonoBehaviour
@@ -48,31 +50,27 @@ public class CargoTruckManager1 : MonoBehaviour
         
     }
 
-    public void OpenTruckTransportBack(GameObject _btn)
+    public void NextLevel()
     {
-        _truckTransportBackAnimator.SetBool("Open", true);
-        _timelineOut.GetComponent<PlayableDirector>().Resume();
-        _btn.SetActive(false);
+        
+        PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);
+        SceneManager.LoadScene(0);
+    }
+    public void LevelComplete(GameObject _point)
+    {
+        _point.SetActive(false);
+        _carCamera.SetActive(false);
+        _car.SetActive(false);
+        _carCanvas.SetActive(false);
+        _completePanel.SetActive(true);
+    }
+    public void SkipAnimation(int _currentPoint)
+    {
+        _levelsPoints[_currentPoint].SetActive(false);
+        _levelsPoints[_currentPoint + 1].SetActive(true);
+        _carCamera.SetActive(true);
+        _car.SetActive(true);
+        _carCanvas.SetActive(true);
     }
 
-
-    public void ResumeTimeLine()
-    {
-        _timelineOut.GetComponent<PlayableDirector>().Pause();
-    }
-    public void PauseTimeLine(GameObject _timeline)
-    {
-        _timelineOut = _timeline;
-        _timeline.GetComponent<PlayableDirector>().Pause();
-    }
-    public void MoveForwardUp()
-    {
-        _timelineOut.GetComponent<PlayableDirector>().Pause();
-    }
-    public void MoveForwardDown(GameObject _timelin)
-
-    {
-        _timelineOut = _timelin;
-        _timelin.GetComponent<PlayableDirector>().Resume();
-    }
 }

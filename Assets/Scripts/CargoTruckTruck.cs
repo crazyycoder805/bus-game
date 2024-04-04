@@ -20,9 +20,19 @@ public class CargoTruckTruck : MonoBehaviour
                 {
                     CargoTruckManager1._link._carCamera.SetActive(false);
                     CargoTruckManager1._link._car.SetActive(false);
+                    CargoTruckManager1._link._carCanvas.SetActive(false);
 
                     CargoTruckManager1._link._levelsAnimation[0].SetActive(true);
                     _check = 1;
+                    _other.gameObject.GetComponent<BoxCollider>().enabled = false;
+                } else if (_check == 1)
+                {
+                    CargoTruckManager1._link._carCamera.SetActive(false);
+                    CargoTruckManager1._link._car.SetActive(false);
+                    CargoTruckManager1._link._carCanvas.SetActive(false);
+
+                    CargoTruckManager1._link._levelsAnimation[1].SetActive(true);
+                    _check = 2;
                     _other.gameObject.GetComponent<BoxCollider>().enabled = false;
                 }
             }
