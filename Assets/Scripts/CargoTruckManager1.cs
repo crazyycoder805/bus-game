@@ -36,23 +36,26 @@ public class CargoTruckManager1 : MonoBehaviour
         if (PlayerPrefs.GetInt("Level") == 0)
         {
             _levelsPoints[0].SetActive(true);
+        } else if (PlayerPrefs.GetInt("Level") == 1)
+        {
+            _levelsPoints[2].SetActive(true);
         }
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void NextLevel()
     {
-        
+
         PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);
         SceneManager.LoadScene(0);
     }
@@ -62,6 +65,7 @@ public class CargoTruckManager1 : MonoBehaviour
         _carCamera.SetActive(false);
         _car.SetActive(false);
         _carCanvas.SetActive(false);
+        _finalCamera.SetActive(true);
         _completePanel.SetActive(true);
     }
     public void SkipAnimation(int _currentPoint)
@@ -73,4 +77,13 @@ public class CargoTruckManager1 : MonoBehaviour
         _carCanvas.SetActive(true);
     }
 
+    public void ObjectOn(GameObject _object)
+    {
+        _object.SetActive(true);
+    }
+    public void ObjectOff(GameObject _object)
+    {
+        _object.SetActive(false);
+
+    }
 }
