@@ -18,7 +18,11 @@ public class CargoTruckManager1 : MonoBehaviour
         _carCamera,
         _completePanel,
         _finalCamera,
-        _failPanel;
+        _failPanel,
+        _truckDump,
+        _toeTruck,
+        _beansBag,
+        _tyres;
 
     public GameObject[] _levels, _levelsStartPoint, _levelsPoints, _levelsAnimation;
 
@@ -38,6 +42,45 @@ public class CargoTruckManager1 : MonoBehaviour
         {
             _levelsPoints[2].SetActive(true);
         }
+        else if (PlayerPrefs.GetInt("Level") == 2)
+        {
+            _levelsPoints[5].SetActive(true);
+        }
+        else if (PlayerPrefs.GetInt("Level") == 3)
+        {
+            _levelsPoints[8].SetActive(true);
+        }
+        else if (PlayerPrefs.GetInt("Level") == 4)
+        {
+            _levelsPoints[9].SetActive(true);
+        }
+        else if (PlayerPrefs.GetInt("Level") == 5)
+        {
+            _truckDump.SetActive(false);
+            _toeTruck.SetActive(true);
+
+            _levelsPoints[11].SetActive(true);
+        }
+        else if (PlayerPrefs.GetInt("Level") == 6)
+        {
+            _levelsPoints[12].SetActive(true);
+        }
+        else if (PlayerPrefs.GetInt("Level") == 7)
+        {
+            _beansBag.SetActive(true);
+
+            _levelsPoints[14].SetActive(true);
+        }
+        else if (PlayerPrefs.GetInt("Level") == 8)
+        {
+            _levelsPoints[15].SetActive(true);
+        }
+        else if (PlayerPrefs.GetInt("Level") == 9)
+        {
+            _tyres.SetActive(true);
+
+            _levelsPoints[16].SetActive(true);
+        }
     }
 
     public void LevelComplete(GameObject _point)
@@ -48,6 +91,16 @@ public class CargoTruckManager1 : MonoBehaviour
         _carCanvas.SetActive(false);
         _finalCamera.SetActive(true);
         _completePanel.SetActive(true);
+        PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + 500);
+    }
+
+    public void LevelFail()
+    {
+        _carCamera.SetActive(false);
+        _car.SetActive(false);
+        _carCanvas.SetActive(false);
+        _finalCamera.SetActive(true);
+        _failPanel.SetActive(true);
     }
     public void SkipAnimation(int _currentPoint)
     {
