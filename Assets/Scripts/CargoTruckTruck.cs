@@ -70,6 +70,39 @@ public class CargoTruckTruck : MonoBehaviour
                     _other.gameObject.GetComponent<BoxCollider>().enabled = false;
                 }
             }
+            else if (PlayerPrefs.GetInt("Level") == 2)
+            {
+                if (_check == 0)
+                {
+                    CargoTruckManager1._link._carCamera.SetActive(false);
+                    CargoTruckManager1._link._car.SetActive(false);
+                    CargoTruckManager1._link._carCanvas.SetActive(false);
+
+                    CargoTruckManager1._link._levelsAnimation[2].SetActive(true);
+                    _check = 1;
+                    _other.gameObject.GetComponent<BoxCollider>().enabled = false;
+                }
+                else if (_check == 1)
+                {
+                    CargoTruckManager1._link._carCamera.SetActive(false);
+                    CargoTruckManager1._link._car.SetActive(false);
+                    CargoTruckManager1._link._carCanvas.SetActive(false);
+
+                    CargoTruckManager1._link._levelsAnimation[3].SetActive(true);
+                    _check = 2;
+                    _other.gameObject.GetComponent<BoxCollider>().enabled = false;
+                }
+                else if (_check == 2)
+                {
+                    CargoTruckManager1._link._carCamera.SetActive(false);
+                    CargoTruckManager1._link._car.SetActive(false);
+                    CargoTruckManager1._link._carCanvas.SetActive(false);
+
+                    CargoTruckManager1._link._levelsAnimation[4].SetActive(true);
+                    _check = 3;
+                    _other.gameObject.GetComponent<BoxCollider>().enabled = false;
+                }
+            }
 
 
         }

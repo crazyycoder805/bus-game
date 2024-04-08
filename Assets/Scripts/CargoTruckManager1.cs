@@ -18,14 +18,12 @@ public class CargoTruckManager1 : MonoBehaviour
         _carCamera,
         _completePanel,
         _finalCamera,
-        _failPanel,
-        _levelsPanel,
-        _timelineOut;
+        _failPanel;
 
     public GameObject[] _levels, _levelsStartPoint, _levelsPoints, _levelsAnimation;
 
     public GameObject _pausePanel;
-
+    public Slider _loadingBar;
 
     private void Awake()
     {
@@ -41,24 +39,7 @@ public class CargoTruckManager1 : MonoBehaviour
             _levelsPoints[2].SetActive(true);
         }
     }
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void NextLevel()
-    {
-
-        PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);
-        SceneManager.LoadScene(0);
-    }
     public void LevelComplete(GameObject _point)
     {
         _point.SetActive(false);
@@ -86,4 +67,5 @@ public class CargoTruckManager1 : MonoBehaviour
         _object.SetActive(false);
 
     }
+    
 }
