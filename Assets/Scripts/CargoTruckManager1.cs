@@ -26,11 +26,10 @@ public class CargoTruckManager1 : MonoBehaviour
 
     public GameObject[] _levels, _levelsStartPoint, _levelsPoints, _levelsAnimation;
 
-    public GameObject _pausePanel;
-    public Slider _loadingBar;
-
     private void Awake()
     {
+        Time.timeScale = 1f;
+
         _link = this;
         _levels[PlayerPrefs.GetInt("Level")].SetActive(true);
         _car.transform.SetPositionAndRotation(_levelsStartPoint[PlayerPrefs.GetInt("Level")].transform.position, _levelsStartPoint[PlayerPrefs.GetInt("Level")].transform.rotation);

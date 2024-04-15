@@ -26,7 +26,7 @@ public class CargoTruckLevelComplete : MonoBehaviour
     }
     public IEnumerator LoadScreen()
     {
-        AsyncOperation _loadOperation = SceneManager.LoadSceneAsync(1);
+        AsyncOperation _loadOperation = SceneManager.LoadSceneAsync(0);
         while (!_loadOperation.isDone)
         {
             float _progress = Mathf.Clamp01(_loadOperation.progress / 0.9f);
