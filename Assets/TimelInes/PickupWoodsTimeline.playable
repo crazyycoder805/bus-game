@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: AnimationPlayableAsset(Clone)(Clone)
   m_EditorClassIdentifier: 
   m_Clip: {fileID: 7400000, guid: afdb5ea71519c6c499f08f6f5588f7be, type: 2}
-  m_Position: {x: 0.102252625, y: 0.10473772, z: 1.1048672}
-  m_EulerAngles: {x: -16.715, y: -0.241, z: 1.854}
+  m_Position: {x: 0.11497252, y: -0.27973357, z: 1.2203698}
+  m_EulerAngles: {x: -16.714, y: -0.273, z: 1.859}
   m_UseTrackMatchFields: 1
   m_MatchTargetFields: 63
   m_RemoveStartOffset: 1
@@ -35,8 +35,8 @@ MonoBehaviour:
   m_Name: AnimationPlayableAsset(Clone)(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
   m_Clip: {fileID: 7400000, guid: afdb5ea71519c6c499f08f6f5588f7be, type: 2}
-  m_Position: {x: -0.043852255, y: 1.8701754, z: -0.2503478}
-  m_EulerAngles: {x: 0, y: 0, z: 0.031}
+  m_Position: {x: -0.043661233, y: 1.5104108, z: -0.25036272}
+  m_EulerAngles: {x: 0, y: 0, z: 0.02}
   m_UseTrackMatchFields: 1
   m_MatchTargetFields: 63
   m_RemoveStartOffset: 1
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
   m_Name: Signal Emitter
   m_EditorClassIdentifier: 
-  m_Time: 16.016666666666666
+  m_Time: 12.469586449613173
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: 79b0415f6608a9a48bba08170e82187f, type: 2}
@@ -73,8 +73,8 @@ MonoBehaviour:
   m_Name: AnimationPlayableAsset(Clone)(Clone)
   m_EditorClassIdentifier: 
   m_Clip: {fileID: 7400000, guid: afdb5ea71519c6c499f08f6f5588f7be, type: 2}
-  m_Position: {x: -0.0009981293, y: 1.8247106, z: -0.044503354}
-  m_EulerAngles: {x: 0, y: 0, z: -0.024}
+  m_Position: {x: 0.29935864, y: 1.470541, z: -0.068261646}
+  m_EulerAngles: {x: 0, y: 0, z: 0.028}
   m_UseTrackMatchFields: 1
   m_MatchTargetFields: 63
   m_RemoveStartOffset: 1
@@ -166,7 +166,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 14.9
+        time: 11.733334
         value: 0
         inSlope: 0
         outSlope: 0
@@ -175,7 +175,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 15.466666
+        time: 12.3
         value: 1
         inSlope: 0
         outSlope: 0
@@ -211,7 +211,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 15.466666
+    m_StopTime: 12.3
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -249,7 +249,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 14.9
+        time: 11.733334
         value: 0
         inSlope: 0
         outSlope: 0
@@ -258,7 +258,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 15.466666
+        time: 12.3
         value: 1
         inSlope: 0
         outSlope: 0
@@ -302,7 +302,7 @@ MonoBehaviour:
     m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 8189702806832017273}
-    m_Duration: 15.913476895540953
+    m_Duration: 12.469586449613173
     m_TimeScale: 1
     m_ParentTrack: {fileID: -1036345822946788106}
     m_EaseInDuration: 0
@@ -462,9 +462,9 @@ MonoBehaviour:
     m_DisplayName: mixamo.com
   - m_Version: 1
     m_Start: 1.0666666666666667
-    m_ClipIn: 0
+    m_ClipIn: 0.9166666666666667
     m_Asset: {fileID: -8889634611910690136}
-    m_Duration: 7.283333333333333
+    m_Duration: 6.366666666666666
     m_TimeScale: 1
     m_ParentTrack: {fileID: -122187579687278138}
     m_EaseInDuration: 0
@@ -530,7 +530,7 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: mixamo.com
   - m_Version: 1
-    m_Start: 8.35
+    m_Start: 7.433333333333333
     m_ClipIn: 6.833333333333334
     m_Asset: {fileID: 8941432817501014067}
     m_Duration: 5.016666666666666
@@ -765,9 +765,9 @@ MonoBehaviour:
     m_DisplayName: mixamo.com
   - m_Version: 1
     m_Start: 5.233333333333333
-    m_ClipIn: 5.083333333333334
+    m_ClipIn: 6.7
     m_Asset: {fileID: 5705176623785338995}
-    m_Duration: 7.316666666666667
+    m_Duration: 5.700000000000001
     m_TimeScale: 1
     m_ParentTrack: {fileID: 3651843060391151980}
     m_EaseInDuration: 0
@@ -797,10 +797,10 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: mixamo.com
   - m_Version: 1
-    m_Start: 12.55
+    m_Start: 10.933333333333334
     m_ClipIn: 12.200000000000003
     m_Asset: {fileID: -8503184596430469782}
-    m_Duration: 2.716666666666667
+    m_Duration: 1.5362531162798394
     m_TimeScale: 1
     m_ParentTrack: {fileID: 3651843060391151980}
     m_EaseInDuration: 0
@@ -991,7 +991,7 @@ MonoBehaviour:
   m_Name: AnimationPlayableAsset(Clone)
   m_EditorClassIdentifier: 
   m_Clip: {fileID: 7400000, guid: afdb5ea71519c6c499f08f6f5588f7be, type: 2}
-  m_Position: {x: 0.021948745, y: -0.66431063, z: 0.2698732}
+  m_Position: {x: 0.26272023, y: -1.003055, z: 0.3498152}
   m_EulerAngles: {x: -16.903, y: -0.218, z: 1.466}
   m_UseTrackMatchFields: 1
   m_MatchTargetFields: 63
@@ -1013,7 +1013,7 @@ MonoBehaviour:
   m_Name: AnimationPlayableAsset(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
   m_Clip: {fileID: 7400000, guid: afdb5ea71519c6c499f08f6f5588f7be, type: 2}
-  m_Position: {x: 0.027713982, y: -1.3273193, z: 0.1803138}
+  m_Position: {x: 0.050462063, y: -1.7710742, z: 0.32204917}
   m_EulerAngles: {x: -17.695, y: -0.457, z: 2.936}
   m_UseTrackMatchFields: 1
   m_MatchTargetFields: 63
@@ -1100,7 +1100,7 @@ MonoBehaviour:
   m_Name: AnimationPlayableAsset(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
   m_Clip: {fileID: 7400000, guid: afdb5ea71519c6c499f08f6f5588f7be, type: 2}
-  m_Position: {x: 0.057278167, y: 1.8146024, z: 0.8522936}
+  m_Position: {x: 0.057274044, y: 1.5370595, z: 0.8523126}
   m_EulerAngles: {x: 0, y: 0, z: 0}
   m_UseTrackMatchFields: 1
   m_MatchTargetFields: 63
@@ -1201,9 +1201,9 @@ MonoBehaviour:
     m_DisplayName: mixamo.com
   - m_Version: 1
     m_Start: 3.3442486993968488
-    m_ClipIn: 3.172417967269818
+    m_ClipIn: 4.744835934539636
     m_Asset: {fileID: 5250273481099166866}
-    m_Duration: 6.805751300603152
+    m_Duration: 5.233333333333334
     m_TimeScale: 1
     m_ParentTrack: {fileID: 8989341474236206646}
     m_EaseInDuration: 0
@@ -1247,11 +1247,11 @@ MonoBehaviour:
     m_Recordable: 0
     m_PostExtrapolationMode: 1
     m_PreExtrapolationMode: 1
-    m_PostExtrapolationTime: 0.0775820327301826
+    m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: mixamo.com
   - m_Version: 1
-    m_Start: 10.227582032730183
+    m_Start: 8.577582032730183
     m_ClipIn: 10.055751300603152
     m_Asset: {fileID: -5296911560867577963}
     m_Duration: 2.689084633936483

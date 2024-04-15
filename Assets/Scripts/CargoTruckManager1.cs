@@ -79,7 +79,7 @@ public class CargoTruckManager1 : MonoBehaviour
         {
             _tyres.SetActive(true);
 
-            _levelsPoints[16].SetActive(true);
+            _levelsPoints[17].SetActive(true);
         }
     }
 
