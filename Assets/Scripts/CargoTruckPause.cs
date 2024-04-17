@@ -35,11 +35,12 @@ public class CargoTruckPause : MonoBehaviour
             _loadingBar.value = _progress;
             yield return null;
         }
+
     }
 
 
 
-    
+
     public void ResumeLevel()
     {
         _pausePanel.SetActive(false);

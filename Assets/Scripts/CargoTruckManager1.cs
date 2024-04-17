@@ -22,9 +22,11 @@ public class CargoTruckManager1 : MonoBehaviour
         _truckDump,
         _toeTruck,
         _beansBag,
-        _tyres;
+        _tyres,
+        _turckRain;
 
     public GameObject[] _levels, _levelsStartPoint, _levelsPoints, _levelsAnimation;
+    public Material _rainyDayMaterial;
 
     private void Awake()
     {
@@ -43,6 +45,8 @@ public class CargoTruckManager1 : MonoBehaviour
         }
         else if (PlayerPrefs.GetInt("Level") == 2)
         {
+            RenderSettings.skybox = _rainyDayMaterial;
+            _turckRain.SetActive(true);
             _levelsPoints[5].SetActive(true);
         }
         else if (PlayerPrefs.GetInt("Level") == 3)
