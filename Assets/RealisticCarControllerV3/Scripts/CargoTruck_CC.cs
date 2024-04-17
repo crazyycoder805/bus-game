@@ -14,19 +14,20 @@ using UnityEngine;
 ///<summary>
 /// API for instantiating, registering new RCC vehicles, and changes at runtime.
 ///</summary>
-public class RCC {
+public class CargoTruck_CC
+{
 
     ///<summary>
     /// Spawn a RCC vehicle prefab with given position, rotation, sets its controllable, and engine state.
     ///</summary>
-    public static RCC_CarControllerV3 SpawnRCC(RCC_CarControllerV3 vehiclePrefab, Vector3 position, Quaternion rotation, bool registerAsPlayerVehicle, bool isControllable, bool isEngineRunning) {
+    public static CargoTruck_CC_CarControllerV3 SpawnRCC(CargoTruck_CC_CarControllerV3 vehiclePrefab, Vector3 position, Quaternion rotation, bool registerAsPlayerVehicle, bool isControllable, bool isEngineRunning) {
 
-        RCC_CarControllerV3 spawnedRCC = (RCC_CarControllerV3)GameObject.Instantiate(vehiclePrefab, position, rotation);
+        CargoTruck_CC_CarControllerV3 spawnedRCC = (CargoTruck_CC_CarControllerV3)GameObject.Instantiate(vehiclePrefab, position, rotation);
         spawnedRCC.gameObject.SetActive(true);
         spawnedRCC.SetCanControl(isControllable);
 
         if (registerAsPlayerVehicle)
-            RCC_SceneManager.Instance.RegisterPlayer(spawnedRCC);
+            CargoTruck_CC_SceneManager.Instance.RegisterPlayer(spawnedRCC);
 
         if (isEngineRunning)
             spawnedRCC.StartEngine(true);
@@ -40,27 +41,27 @@ public class RCC {
     ///<summary>
     /// Registers the vehicle as player vehicle. 
     ///</summary>
-    public static void RegisterPlayerVehicle(RCC_CarControllerV3 vehicle) {
+    public static void RegisterPlayerVehicle(CargoTruck_CC_CarControllerV3 vehicle) {
 
-        RCC_SceneManager.Instance.RegisterPlayer(vehicle);
+        CargoTruck_CC_SceneManager.Instance.RegisterPlayer(vehicle);
 
     }
 
     ///<summary>
     /// Registers the vehicle as player vehicle with controllable state. 
     ///</summary>
-    public static void RegisterPlayerVehicle(RCC_CarControllerV3 vehicle, bool isControllable) {
+    public static void RegisterPlayerVehicle(CargoTruck_CC_CarControllerV3 vehicle, bool isControllable) {
 
-        RCC_SceneManager.Instance.RegisterPlayer(vehicle, isControllable);
+        CargoTruck_CC_SceneManager.Instance.RegisterPlayer(vehicle, isControllable);
 
     }
 
     ///<summary>
     /// Registers the vehicle as player vehicle with controllable and engine state. 
     ///</summary>
-    public static void RegisterPlayerVehicle(RCC_CarControllerV3 vehicle, bool isControllable, bool engineState) {
+    public static void RegisterPlayerVehicle(CargoTruck_CC_CarControllerV3 vehicle, bool isControllable, bool engineState) {
 
-        RCC_SceneManager.Instance.RegisterPlayer(vehicle, isControllable, engineState);
+        CargoTruck_CC_SceneManager.Instance.RegisterPlayer(vehicle, isControllable, engineState);
 
     }
 
@@ -69,14 +70,14 @@ public class RCC {
     ///</summary>
     public static void DeRegisterPlayerVehicle() {
 
-        RCC_SceneManager.Instance.DeRegisterPlayer();
+        CargoTruck_CC_SceneManager.Instance.DeRegisterPlayer();
 
     }
 
     ///<summary>
     /// Sets controllable state of the vehicle.
     ///</summary>
-    public static void SetControl(RCC_CarControllerV3 vehicle, bool isControllable) {
+    public static void SetControl(CargoTruck_CC_CarControllerV3 vehicle, bool isControllable) {
 
         vehicle.SetCanControl(isControllable);
 
@@ -85,7 +86,7 @@ public class RCC {
     ///<summary>
     /// Sets engine state of the vehicle.
     ///</summary>
-    public static void SetEngine(RCC_CarControllerV3 vehicle, bool engineState) {
+    public static void SetEngine(CargoTruck_CC_CarControllerV3 vehicle, bool engineState) {
 
         if (engineState)
             vehicle.StartEngine();
@@ -97,9 +98,9 @@ public class RCC {
     ///<summary>
     /// Sets the mobile controller type.
     ///</summary>
-    public static void SetMobileController(RCC_Settings.MobileController mobileController) {
+    public static void SetMobileController(CargoTruck_CC_Settings.MobileController mobileController) {
 
-        RCC_Settings.Instance.mobileController = mobileController;
+        CargoTruck_CC_Settings.Instance.mobileController = mobileController;
         Debug.Log("Mobile Controller has been changed to " + mobileController.ToString());
 
     }
@@ -119,7 +120,7 @@ public class RCC {
     ///</summary>
     public static void StartStopRecord() {
 
-        RCC_SceneManager.Instance.Record();
+        CargoTruck_CC_SceneManager.Instance.Record();
 
     }
 
@@ -128,7 +129,7 @@ public class RCC {
     ///</summary>
     public static void StartStopReplay() {
 
-        RCC_SceneManager.Instance.Play();
+        CargoTruck_CC_SceneManager.Instance.Play();
 
     }
 
@@ -137,7 +138,7 @@ public class RCC {
     ///</summary>
     public static void StopRecordReplay() {
 
-        RCC_SceneManager.Instance.Stop();
+        CargoTruck_CC_SceneManager.Instance.Stop();
 
     }
 
@@ -146,7 +147,7 @@ public class RCC {
     ///</summary>
     public static void SetBehavior(int behaviorIndex) {
 
-        RCC_SceneManager.SetBehavior(behaviorIndex);
+        CargoTruck_CC_SceneManager.SetBehavior(behaviorIndex);
         Debug.Log("Behavior has been changed to " + behaviorIndex.ToString());
 
     }
@@ -156,7 +157,7 @@ public class RCC {
     /// </summary>
     public static void ChangeCamera() {
 
-        RCC_SceneManager.Instance.ChangeCamera();
+        CargoTruck_CC_SceneManager.Instance.ChangeCamera();
 
     }
 
@@ -167,7 +168,7 @@ public class RCC {
     /// <param name="rotation">Rotation.</param>
     public static void Transport(Vector3 position, Quaternion rotation) {
 
-        RCC_SceneManager.Instance.Transport(position, rotation);
+        CargoTruck_CC_SceneManager.Instance.Transport(position, rotation);
 
     }
 
@@ -177,9 +178,9 @@ public class RCC {
     /// <param name="vehicle"></param>
     /// <param name="position"></param>
     /// <param name="rotation"></param>
-    public static void Transport(RCC_CarControllerV3 vehicle, Vector3 position, Quaternion rotation) {
+    public static void Transport(CargoTruck_CC_CarControllerV3 vehicle, Vector3 position, Quaternion rotation) {
 
-        RCC_SceneManager.Instance.Transport(vehicle, position, rotation);
+        CargoTruck_CC_SceneManager.Instance.Transport(vehicle, position, rotation);
 
     }
 
@@ -188,7 +189,7 @@ public class RCC {
     /// </summary>
     public static void CleanSkidmarks() {
 
-        RCC_SkidmarksManager.Instance.CleanSkidmarks();
+        CargoTruck_CC_SkidmarksManager.Instance.CleanSkidmarks();
 
     }
 
@@ -197,7 +198,7 @@ public class RCC {
     /// </summary>
     public static void CleanSkidmarks(int index) {
 
-        RCC_SkidmarksManager.Instance.CleanSkidmarks(index);
+        CargoTruck_CC_SkidmarksManager.Instance.CleanSkidmarks(index);
 
     }
 

@@ -14,19 +14,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-[CustomEditor(typeof(RCC_GroundMaterials))]
-public class RCC_GroundMaterialsEditor : Editor {
+[CustomEditor(typeof(CargoTruck_CC_GroundMaterials))]
+public class CargoTruck_CC_GroundMaterialsEditor : Editor {
 
-    RCC_GroundMaterials prop;
+    CargoTruck_CC_GroundMaterials prop;
 
     Vector2 scrollPos;
-    List<RCC_GroundMaterials.GroundMaterialFrictions> groundMaterials = new List<RCC_GroundMaterials.GroundMaterialFrictions>();
+    List<CargoTruck_CC_GroundMaterials.GroundMaterialFrictions> groundMaterials = new List<CargoTruck_CC_GroundMaterials.GroundMaterialFrictions>();
 
     Color orgColor;
 
     public override void OnInspectorGUI() {
 
-        prop = (RCC_GroundMaterials)target;
+        prop = (CargoTruck_CC_GroundMaterials)target;
         serializedObject.Update();
         orgColor = GUI.color;
 
@@ -76,7 +76,7 @@ public class RCC_GroundMaterialsEditor : Editor {
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.BeginHorizontal();
             prop.frictions[i].groundParticles = (GameObject)EditorGUILayout.ObjectField("Wheel Particles", prop.frictions[i].groundParticles, typeof(GameObject), false, GUILayout.Width(200f));
-            prop.frictions[i].skidmark = (RCC_Skidmarks)EditorGUILayout.ObjectField("Wheel Skidmarks", prop.frictions[i].skidmark, typeof(RCC_Skidmarks), false, GUILayout.Width(200f));
+            prop.frictions[i].skidmark = (CargoTruck_CC_Skidmarks)EditorGUILayout.ObjectField("Wheel Skidmarks", prop.frictions[i].skidmark, typeof(CargoTruck_CC_Skidmarks), false, GUILayout.Width(200f));
 
             EditorGUILayout.Space();
 
@@ -133,7 +133,7 @@ public class RCC_GroundMaterialsEditor : Editor {
 
         groundMaterials.Clear();
         groundMaterials.AddRange(prop.frictions);
-        RCC_GroundMaterials.GroundMaterialFrictions newGroundMaterial = new RCC_GroundMaterials.GroundMaterialFrictions();
+        CargoTruck_CC_GroundMaterials.GroundMaterialFrictions newGroundMaterial = new CargoTruck_CC_GroundMaterials.GroundMaterialFrictions();
         groundMaterials.Add(newGroundMaterial);
         prop.frictions = groundMaterials.ToArray();
 
@@ -150,7 +150,7 @@ public class RCC_GroundMaterialsEditor : Editor {
 
     void OpenGeneralSettings() {
 
-        Selection.activeObject = RCC_Settings.Instance;
+        Selection.activeObject = CargoTruck_CC_Settings.Instance;
 
     }
 

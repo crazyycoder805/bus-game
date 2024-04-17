@@ -21,12 +21,12 @@ public class CargoTruck_CC_Teleporter : MonoBehaviour {
         if (col.isTrigger)
             return;
 
-        RCC_CarControllerV3 carController = col.gameObject.GetComponentInParent<RCC_CarControllerV3>();
+        CargoTruck_CC_CarControllerV3 carController = col.gameObject.GetComponentInParent<CargoTruck_CC_CarControllerV3>();
 
         if (!carController)
             return;
 
-        RCC.Transport(carController, spawnPoint.position, spawnPoint.rotation);
+        CargoTruck_CC.Transport(carController, spawnPoint.position, spawnPoint.rotation);
 
     }
 

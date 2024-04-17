@@ -14,7 +14,7 @@ using System.Collections;
 /// Tracks the player vehicle and keeps orientation nicely for cinematic angles. It has a pivot gameobject named "Animation Pivot". This pivot gameobject has 3 animations itself. 
 /// </summary>
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/Camera/RCC Cinematic Camera")]
-public class RCC_CinematicCamera : RCC_Singleton<RCC_CinematicCamera> {
+public class CargoTruck_CC_CinematicCamera : CargoTruck_CC_Singleton<CargoTruck_CC_CinematicCamera> {
 
     public GameObject pivot;                // Animation Pivot.
     private Vector3 targetPosition;     // Target position for tracking.
@@ -37,13 +37,13 @@ public class RCC_CinematicCamera : RCC_Singleton<RCC_CinematicCamera> {
     void Update() {
 
         // If current camera is null, return.
-        if (!RCC_SceneManager.Instance.activePlayerCamera)
+        if (!CargoTruck_CC_SceneManager.Instance.activePlayerCamera)
             return;
 
         Transform target = null;
 
-        if (RCC_SceneManager.Instance.activePlayerCamera.cameraTarget.playerVehicle)
-            target = RCC_SceneManager.Instance.activePlayerCamera.cameraTarget.playerVehicle.transform;
+        if (CargoTruck_CC_SceneManager.Instance.activePlayerCamera.cameraTarget.playerVehicle)
+            target = CargoTruck_CC_SceneManager.Instance.activePlayerCamera.cameraTarget.playerVehicle.transform;
 
         if (target == null)
             return;

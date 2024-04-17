@@ -19,7 +19,7 @@ public class CargoTruck_CC_Spawner : MonoBehaviour {
 
         int selectedIndex = PlayerPrefs.GetInt("SelectedRCCVehicle", 0);
 
-        RCC.SpawnRCC(RCC_DemoVehicles.Instance.vehicles[selectedIndex], transform.position, transform.rotation, true, true, true);
+        CargoTruck_CC.SpawnRCC(CargoTruck_CC_DemoVehicles.Instance.vehicles[selectedIndex], transform.position, transform.rotation, true, true, true);
 
     }
 

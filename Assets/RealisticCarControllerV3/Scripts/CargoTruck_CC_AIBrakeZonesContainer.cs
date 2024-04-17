@@ -15,7 +15,7 @@ using System.Collections.Generic;
 /// Used for holding a list for brake zones, and drawing gizmos for all of them.
 /// </summary>
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/AI/RCC AI Brake Zones Container")]
-public class RCC_AIBrakeZonesContainer : MonoBehaviour {
+public class CargoTruck_CC_AIBrakeZonesContainer : MonoBehaviour {
 
     public List<Transform> brakeZones = new List<Transform>();		// Brake Zones list.
 

@@ -13,7 +13,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/Misc/RCC Level Loader")]
-public class RCC_LevelLoader : MonoBehaviour {
+public class CargoTruck_CC_LevelLoader : MonoBehaviour {
 
     public void LoadLevel(string levelName) {
 

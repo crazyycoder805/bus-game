@@ -16,13 +16,13 @@ using System.Linq;
 /// Used for holding a list for waypoints, and drawing gizmos for all of them.
 /// </summary>
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/AI/RCC AI Waypoints Container")]
-public class RCC_AIWaypointsContainer : MonoBehaviour {
+public class CargoTruck_CC_AIWaypointsContainer : MonoBehaviour {
 
-    public List<RCC_Waypoint> waypoints = new List<RCC_Waypoint>();
+    public List<CargoTruck_CC_Waypoint> waypoints = new List<CargoTruck_CC_Waypoint>();
 
     void Start() {
 
-        RCC_Waypoint[] childWaypoints = GetComponentsInChildren<RCC_Waypoint>();
+        CargoTruck_CC_Waypoint[] childWaypoints = GetComponentsInChildren<CargoTruck_CC_Waypoint>();
         waypoints = childWaypoints.ToList();
 
     }

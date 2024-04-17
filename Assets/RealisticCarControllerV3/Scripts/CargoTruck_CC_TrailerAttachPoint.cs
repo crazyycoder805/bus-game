@@ -16,12 +16,12 @@ public class CargoTruck_CC_TrailerAttachPoint : MonoBehaviour {
 
     void OnTriggerEnter(Collider col) {
 
-        RCC_TrailerAttachPoint otherAttacher = col.gameObject.GetComponent<RCC_TrailerAttachPoint>();
+        CargoTruck_CC_TrailerAttachPoint otherAttacher = col.gameObject.GetComponent<CargoTruck_CC_TrailerAttachPoint>();
 
         if (!otherAttacher)
             return;
 
-        RCC_CarControllerV3 otherVehicle = otherAttacher.gameObject.GetComponentInParent<RCC_CarControllerV3>();
+        CargoTruck_CC_CarControllerV3 otherVehicle = otherAttacher.gameObject.GetComponentInParent<CargoTruck_CC_CarControllerV3>();
 
         if (!otherVehicle)
             return;

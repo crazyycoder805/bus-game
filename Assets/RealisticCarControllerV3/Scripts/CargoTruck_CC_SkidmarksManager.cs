@@ -12,21 +12,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/Misc/RCC Skidmarks Manager")]
-public class CargoTruck_CC_SkidmarksManager : RCC_Singleton<RCC_SkidmarksManager> {
+public class CargoTruck_CC_SkidmarksManager : CargoTruck_CC_Singleton<CargoTruck_CC_SkidmarksManager> {
 
-    private RCC_Skidmarks[] skidmarks;
+    private CargoTruck_CC_Skidmarks[] skidmarks;
     private int[] skidmarksIndexes;
     private int _lastGroundIndex = 0;
 
     void Awake() {
 
-        skidmarks = new RCC_Skidmarks[RCC_GroundMaterials.Instance.frictions.Length];
+        skidmarks = new CargoTruck_CC_Skidmarks[CargoTruck_CC_GroundMaterials.Instance.frictions.Length];
         skidmarksIndexes = new int[skidmarks.Length];
 
         for (int i = 0; i < skidmarks.Length; i++) {
 
-            skidmarks[i] = Instantiate(RCC_GroundMaterials.Instance.frictions[i].skidmark, Vector3.zero, Quaternion.identity);
-            skidmarks[i].transform.name = skidmarks[i].transform.name + "_" + RCC_GroundMaterials.Instance.frictions[i].groundMaterial.name;
+            skidmarks[i] = Instantiate(CargoTruck_CC_GroundMaterials.Instance.frictions[i].skidmark, Vector3.zero, Quaternion.identity);
+            skidmarks[i].transform.name = skidmarks[i].transform.name + "_" + CargoTruck_CC_GroundMaterials.Instance.frictions[i].groundMaterial.name;
             skidmarks[i].transform.SetParent(transform, true);
 
         }

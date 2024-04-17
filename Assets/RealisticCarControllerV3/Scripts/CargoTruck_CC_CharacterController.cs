@@ -14,9 +14,9 @@ using System.Collections;
 /// Animates Driver Sofie (Credits to 3DMaesen). Simply feeds floats and bools of Sofie's animator component.
 /// </summary>
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/Misc/RCC Animator Controller")]
-public class RCC_CharacterController : MonoBehaviour {
+public class CargoTruck_CC_CharacterController : MonoBehaviour {
 
-    private RCC_CarControllerV3 carController;
+    private CargoTruck_CC_CarControllerV3 carController;
     private Rigidbody carRigid;
     public Animator animator;
 
@@ -38,7 +38,7 @@ public class RCC_CharacterController : MonoBehaviour {
         if (!animator)
             animator = GetComponentInChildren<Animator>();
 
-        carController = GetComponent<RCC_CarControllerV3>();
+        carController = GetComponent<CargoTruck_CC_CarControllerV3>();
         carRigid = GetComponent<Rigidbody>();
 
     }

@@ -12,7 +12,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class RCC_Inputs {
+public class CargoTruck_CC_Inputs
+{
 
     public float throttleInput = 0f;
     public float brakeInput = 0f;

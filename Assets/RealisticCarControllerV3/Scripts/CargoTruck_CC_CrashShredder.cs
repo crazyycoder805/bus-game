@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class RCC_CrashShredder : MonoBehaviour {
+public class CargoTruck_CC_CrashShredder : MonoBehaviour {
 
     public Transform hingePoint;        // Hinge joint.
     private Rigidbody rigid;                //  Rigid.

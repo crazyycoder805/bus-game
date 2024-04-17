@@ -14,7 +14,8 @@ using UnityEngine;
 /// <summary>
 /// Stores properties, sets properties, and locks motions of the Configurable Joint.
 /// </summary>
-public class RCC_Joint {
+public class CargoTruck_CC_Joint
+{
 
     public Rigidbody connectedBody;
 

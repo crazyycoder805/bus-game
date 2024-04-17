@@ -11,11 +11,11 @@ using UnityEngine;
 using System.Collections;
 
 [System.Serializable]
-public class RCC_GroundMaterials : ScriptableObject {
+public class CargoTruck_CC_GroundMaterials : ScriptableObject {
 
     #region singleton
-    private static RCC_GroundMaterials instance;
-    public static RCC_GroundMaterials Instance { get { if (instance == null) instance = Resources.Load("RCC Assets/RCC_GroundMaterials") as RCC_GroundMaterials; return instance; } }
+    private static CargoTruck_CC_GroundMaterials instance;
+    public static CargoTruck_CC_GroundMaterials Instance { get { if (instance == null) instance = Resources.Load("RCC Assets/CargoTruck_CC_GroundMaterials") as CargoTruck_CC_GroundMaterials; return instance; } }
     #endregion
 
     [System.Serializable]
@@ -29,7 +29,7 @@ public class RCC_GroundMaterials : ScriptableObject {
         [Range(0f, 1f)] public float volume = 1f;
         public GameObject groundParticles;
         public AudioClip groundSound;
-        public RCC_Skidmarks skidmark;
+        public CargoTruck_CC_Skidmarks skidmark;
         public bool deflate = false;
 
     }

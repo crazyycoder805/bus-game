@@ -13,24 +13,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-[CustomEditor(typeof(RCC_Light)), CanEditMultipleObjects]
-public class RCC_LightEditor : Editor {
+[CustomEditor(typeof(CargoTruck_CC_Light)), CanEditMultipleObjects]
+public class CargoTruck_CC_LightEditor : Editor {
 
-    RCC_Light prop;
+    CargoTruck_CC_Light prop;
 
     Color originalGUIColor;
 
     public override void OnInspectorGUI() {
 
         originalGUIColor = GUI.color;
-        prop = (RCC_Light)target;
+        prop = (CargoTruck_CC_Light)target;
         serializedObject.Update();
 
         CheckLights();
 
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("RCC lights will receive inputs from parent car controller and adjusts intensity for lights. You can choose which type of light you want to use below. You won't need to specify left or right indicator lights.", EditorStyles.helpBox);
-        EditorGUILayout.LabelField("''Important'' or ''Not Important'' modes (Pixel or Vertex) overrided by RCC_Settings.", EditorStyles.helpBox);
+        EditorGUILayout.LabelField("''Important'' or ''Not Important'' modes (Pixel or Vertex) overrided by CargoTruck_CC_Settings.", EditorStyles.helpBox);
         EditorGUILayout.Space();
 
         EditorGUILayout.PropertyField(serializedObject.FindProperty("lightType"), new GUIContent("Light Type"), false);
@@ -61,7 +61,7 @@ public class RCC_LightEditor : Editor {
         } else {
 
             EditorGUILayout.Space();
-            EditorGUILayout.LabelField("RCC uses ''Interpolation'' mode for all rigidbodies. Therefore, lights at front of the vehicle will blink while on high speeds. To fix this, select your RCC layer in LensFlare component as ignored layer. RCC_Light script will simulate lens flares depending on camera distance and angle.''.", EditorStyles.helpBox);
+            EditorGUILayout.LabelField("RCC uses ''Interpolation'' mode for all rigidbodies. Therefore, lights at front of the vehicle will blink while on high speeds. To fix this, select your RCC layer in LensFlare component as ignored layer. CargoTruck_CC_Light script will simulate lens flares depending on camera distance and angle.''.", EditorStyles.helpBox);
             EditorGUILayout.Space();
 
             EditorGUILayout.PropertyField(serializedObject.FindProperty("flareBrightness"), new GUIContent("Lens Flare Brightness"), false);
@@ -104,8 +104,8 @@ public class RCC_LightEditor : Editor {
                     if (lights[i].GetComponentInChildren<TrailRenderer>())
                         break;
 
-                    GameObject newTrail = GameObject.Instantiate(RCC_Settings.Instance.lightTrailers, lights[i].transform.position, lights[i].transform.rotation, lights[i].transform);
-                    newTrail.name = RCC_Settings.Instance.lightTrailers.name;
+                    GameObject newTrail = GameObject.Instantiate(CargoTruck_CC_Settings.Instance.lightTrailers, lights[i].transform.position, lights[i].transform.rotation, lights[i].transform);
+                    newTrail.name = CargoTruck_CC_Settings.Instance.lightTrailers.name;
 
                 }
 
@@ -130,10 +130,10 @@ public class RCC_LightEditor : Editor {
         if (!prop.gameObject.activeInHierarchy)
             return;
 
-        if (prop.GetComponentInParent<RCC_CarControllerV3>() == null)
+        if (prop.GetComponentInParent<CargoTruck_CC_CarControllerV3>() == null)
             return;
 
-        Vector3 relativePos = prop.GetComponentInParent<RCC_CarControllerV3>().transform.InverseTransformPoint(prop.transform.position);
+        Vector3 relativePos = prop.GetComponentInParent<CargoTruck_CC_CarControllerV3>().transform.InverseTransformPoint(prop.transform.position);
 
         if (relativePos.z > 0f) {
 

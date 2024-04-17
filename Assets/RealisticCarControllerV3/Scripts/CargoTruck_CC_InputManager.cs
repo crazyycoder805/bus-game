@@ -13,10 +13,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-public class RCC_InputManager {
+public class CargoTruck_CC_InputManager
+{
 
-    private static readonly RCC_Inputs inputs = new RCC_Inputs();
-    private static RCC_InputActions inputActions;
+    private static readonly CargoTruck_CC_Inputs inputs = new CargoTruck_CC_Inputs();
+    private static CargoTruck_CC_InputActions inputActions;
 
     public static bool gyroUsed = false;
     public static bool logitechSteeringUsed = false;
@@ -68,11 +69,11 @@ public class RCC_InputManager {
     public delegate void onTrailerDetach();
     public static event onTrailerDetach OnTrailerDetach;
 
-    public static RCC_Inputs GetInputs() {
+    public static CargoTruck_CC_Inputs GetInputs() {
 
         if (inputActions == null) {
 
-            inputActions = new RCC_InputActions();
+            inputActions = new CargoTruck_CC_InputActions();
             inputActions.Enable();
 
             inputActions.Vehicle.StartStopEngine.performed += StartStopEngine_performed;
@@ -94,7 +95,7 @@ public class RCC_InputManager {
             inputActions.Camera.LookBack.canceled += LookBack_canceled;
             inputActions.Vehicle.TrailerDetach.performed += TrailerDetach_performed;
 
-#if RCC_LOGITECH
+#if CargoTruck_CC_LOGITECH
             //	LOGITECH STEERING WHEEL INPUTS
             inputActions.Vehicle._1stGear.performed += _1stGear_performed;
             inputActions.Vehicle._2ndGear.performed += _2ndGear_performed;
@@ -115,7 +116,7 @@ public class RCC_InputManager {
 
         }
 
-        if (!RCC_Settings.Instance.mobileControllerEnabled) {
+        if (!CargoTruck_CC_Settings.Instance.mobileControllerEnabled) {
 
             inputs.throttleInput = inputActions.Vehicle.Throttle.ReadValue<float>();
             inputs.brakeInput = inputActions.Vehicle.Brake.ReadValue<float>();
@@ -130,11 +131,11 @@ public class RCC_InputManager {
 
         } else {
 
-            inputs.throttleInput = RCC_MobileButtons.mobileInputs.throttleInput;
-            inputs.brakeInput = RCC_MobileButtons.mobileInputs.brakeInput;
-            inputs.steerInput = RCC_MobileButtons.mobileInputs.steerInput;
-            inputs.handbrakeInput = RCC_MobileButtons.mobileInputs.handbrakeInput;
-            inputs.boostInput = RCC_MobileButtons.mobileInputs.boostInput;
+            inputs.throttleInput = CargoTruck_CC_MobileButtons.mobileInputs.throttleInput;
+            inputs.brakeInput = CargoTruck_CC_MobileButtons.mobileInputs.brakeInput;
+            inputs.steerInput = CargoTruck_CC_MobileButtons.mobileInputs.steerInput;
+            inputs.handbrakeInput = CargoTruck_CC_MobileButtons.mobileInputs.handbrakeInput;
+            inputs.boostInput = CargoTruck_CC_MobileButtons.mobileInputs.boostInput;
 
         }
 
@@ -142,7 +143,7 @@ public class RCC_InputManager {
 
     }
 
-#if RCC_LOGITECH
+#if CargoTruck_CC_LOGITECH
     //	LOGITECH H SHIFTER INPUTS
     private static void _1stGear_performed(InputAction.CallbackContext obj) {
 

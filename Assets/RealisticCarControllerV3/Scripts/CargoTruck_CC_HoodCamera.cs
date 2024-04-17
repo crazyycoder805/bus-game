@@ -14,7 +14,7 @@ using UnityEngine;
 /// RCC Camera will be parented to this gameobject when current camera mode is Hood Camera.
 /// </summary>
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/Camera/RCC Hood Camera")]
-public class RCC_HoodCamera : MonoBehaviour {
+public class CargoTruck_CC_HoodCamera : MonoBehaviour {
 
     private void Awake() {
 
@@ -49,7 +49,7 @@ public class RCC_HoodCamera : MonoBehaviour {
 
         if (joint.connectedBody == null) {
 
-            RCC_CarControllerV3 carController = GetComponentInParent<RCC_CarControllerV3>();
+            CargoTruck_CC_CarControllerV3 carController = GetComponentInParent<CargoTruck_CC_CarControllerV3>();
 
             if (carController) {
 
@@ -78,7 +78,7 @@ public class RCC_HoodCamera : MonoBehaviour {
         if (!joint)
             return;
 
-        RCC_CarControllerV3 carController = GetComponentInParent<RCC_CarControllerV3>();
+        CargoTruck_CC_CarControllerV3 carController = GetComponentInParent<CargoTruck_CC_CarControllerV3>();
 
         if (!carController)
             return;

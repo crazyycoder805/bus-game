@@ -16,10 +16,10 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// RCC All In One playable demo scene manager.
 /// </summary>
-public class RCC_AIO : MonoBehaviour {
+public class CargoTruck_CC_AIO : MonoBehaviour {
 
     // Instance of the script.
-    private static RCC_AIO instance;
+    private static CargoTruck_CC_AIO instance;
 
     public GameObject levels;           //	UI levels menu.
     public GameObject photonLevels;

@@ -13,14 +13,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-[CustomEditor(typeof(RCC_SceneManager))]
-public class RCC_SceneManagerEditor : Editor {
+[CustomEditor(typeof(CargoTruck_CC_SceneManager))]
+public class CargoTruck_CC_SceneManagerEditor : Editor {
 
-    RCC_SceneManager prop;
+    CargoTruck_CC_SceneManager prop;
 
     public override void OnInspectorGUI() {
 
-        prop = (RCC_SceneManager)target;
+        prop = (CargoTruck_CC_SceneManager)target;
         serializedObject.Update();
 
         EditorGUILayout.HelpBox("Scene manager that contains current player vehicle, current player camera, current player UI, current player character, recording/playing mechanim, and other vehicles as well.", MessageType.Info);

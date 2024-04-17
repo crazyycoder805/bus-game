@@ -23,37 +23,37 @@ public class CargoTruck_CC_Useless : MonoBehaviour {
 
         if (useless == Useless.Behavior) {
 
-            type = RCC_Settings.Instance.behaviorSelectedIndex;
+            type = CargoTruck_CC_Settings.Instance.behaviorSelectedIndex;
 
         }
         if (useless == Useless.MainController) {
 
-            //type = RCC_Settings.Instance.controllerSelectedIndex;
+            //type = CargoTruck_CC_Settings.Instance.controllerSelectedIndex;
 
         }
         if (useless == Useless.MobileControllers) {
 
-            switch (RCC_Settings.Instance.mobileController) {
+            switch (CargoTruck_CC_Settings.Instance.mobileController) {
 
-                case RCC_Settings.MobileController.TouchScreen:
+                case CargoTruck_CC_Settings.MobileController.TouchScreen:
 
                     type = 0;
 
                     break;
 
-                case RCC_Settings.MobileController.Gyro:
+                case CargoTruck_CC_Settings.MobileController.Gyro:
 
                     type = 1;
 
                     break;
 
-                case RCC_Settings.MobileController.SteeringWheel:
+                case CargoTruck_CC_Settings.MobileController.SteeringWheel:
 
                     type = 2;
 
                     break;
 
-                case RCC_Settings.MobileController.Joystick:
+                case CargoTruck_CC_Settings.MobileController.Joystick:
 
                     type = 3;
 

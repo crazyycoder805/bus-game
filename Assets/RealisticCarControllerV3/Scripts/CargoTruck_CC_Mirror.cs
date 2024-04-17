@@ -17,7 +17,7 @@ using System.Collections;
 public class CargoTruck_CC_Mirror : MonoBehaviour {
 
     private Camera cam;
-    private RCC_CarControllerV3 carController;
+    private CargoTruck_CC_CarControllerV3 carController;
 
     void Awake() {
 
@@ -46,7 +46,7 @@ public class CargoTruck_CC_Mirror : MonoBehaviour {
         cam.ResetWorldToCameraMatrix();
         cam.ResetProjectionMatrix();
         cam.projectionMatrix *= Matrix4x4.Scale(new Vector3(-1, 1, 1));
-        carController = GetComponentInParent<RCC_CarControllerV3>();
+        carController = GetComponentInParent<CargoTruck_CC_CarControllerV3>();
 
     }
 

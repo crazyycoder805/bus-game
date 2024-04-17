@@ -39,7 +39,7 @@ public class CargoTruck_CC_Recorder : MonoBehaviour {
 
     public Recorded recorded;
 
-    public RCC_CarControllerV3 carController;
+    public CargoTruck_CC_CarControllerV3 carController;
 
     public List<PlayerInput> Inputs;
     public List<PlayerTransform> Transforms;
@@ -60,11 +60,11 @@ public class CargoTruck_CC_Recorder : MonoBehaviour {
         public int currentGear = 0;
         public bool changingGear = false;
 
-        public RCC_CarControllerV3.IndicatorsOn indicatorsOn = RCC_CarControllerV3.IndicatorsOn.Off;
+        public CargoTruck_CC_CarControllerV3.IndicatorsOn indicatorsOn = CargoTruck_CC_CarControllerV3.IndicatorsOn.Off;
         public bool lowBeamHeadLightsOn = false;
         public bool highBeamHeadLightsOn = false;
 
-        public PlayerInput(float _gasInput, float _brakeInput, float _steerInput, float _handbrakeInput, float _clutchInput, float _boostInput, float _fuelInput, int _direction, bool _canGoReverse, int _currentGear, bool _changingGear, RCC_CarControllerV3.IndicatorsOn _indicatorsOn, bool _lowBeamHeadLightsOn, bool _highBeamHeadLightsOn) {
+        public PlayerInput(float _gasInput, float _brakeInput, float _steerInput, float _handbrakeInput, float _clutchInput, float _boostInput, float _fuelInput, int _direction, bool _canGoReverse, int _currentGear, bool _changingGear, CargoTruck_CC_CarControllerV3.IndicatorsOn _indicatorsOn, bool _lowBeamHeadLightsOn, bool _highBeamHeadLightsOn) {
 
             throttleInput = _gasInput;
             brakeInput = _brakeInput;
@@ -130,20 +130,20 @@ public class CargoTruck_CC_Recorder : MonoBehaviour {
     private void OnEnable() {
 
         // Listening input events.
-        RCC_InputManager.OnRecord += RCC_InputManager_OnRecord;
-        RCC_InputManager.OnReplay += RCC_InputManager_OnReplay;
+        CargoTruck_CC_InputManager.OnRecord += CargoTruck_CC_InputManager_OnRecord;
+        CargoTruck_CC_InputManager.OnReplay += CargoTruck_CC_InputManager_OnReplay;
 
     }
 
-    private void RCC_InputManager_OnReplay() {
+    private void CargoTruck_CC_InputManager_OnReplay() {
 
-        RCC_SceneManager.Instance.Play();
+        CargoTruck_CC_SceneManager.Instance.Play();
 
     }
 
-    private void RCC_InputManager_OnRecord() {
+    private void CargoTruck_CC_InputManager_OnRecord() {
 
-        RCC_SceneManager.Instance.Record();
+        CargoTruck_CC_SceneManager.Instance.Record();
 
     }
 
@@ -169,8 +169,8 @@ public class CargoTruck_CC_Recorder : MonoBehaviour {
     public void SaveRecord() {
 
         print("Record saved!");
-        recorded = new Recorded(Inputs.ToArray(), Transforms.ToArray(), Rigidbodies.ToArray(), RCC_Records.Instance.records.Count.ToString() + "_" + carController.transform.name);
-        RCC_Records.Instance.records.Add(recorded);
+        recorded = new Recorded(Inputs.ToArray(), Transforms.ToArray(), Rigidbodies.ToArray(), CargoTruck_CC_Records.Instance.records.Count.ToString() + "_" + carController.transform.name);
+        CargoTruck_CC_Records.Instance.records.Add(recorded);
 
     }
 
@@ -354,8 +354,8 @@ public class CargoTruck_CC_Recorder : MonoBehaviour {
     private void OnDisable() {
 
         // Listening input events.
-        RCC_InputManager.OnRecord -= RCC_InputManager_OnRecord;
-        RCC_InputManager.OnReplay -= RCC_InputManager_OnReplay;
+        CargoTruck_CC_InputManager.OnRecord -= CargoTruck_CC_InputManager_OnRecord;
+        CargoTruck_CC_InputManager.OnReplay -= CargoTruck_CC_InputManager_OnReplay;
 
     }
 

@@ -12,14 +12,14 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-[CustomEditor(typeof(RCC_AIWaypointsContainer))]
-public class RCC_AIWPEditor : Editor {
+[CustomEditor(typeof(CargoTruck_CC_AIWaypointsContainer))]
+public class CargoTruck_CC_AIWPEditor : Editor {
 
-    RCC_AIWaypointsContainer wpScript;
+    CargoTruck_CC_AIWaypointsContainer wpScript;
 
     public override void OnInspectorGUI() {
 
-        wpScript = (RCC_AIWaypointsContainer)target;
+        wpScript = (CargoTruck_CC_AIWaypointsContainer)target;
         serializedObject.Update();
 
         EditorGUILayout.HelpBox("Create Waypoints By Shift + Left Mouse Button On Your Road", MessageType.Info);
@@ -28,14 +28,14 @@ public class RCC_AIWPEditor : Editor {
 
         foreach (Transform item in wpScript.transform) {
 
-            if (item.gameObject.GetComponent<RCC_Waypoint>() == null)
-                item.gameObject.AddComponent<RCC_Waypoint>();
+            if (item.gameObject.GetComponent<CargoTruck_CC_Waypoint>() == null)
+                item.gameObject.AddComponent<CargoTruck_CC_Waypoint>();
 
         }
 
         if (GUILayout.Button("Delete Waypoints")) {
 
-            foreach (RCC_Waypoint t in wpScript.waypoints) {
+            foreach (CargoTruck_CC_Waypoint t in wpScript.waypoints) {
                 DestroyImmediate(t.gameObject);
             }
             wpScript.waypoints.Clear();
@@ -49,7 +49,7 @@ public class RCC_AIWPEditor : Editor {
     void OnSceneGUI() {
 
         Event e = Event.current;
-        wpScript = (RCC_AIWaypointsContainer)target;
+        wpScript = (CargoTruck_CC_AIWaypointsContainer)target;
 
         if (e != null) {
 
@@ -62,7 +62,7 @@ public class RCC_AIWPEditor : Editor {
                     Vector3 newTilePosition = hit.point;
 
                     GameObject wp = new GameObject("Waypoint " + wpScript.waypoints.Count.ToString());
-                    wp.AddComponent<RCC_Waypoint>();
+                    wp.AddComponent<CargoTruck_CC_Waypoint>();
                     wp.transform.position = newTilePosition;
                     wp.transform.SetParent(wpScript.transform);
 
@@ -83,11 +83,11 @@ public class RCC_AIWPEditor : Editor {
 
     public void GetWaypoints() {
 
-        wpScript.waypoints = new List<RCC_Waypoint>();
+        wpScript.waypoints = new List<CargoTruck_CC_Waypoint>();
 
-        RCC_Waypoint[] allTransforms = wpScript.transform.GetComponentsInChildren<RCC_Waypoint>();
+        CargoTruck_CC_Waypoint[] allTransforms = wpScript.transform.GetComponentsInChildren<CargoTruck_CC_Waypoint>();
 
-        foreach (RCC_Waypoint t in allTransforms) {
+        foreach (CargoTruck_CC_Waypoint t in allTransforms) {
 
             if (t != wpScript.transform)
                 wpScript.waypoints.Add(t);

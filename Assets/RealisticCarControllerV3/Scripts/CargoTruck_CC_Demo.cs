@@ -15,7 +15,7 @@ using UnityEngine.SceneManagement;
 /// A simple manager script for all demo scenes. It has an array of spawnable player vehicles, public methods, setting new behavior modes, restart, and quit application.
 /// </summary>
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/UI/RCC Demo Manager")]
-public class RCC_Demo : MonoBehaviour {
+public class CargoTruck_CC_Demo : MonoBehaviour {
 
     internal int selectedVehicleIndex = 0;      // An integer index value used for spawning a new vehicle.
     internal int selectedBehaviorIndex = 0;     // An integer index value used for setting behavior mode.
@@ -34,20 +34,20 @@ public class RCC_Demo : MonoBehaviour {
         Quaternion lastKnownRot = new Quaternion();
 
         // Checking if there is a player vehicle on the scene.
-        if (RCC_SceneManager.Instance.activePlayerVehicle) {
+        if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle) {
 
-            lastKnownPos = RCC_SceneManager.Instance.activePlayerVehicle.transform.position;
-            lastKnownRot = RCC_SceneManager.Instance.activePlayerVehicle.transform.rotation;
+            lastKnownPos = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.transform.position;
+            lastKnownRot = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.transform.rotation;
 
         }
 
         // If last known position and rotation is not assigned, camera's position and rotation will be used.
         if (lastKnownPos == Vector3.zero) {
 
-            if (RCC_SceneManager.Instance.activePlayerCamera) {
+            if (CargoTruck_CC_SceneManager.Instance.activePlayerCamera) {
 
-                lastKnownPos = RCC_SceneManager.Instance.activePlayerCamera.transform.position;
-                lastKnownRot = RCC_SceneManager.Instance.activePlayerCamera.transform.rotation;
+                lastKnownPos = CargoTruck_CC_SceneManager.Instance.activePlayerCamera.transform.position;
+                lastKnownRot = CargoTruck_CC_SceneManager.Instance.activePlayerCamera.transform.rotation;
 
             }
 
@@ -57,7 +57,7 @@ public class RCC_Demo : MonoBehaviour {
         lastKnownRot.x = 0f;
         lastKnownRot.z = 0f;
 
-        RCC_CarControllerV3 lastVehicle = RCC_SceneManager.Instance.activePlayerVehicle;
+        CargoTruck_CC_CarControllerV3 lastVehicle = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle;
 
 #if BCG_ENTEREXIT
 
@@ -85,7 +85,7 @@ public class RCC_Demo : MonoBehaviour {
             Destroy(lastVehicle.gameObject);
 
         // Here we are creating our new vehicle.
-        RCC.SpawnRCC(RCC_DemoVehicles.Instance.vehicles[selectedVehicleIndex], lastKnownPos, lastKnownRot, true, true, true);
+        CargoTruck_CC.SpawnRCC(CargoTruck_CC_DemoVehicles.Instance.vehicles[selectedVehicleIndex], lastKnownPos, lastKnownRot, true, true, true);
 
 #if BCG_ENTEREXIT
 
@@ -93,11 +93,11 @@ public class RCC_Demo : MonoBehaviour {
 
 			lastEnterExitVehicle = null;
 
-			lastEnterExitVehicle = RCC_SceneManager.Instance.activePlayerVehicle.GetComponentInChildren<BCG_EnterExitVehicle> ();
+			lastEnterExitVehicle = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.GetComponentInChildren<BCG_EnterExitVehicle> ();
 
 			if(!lastEnterExitVehicle){
 				
-				lastEnterExitVehicle = RCC_SceneManager.Instance.activePlayerVehicle.gameObject.AddComponent<BCG_EnterExitVehicle> ();
+				lastEnterExitVehicle = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.gameObject.AddComponent<BCG_EnterExitVehicle> ();
 
 			}
 
@@ -124,7 +124,7 @@ public class RCC_Demo : MonoBehaviour {
     // Here we are setting new selected behavior to corresponding one.
     public void InitBehavior() {
 
-        RCC.SetBehavior(selectedBehaviorIndex);
+        CargoTruck_CC.SetBehavior(selectedBehaviorIndex);
 
     }
 
@@ -134,16 +134,16 @@ public class RCC_Demo : MonoBehaviour {
         switch (index) {
 
             case 0:
-                RCC.SetMobileController(RCC_Settings.MobileController.TouchScreen);
+                CargoTruck_CC.SetMobileController(CargoTruck_CC_Settings.MobileController.TouchScreen);
                 break;
             case 1:
-                RCC.SetMobileController(RCC_Settings.MobileController.Gyro);
+                CargoTruck_CC.SetMobileController(CargoTruck_CC_Settings.MobileController.Gyro);
                 break;
             case 2:
-                RCC.SetMobileController(RCC_Settings.MobileController.SteeringWheel);
+                CargoTruck_CC.SetMobileController(CargoTruck_CC_Settings.MobileController.SteeringWheel);
                 break;
             case 3:
-                RCC.SetMobileController(RCC_Settings.MobileController.Joystick);
+                CargoTruck_CC.SetMobileController(CargoTruck_CC_Settings.MobileController.Joystick);
                 break;
 
         }

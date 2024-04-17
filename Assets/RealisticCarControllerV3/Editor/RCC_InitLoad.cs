@@ -13,25 +13,25 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class RCC_InitLoad : EditorWindow {
+public class CargoTruck_CC_InitLoad : EditorWindow {
 
     [InitializeOnLoad]
     public class InitOnLoad {
 
         static InitOnLoad() {
 
-            RCC_SetScriptingSymbol.SetEnabled("BCG_RCC", true);
-            RCC_Installation.Check();
+            CargoTruck_CC_SetScriptingSymbol.SetEnabled("BCG_RCC", true);
+            CargoTruck_CC_Installation.Check();
 
-            bool hasKey = EditorPrefs.HasKey("RCC" + RCC_Version.version.ToString());
+            bool hasKey = EditorPrefs.HasKey("RCC" + CargoTruck_CC_Version.version.ToString());
 
             if (!hasKey) {
 
-                EditorPrefs.SetInt("RCC" + RCC_Version.version.ToString(), 1);
+                EditorPrefs.SetInt("RCC" + CargoTruck_CC_Version.version.ToString(), 1);
                 EditorUtility.DisplayDialog("Regards from BoneCracker Games", "Thank you for purchasing and using Realistic Car Controller. Please read the documentation before use. Also check out the online documentation for updated info. Have fun :)", "Let's get started!");
                 EditorUtility.DisplayDialog("New Input System", "RCC is using new input system. Legacy input system is deprecated. Make sure your project has Input System installed through the Package Manager. Import screen will ask you to install dependencies, choose Yes.", "Ok");
 
-                RCC_WelcomeWindow.OpenWindow();
+                CargoTruck_CC_WelcomeWindow.OpenWindow();
 
             }
 

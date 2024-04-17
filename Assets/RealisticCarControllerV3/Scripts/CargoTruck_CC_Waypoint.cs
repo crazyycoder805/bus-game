@@ -11,7 +11,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[AddComponentMenu("BoneCracker Games/Realistic Car Controller/AI/RCC Waypoint")]
+[AddComponentMenu("BoneCracker Games/Realistic Car Controller/AI/CargoTruck_CC Waypoint")]
 public class CargoTruck_CC_Waypoint : MonoBehaviour {
 
     public float targetSpeed = 100f;

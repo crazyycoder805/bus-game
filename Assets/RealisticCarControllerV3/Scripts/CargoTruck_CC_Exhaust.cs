@@ -14,9 +14,9 @@ using System.Collections;
 /// Exhaust based on Particle System. Based on vehicle controller's throttle situation.
 /// </summary>
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/Misc/RCC Exhaust")]
-public class RCC_Exhaust : RCC_Core {
+public class CargoTruck_CC_Exhaust : CargoTruck_CC_Core {
 
-    private RCC_CarControllerV3 carController;
+    private CargoTruck_CC_CarControllerV3 carController;
     private ParticleSystem particle;
     private ParticleSystem.EmissionModule emission;
     public ParticleSystem flame;
@@ -47,12 +47,12 @@ public class RCC_Exhaust : RCC_Core {
 
     void Start() {
 
-        if (RCC_Settings.Instance.dontUseAnyParticleEffects) {
+        if (CargoTruck_CC_Settings.Instance.dontUseAnyParticleEffects) {
             Destroy(gameObject);
             return;
         }
 
-        carController = GetComponentInParent<RCC_CarControllerV3>();
+        carController = GetComponentInParent<CargoTruck_CC_CarControllerV3>();
         particle = GetComponent<ParticleSystem>();
         emission = particle.emission;
 
@@ -60,10 +60,10 @@ public class RCC_Exhaust : RCC_Core {
 
             subEmission = flame.emission;
             flameLight = flame.GetComponentInChildren<Light>();
-            flameSource = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, "Exhaust Flame AudioSource", 10f, 25f, .5f, RCC_Settings.Instance.exhaustFlameClips[0], false, false, false);
+            flameSource = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, "Exhaust Flame AudioSource", 10f, 25f, .5f, CargoTruck_CC_Settings.Instance.exhaustFlameClips[0], false, false, false);
 
             if (flameLight)
-                flameLight.renderMode = RCC_Settings.Instance.useLightsAsVertexLights ? LightRenderMode.ForceVertex : LightRenderMode.ForcePixel;
+                flameLight.renderMode = CargoTruck_CC_Settings.Instance.useLightsAsVertexLights ? LightRenderMode.ForceVertex : LightRenderMode.ForcePixel;
 
         }
 
@@ -167,7 +167,7 @@ public class RCC_Exhaust : RCC_Core {
 
                 if (!flameSource.isPlaying) {
 
-                    flameSource.clip = RCC_Settings.Instance.exhaustFlameClips[Random.Range(0, RCC_Settings.Instance.exhaustFlameClips.Length)];
+                    flameSource.clip = CargoTruck_CC_Settings.Instance.exhaustFlameClips[Random.Range(0, CargoTruck_CC_Settings.Instance.exhaustFlameClips.Length)];
                     flameSource.Play();
 
                 }
@@ -201,11 +201,11 @@ public class RCC_Exhaust : RCC_Core {
 
     private void LensFlare() {
 
-        if (!RCC_SceneManager.Instance.activePlayerCamera)
+        if (!CargoTruck_CC_SceneManager.Instance.activePlayerCamera)
             return;
 
-        float distanceTocam = Vector3.Distance(transform.position, RCC_SceneManager.Instance.activePlayerCamera.actualCamera.transform.position);
-        float angle = Vector3.Angle(transform.forward, RCC_SceneManager.Instance.activePlayerCamera.actualCamera.transform.position - transform.position);
+        float distanceTocam = Vector3.Distance(transform.position, CargoTruck_CC_SceneManager.Instance.activePlayerCamera.actualCamera.transform.position);
+        float angle = Vector3.Angle(transform.forward, CargoTruck_CC_SceneManager.Instance.activePlayerCamera.actualCamera.transform.position - transform.position);
 
         if (angle != 0)
             finalFlareBrightness = flareBrightness * (4 / distanceTocam) * ((100f - (1.11f * angle)) / 100f) / 2f;

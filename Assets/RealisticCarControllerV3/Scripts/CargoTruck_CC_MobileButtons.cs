@@ -17,22 +17,22 @@ using UnityEngine.InputSystem;
 /// Receiving inputs from UI buttons, and feeds active vehicles on your scene.
 /// </summary>
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/UI/Mobile/RCC UI Mobile Buttons")]
-public class CargoTruck_CC_MobileButtons : RCC_Core {
+public class CargoTruck_CC_MobileButtons : CargoTruck_CC_Core {
 
-    public RCC_UIController gasButton;
-    public RCC_UIController gradualGasButton;
-    public RCC_UIController brakeButton;
-    public RCC_UIController leftButton;
-    public RCC_UIController rightButton;
-    public RCC_UISteeringWheelController steeringWheel;
-    public RCC_UIController handbrakeButton;
-    public RCC_UIController NOSButton;
-    public RCC_UIController NOSButtonSteeringWheel;
+    public CargoTruck_CC_UIController gasButton;
+    public CargoTruck_CC_UIController gradualGasButton;
+    public CargoTruck_CC_UIController brakeButton;
+    public CargoTruck_CC_UIController leftButton;
+    public CargoTruck_CC_UIController rightButton;
+    public CargoTruck_CC_UISteeringWheelController steeringWheel;
+    public CargoTruck_CC_UIController handbrakeButton;
+    public CargoTruck_CC_UIController NOSButton;
+    public CargoTruck_CC_UIController NOSButtonSteeringWheel;
     public GameObject gearButton;
 
-    public RCC_UIJoystick joystick;
+    public CargoTruck_CC_UIJoystick joystick;
 
-    public static RCC_Inputs mobileInputs = new RCC_Inputs();
+    public static CargoTruck_CC_Inputs mobileInputs = new CargoTruck_CC_Inputs();
 
     private float throttleInput = 0f;
     private float brakeInput = 0f;
@@ -60,16 +60,16 @@ public class CargoTruck_CC_MobileButtons : RCC_Core {
 
     void OnEnable() {
 
-        RCC_SceneManager.OnVehicleChanged += CheckController;
+        CargoTruck_CC_SceneManager.OnVehicleChanged += CheckController;
 
     }
 
     private void CheckController() {
 
-        if (!RCC_SceneManager.Instance.activePlayerVehicle)
+        if (!CargoTruck_CC_SceneManager.Instance.activePlayerVehicle)
             return;
 
-        if (RCC_Settings.Instance.mobileControllerEnabled) {
+        if (CargoTruck_CC_Settings.Instance.mobileControllerEnabled) {
 
             EnableButtons();
             return;
@@ -143,16 +143,16 @@ public class CargoTruck_CC_MobileButtons : RCC_Core {
 
     void Update() {
 
-        if (!RCC_Settings.Instance.mobileControllerEnabled)
+        if (!CargoTruck_CC_Settings.Instance.mobileControllerEnabled)
             return;
 
-        switch (RCC_Settings.Instance.mobileController) {
+        switch (CargoTruck_CC_Settings.Instance.mobileController) {
 
-            case RCC_Settings.MobileController.TouchScreen:
+            case CargoTruck_CC_Settings.MobileController.TouchScreen:
 
-                if (RCC_InputManager.gyroUsed) {
+                if (CargoTruck_CC_InputManager.gyroUsed) {
 
-                    RCC_InputManager.gyroUsed = false;
+                    CargoTruck_CC_InputManager.gyroUsed = false;
                     InputSystem.DisableDevice(UnityEngine.InputSystem.Accelerometer.current);
 
                 }
@@ -180,17 +180,17 @@ public class CargoTruck_CC_MobileButtons : RCC_Core {
 
                 break;
 
-            case RCC_Settings.MobileController.Gyro:
+            case CargoTruck_CC_Settings.MobileController.Gyro:
 
-                if (!RCC_InputManager.gyroUsed) {
+                if (!CargoTruck_CC_InputManager.gyroUsed) {
 
-                    RCC_InputManager.gyroUsed = true;
+                    CargoTruck_CC_InputManager.gyroUsed = true;
                     InputSystem.EnableDevice(UnityEngine.InputSystem.Accelerometer.current);
 
                 }
 
                 if (UnityEngine.InputSystem.Accelerometer.current != null)
-                    gyroInput = Mathf.Lerp(gyroInput, UnityEngine.InputSystem.Accelerometer.current.acceleration.ReadValue().x * RCC_Settings.Instance.gyroSensitivity, Time.deltaTime * 5f);
+                    gyroInput = Mathf.Lerp(gyroInput, UnityEngine.InputSystem.Accelerometer.current.acceleration.ReadValue().x * CargoTruck_CC_Settings.Instance.gyroSensitivity, Time.deltaTime * 5f);
 
                 brakeButton.transform.position = leftButton.transform.position;
 
@@ -211,11 +211,11 @@ public class CargoTruck_CC_MobileButtons : RCC_Core {
 
                 break;
 
-            case RCC_Settings.MobileController.SteeringWheel:
+            case CargoTruck_CC_Settings.MobileController.SteeringWheel:
 
-                if (RCC_InputManager.gyroUsed) {
+                if (CargoTruck_CC_InputManager.gyroUsed) {
 
-                    RCC_InputManager.gyroUsed = false;
+                    CargoTruck_CC_InputManager.gyroUsed = false;
                     InputSystem.DisableDevice(UnityEngine.InputSystem.Accelerometer.current);
 
                 }
@@ -243,11 +243,11 @@ public class CargoTruck_CC_MobileButtons : RCC_Core {
 
                 break;
 
-            case RCC_Settings.MobileController.Joystick:
+            case CargoTruck_CC_Settings.MobileController.Joystick:
 
-                if (RCC_InputManager.gyroUsed) {
+                if (CargoTruck_CC_InputManager.gyroUsed) {
 
-                    RCC_InputManager.gyroUsed = false;
+                    CargoTruck_CC_InputManager.gyroUsed = false;
                     InputSystem.DisableDevice(UnityEngine.InputSystem.Accelerometer.current);
 
                 }
@@ -294,10 +294,10 @@ public class CargoTruck_CC_MobileButtons : RCC_Core {
 
     private void FeedRCC() {
 
-        if (!RCC_SceneManager.Instance.activePlayerVehicle)
+        if (!CargoTruck_CC_SceneManager.Instance.activePlayerVehicle)
             return;
 
-        canUseNos = RCC_SceneManager.Instance.activePlayerVehicle.useNOS;
+        canUseNos = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.useNOS;
 
         mobileInputs.throttleInput = throttleInput;
         mobileInputs.brakeInput = brakeInput;
@@ -308,7 +308,7 @@ public class CargoTruck_CC_MobileButtons : RCC_Core {
     }
 
     // Gets input from button.
-    float GetInput(RCC_UIController button) {
+    float GetInput(CargoTruck_CC_UIController button) {
 
         if (button == null)
             return 0f;
@@ -319,7 +319,7 @@ public class CargoTruck_CC_MobileButtons : RCC_Core {
 
     void OnDisable() {
 
-        RCC_SceneManager.OnVehicleChanged -= CheckController;
+        CargoTruck_CC_SceneManager.OnVehicleChanged -= CheckController;
 
     }
 

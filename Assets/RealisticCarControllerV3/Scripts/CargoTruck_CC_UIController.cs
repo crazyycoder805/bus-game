@@ -22,8 +22,8 @@ public class CargoTruck_CC_UIController : MonoBehaviour, IPointerDownHandler, IP
     private Slider slider;
 
     internal float input;
-    private float sensitivity { get { return RCC_Settings.Instance.UIButtonSensitivity; } }
-    private float gravity { get { return RCC_Settings.Instance.UIButtonGravity; } }
+    private float sensitivity { get { return CargoTruck_CC_Settings.Instance.UIButtonSensitivity; } }
+    private float gravity { get { return CargoTruck_CC_Settings.Instance.UIButtonGravity; } }
     public bool pressing;
 
     void Awake() {

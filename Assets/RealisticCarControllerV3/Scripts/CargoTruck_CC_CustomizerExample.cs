@@ -13,10 +13,10 @@ using System.Collections;
 using UnityEngine.EventSystems;
 
 /// <summary>
-/// A simple customizer example script used for receiving methods from UI elements and send them to RCC_Customization script. Also updates all UI elements for new spawned vehicles too.
+/// A simple customizer example script used for receiving methods from UI elements and send them to CargoTruck_CC_Customization script. Also updates all UI elements for new spawned vehicles too.
 /// </summary>
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/UI/RCC Customizer Example")]
-public class RCC_CustomizerExample : RCC_Singleton<RCC_CustomizerExample> {
+public class CargoTruck_CC_CustomizerExample : CargoTruck_CC_Singleton<CargoTruck_CC_CustomizerExample> {
 
     [Header("UI Menus")]
     public GameObject wheelsMenu;
@@ -65,50 +65,50 @@ public class RCC_CustomizerExample : RCC_Singleton<RCC_CustomizerExample> {
 
     public void CheckUIs() {
 
-        if (!RCC_SceneManager.Instance.activePlayerVehicle)
+        if (!CargoTruck_CC_SceneManager.Instance.activePlayerVehicle)
             return;
 
-        frontCamber.value = RCC_SceneManager.Instance.activePlayerVehicle.FrontLeftWheelCollider.camber;
-        rearCamber.value = RCC_SceneManager.Instance.activePlayerVehicle.RearLeftWheelCollider.camber;
-        frontSuspensionDistances.value = RCC_SceneManager.Instance.activePlayerVehicle.FrontLeftWheelCollider.wheelCollider.suspensionDistance;
-        rearSuspensionDistances.value = RCC_SceneManager.Instance.activePlayerVehicle.RearLeftWheelCollider.wheelCollider.suspensionDistance;
-        frontSuspensionDampers.value = RCC_SceneManager.Instance.activePlayerVehicle.FrontLeftWheelCollider.wheelCollider.suspensionSpring.damper;
-        rearSuspensionDampers.value = RCC_SceneManager.Instance.activePlayerVehicle.RearLeftWheelCollider.wheelCollider.suspensionSpring.damper;
-        frontSuspensionSprings.value = RCC_SceneManager.Instance.activePlayerVehicle.FrontLeftWheelCollider.wheelCollider.suspensionSpring.spring;
-        rearSuspensionSprings.value = RCC_SceneManager.Instance.activePlayerVehicle.RearLeftWheelCollider.wheelCollider.suspensionSpring.spring;
-        gearShiftingThreshold.value = RCC_SceneManager.Instance.activePlayerVehicle.gearShiftingThreshold;
-        clutchThreshold.value = RCC_SceneManager.Instance.activePlayerVehicle.clutchInertia;
+        frontCamber.value = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.FrontLeftWheelCollider.camber;
+        rearCamber.value = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.RearLeftWheelCollider.camber;
+        frontSuspensionDistances.value = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.FrontLeftWheelCollider.wheelCollider.suspensionDistance;
+        rearSuspensionDistances.value = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.RearLeftWheelCollider.wheelCollider.suspensionDistance;
+        frontSuspensionDampers.value = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.FrontLeftWheelCollider.wheelCollider.suspensionSpring.damper;
+        rearSuspensionDampers.value = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.RearLeftWheelCollider.wheelCollider.suspensionSpring.damper;
+        frontSuspensionSprings.value = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.FrontLeftWheelCollider.wheelCollider.suspensionSpring.spring;
+        rearSuspensionSprings.value = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.RearLeftWheelCollider.wheelCollider.suspensionSpring.spring;
+        gearShiftingThreshold.value = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.gearShiftingThreshold;
+        clutchThreshold.value = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.clutchInertia;
 
-        TCS.isOn = RCC_SceneManager.Instance.activePlayerVehicle.TCS;
-        ABS.isOn = RCC_SceneManager.Instance.activePlayerVehicle.ABS;
-        ESP.isOn = RCC_SceneManager.Instance.activePlayerVehicle.ESP;
-        SH.isOn = RCC_SceneManager.Instance.activePlayerVehicle.steeringHelper;
-        counterSteering.isOn = RCC_SceneManager.Instance.activePlayerVehicle.useCounterSteering;
-        NOS.isOn = RCC_SceneManager.Instance.activePlayerVehicle.useNOS;
-        turbo.isOn = RCC_SceneManager.Instance.activePlayerVehicle.useTurbo;
-        exhaustFlame.isOn = RCC_SceneManager.Instance.activePlayerVehicle.useExhaustFlame;
-        revLimiter.isOn = RCC_SceneManager.Instance.activePlayerVehicle.useRevLimiter;
-        transmission.isOn = RCC_Settings.Instance.useAutomaticGear;
+        TCS.isOn = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.TCS;
+        ABS.isOn = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.ABS;
+        ESP.isOn = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.ESP;
+        SH.isOn = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.steeringHelper;
+        counterSteering.isOn = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.useCounterSteering;
+        NOS.isOn = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.useNOS;
+        turbo.isOn = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.useTurbo;
+        exhaustFlame.isOn = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.useExhaustFlame;
+        revLimiter.isOn = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.useRevLimiter;
+        transmission.isOn = CargoTruck_CC_Settings.Instance.useAutomaticGear;
 
-        maxSpeed.text = RCC_SceneManager.Instance.activePlayerVehicle.maxspeed.ToString();
-        maxBrake.text = RCC_SceneManager.Instance.activePlayerVehicle.brakeTorque.ToString();
-        maxTorque.text = RCC_SceneManager.Instance.activePlayerVehicle.maxEngineTorque.ToString();
+        maxSpeed.text = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.maxspeed.ToString();
+        maxBrake.text = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.brakeTorque.ToString();
+        maxTorque.text = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.maxEngineTorque.ToString();
 
-        switch (RCC_SceneManager.Instance.activePlayerVehicle.wheelTypeChoise) {
+        switch (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.wheelTypeChoise) {
 
-            case RCC_CarControllerV3.WheelType.FWD:
+            case CargoTruck_CC_CarControllerV3.WheelType.FWD:
                 drivetrainMode.value = 0;
                 break;
 
-            case RCC_CarControllerV3.WheelType.RWD:
+            case CargoTruck_CC_CarControllerV3.WheelType.RWD:
                 drivetrainMode.value = 1;
                 break;
 
-            case RCC_CarControllerV3.WheelType.AWD:
+            case CargoTruck_CC_CarControllerV3.WheelType.AWD:
                 drivetrainMode.value = 2;
                 break;
 
-            case RCC_CarControllerV3.WheelType.BIASED:
+            case CargoTruck_CC_CarControllerV3.WheelType.BIASED:
                 drivetrainMode.value = 3;
                 break;
 
@@ -145,10 +145,10 @@ public class RCC_CustomizerExample : RCC_Singleton<RCC_CustomizerExample> {
 
     public void SetCustomizationMode(bool state) {
 
-        if (!RCC_SceneManager.Instance.activePlayerVehicle)
+        if (!CargoTruck_CC_SceneManager.Instance.activePlayerVehicle)
             return;
 
-        RCC_Customization.SetCustomizationMode(RCC_SceneManager.Instance.activePlayerVehicle, state);
+        CargoTruck_CC_Customization.SetCustomizationMode(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, state);
 
         if (state)
             CheckUIs();
@@ -157,85 +157,85 @@ public class RCC_CustomizerExample : RCC_Singleton<RCC_CustomizerExample> {
 
     public void SetFrontCambersBySlider(Slider slider) {
 
-        RCC_Customization.SetFrontCambers(RCC_SceneManager.Instance.activePlayerVehicle, slider.value);
+        CargoTruck_CC_Customization.SetFrontCambers(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, slider.value);
 
     }
 
     public void SetRearCambersBySlider(Slider slider) {
 
-        RCC_Customization.SetRearCambers(RCC_SceneManager.Instance.activePlayerVehicle, slider.value);
+        CargoTruck_CC_Customization.SetRearCambers(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, slider.value);
 
     }
 
     public void TogglePreviewSmokeByToggle(Toggle toggle) {
 
-        RCC_Customization.SetSmokeParticle(RCC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
+        CargoTruck_CC_Customization.SetSmokeParticle(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
 
     }
 
     public void TogglePreviewExhaustFlameByToggle(Toggle toggle) {
 
-        RCC_Customization.SetExhaustFlame(RCC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
+        CargoTruck_CC_Customization.SetExhaustFlame(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
 
     }
 
-    public void SetSmokeColorByColorPicker(RCC_ColorPickerBySliders color) {
+    public void SetSmokeColorByColorPicker(CargoTruck_CC_ColorPickerBySliders color) {
 
-        RCC_Customization.SetSmokeColor(RCC_SceneManager.Instance.activePlayerVehicle, 0, color.color);
+        CargoTruck_CC_Customization.SetSmokeColor(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, 0, color.color);
 
     }
 
-    public void SetHeadlightColorByColorPicker(RCC_ColorPickerBySliders color) {
+    public void SetHeadlightColorByColorPicker(CargoTruck_CC_ColorPickerBySliders color) {
 
-        RCC_Customization.SetHeadlightsColor(RCC_SceneManager.Instance.activePlayerVehicle, color.color);
+        CargoTruck_CC_Customization.SetHeadlightsColor(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, color.color);
 
     }
 
     public void ChangeWheelsBySlider(Slider slider) {
 
-        RCC_Customization.ChangeWheels(RCC_SceneManager.Instance.activePlayerVehicle, RCC_ChangableWheels.Instance.wheels[(int)slider.value].wheel, true);
+        CargoTruck_CC_Customization.ChangeWheels(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, CargoTruck_CC_ChangableWheels.Instance.wheels[(int)slider.value].wheel, true);
 
     }
 
     public void SetFrontSuspensionTargetsBySlider(Slider slider) {
 
-        RCC_Customization.SetFrontSuspensionsTargetPos(RCC_SceneManager.Instance.activePlayerVehicle, slider.value);
+        CargoTruck_CC_Customization.SetFrontSuspensionsTargetPos(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, slider.value);
 
     }
 
     public void SetRearSuspensionTargetsBySlider(Slider slider) {
 
-        RCC_Customization.SetRearSuspensionsTargetPos(RCC_SceneManager.Instance.activePlayerVehicle, slider.value);
+        CargoTruck_CC_Customization.SetRearSuspensionsTargetPos(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, slider.value);
 
     }
 
     public void SetAllSuspensionTargetsByButton(float strength) {
 
-        RCC_Customization.SetAllSuspensionsTargetPos(RCC_SceneManager.Instance.activePlayerVehicle, strength);
+        CargoTruck_CC_Customization.SetAllSuspensionsTargetPos(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, strength);
 
     }
 
     public void SetFrontSuspensionDistancesBySlider(Slider slider) {
 
-        RCC_Customization.SetFrontSuspensionsDistances(RCC_SceneManager.Instance.activePlayerVehicle, slider.value);
+        CargoTruck_CC_Customization.SetFrontSuspensionsDistances(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, slider.value);
 
     }
 
     public void SetRearSuspensionDistancesBySlider(Slider slider) {
 
-        RCC_Customization.SetRearSuspensionsDistances(RCC_SceneManager.Instance.activePlayerVehicle, slider.value);
+        CargoTruck_CC_Customization.SetRearSuspensionsDistances(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, slider.value);
 
     }
 
     public void SetGearShiftingThresholdBySlider(Slider slider) {
 
-        RCC_Customization.SetGearShiftingThreshold(RCC_SceneManager.Instance.activePlayerVehicle, Mathf.Clamp(slider.value, .5f, .95f));
+        CargoTruck_CC_Customization.SetGearShiftingThreshold(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, Mathf.Clamp(slider.value, .5f, .95f));
 
     }
 
     public void SetClutchThresholdBySlider(Slider slider) {
 
-        RCC_Customization.SetClutchThreshold(RCC_SceneManager.Instance.activePlayerVehicle, Mathf.Clamp(slider.value, .1f, .9f));
+        CargoTruck_CC_Customization.SetClutchThreshold(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, Mathf.Clamp(slider.value, .1f, .9f));
 
     }
 
@@ -244,15 +244,15 @@ public class RCC_CustomizerExample : RCC_Singleton<RCC_CustomizerExample> {
         switch (dropdown.value) {
 
             case 0:
-                RCC_Customization.SetDrivetrainMode(RCC_SceneManager.Instance.activePlayerVehicle, RCC_CarControllerV3.WheelType.FWD);
+                CargoTruck_CC_Customization.SetDrivetrainMode(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, CargoTruck_CC_CarControllerV3.WheelType.FWD);
                 break;
 
             case 1:
-                RCC_Customization.SetDrivetrainMode(RCC_SceneManager.Instance.activePlayerVehicle, RCC_CarControllerV3.WheelType.RWD);
+                CargoTruck_CC_Customization.SetDrivetrainMode(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, CargoTruck_CC_CarControllerV3.WheelType.RWD);
                 break;
 
             case 2:
-                RCC_Customization.SetDrivetrainMode(RCC_SceneManager.Instance.activePlayerVehicle, RCC_CarControllerV3.WheelType.AWD);
+                CargoTruck_CC_Customization.SetDrivetrainMode(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, CargoTruck_CC_CarControllerV3.WheelType.AWD);
                 break;
 
         }
@@ -261,136 +261,136 @@ public class RCC_CustomizerExample : RCC_Singleton<RCC_CustomizerExample> {
 
     public void SetCounterSteeringByToggle(Toggle toggle) {
 
-        RCC_Customization.SetCounterSteering(RCC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
+        CargoTruck_CC_Customization.SetCounterSteering(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
 
     }
 
     public void SetSteeringLimitByToggle(Toggle toggle) {
 
-        RCC_Customization.SetSteeringLimit(RCC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
+        CargoTruck_CC_Customization.SetSteeringLimit(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
 
     }
 
     public void SetNOSByToggle(Toggle toggle) {
 
-        RCC_Customization.SetNOS(RCC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
+        CargoTruck_CC_Customization.SetNOS(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
 
     }
 
     public void SetTurboByToggle(Toggle toggle) {
 
-        RCC_Customization.SetTurbo(RCC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
+        CargoTruck_CC_Customization.SetTurbo(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
 
     }
 
     public void SetExhaustFlameByToggle(Toggle toggle) {
 
-        RCC_Customization.SetUseExhaustFlame(RCC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
+        CargoTruck_CC_Customization.SetUseExhaustFlame(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
 
     }
 
     public void SetRevLimiterByToggle(Toggle toggle) {
 
-        RCC_Customization.SetRevLimiter(RCC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
+        CargoTruck_CC_Customization.SetRevLimiter(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
 
     }
 
     public void SetFrontSuspensionsSpringForceBySlider(Slider slider) {
 
-        RCC_Customization.SetFrontSuspensionsSpringForce(RCC_SceneManager.Instance.activePlayerVehicle, Mathf.Clamp(slider.value, 10000f, 100000f));
+        CargoTruck_CC_Customization.SetFrontSuspensionsSpringForce(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, Mathf.Clamp(slider.value, 10000f, 100000f));
 
     }
 
     public void SetRearSuspensionsSpringForceBySlider(Slider slider) {
 
-        RCC_Customization.SetRearSuspensionsSpringForce(RCC_SceneManager.Instance.activePlayerVehicle, Mathf.Clamp(slider.value, 10000f, 100000f));
+        CargoTruck_CC_Customization.SetRearSuspensionsSpringForce(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, Mathf.Clamp(slider.value, 10000f, 100000f));
 
     }
 
     public void SetFrontSuspensionsSpringDamperBySlider(Slider slider) {
 
-        RCC_Customization.SetFrontSuspensionsSpringDamper(RCC_SceneManager.Instance.activePlayerVehicle, Mathf.Clamp(slider.value, 1000f, 10000f));
+        CargoTruck_CC_Customization.SetFrontSuspensionsSpringDamper(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, Mathf.Clamp(slider.value, 1000f, 10000f));
 
     }
 
     public void SetRearSuspensionsSpringDamperBySlider(Slider slider) {
 
-        RCC_Customization.SetRearSuspensionsSpringDamper(RCC_SceneManager.Instance.activePlayerVehicle, Mathf.Clamp(slider.value, 1000f, 10000f));
+        CargoTruck_CC_Customization.SetRearSuspensionsSpringDamper(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, Mathf.Clamp(slider.value, 1000f, 10000f));
 
     }
 
     public void SetMaximumSpeedByInputField(InputField inputField) {
 
-        RCC_Customization.SetMaximumSpeed(RCC_SceneManager.Instance.activePlayerVehicle, StringToFloat(inputField.text, 200f));
-        inputField.text = RCC_SceneManager.Instance.activePlayerVehicle.maxspeed.ToString();
+        CargoTruck_CC_Customization.SetMaximumSpeed(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, StringToFloat(inputField.text, 200f));
+        inputField.text = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.maxspeed.ToString();
 
     }
 
     public void SetMaximumTorqueByInputField(InputField inputField) {
 
-        RCC_Customization.SetMaximumTorque(RCC_SceneManager.Instance.activePlayerVehicle, StringToFloat(inputField.text, 2000f));
-        inputField.text = RCC_SceneManager.Instance.activePlayerVehicle.maxEngineTorque.ToString();
+        CargoTruck_CC_Customization.SetMaximumTorque(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, StringToFloat(inputField.text, 2000f));
+        inputField.text = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.maxEngineTorque.ToString();
 
     }
 
     public void SetMaximumBrakeByInputField(InputField inputField) {
 
-        RCC_Customization.SetMaximumBrake(RCC_SceneManager.Instance.activePlayerVehicle, StringToFloat(inputField.text, 2000f));
-        inputField.text = RCC_SceneManager.Instance.activePlayerVehicle.brakeTorque.ToString();
+        CargoTruck_CC_Customization.SetMaximumBrake(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, StringToFloat(inputField.text, 2000f));
+        inputField.text = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.brakeTorque.ToString();
 
     }
 
     public void RepairCar() {
 
-        RCC_Customization.Repair(RCC_SceneManager.Instance.activePlayerVehicle);
+        CargoTruck_CC_Customization.Repair(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle);
 
     }
 
     public void SetESP(Toggle toggle) {
 
-        RCC_Customization.SetESP(RCC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
+        CargoTruck_CC_Customization.SetESP(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
 
     }
 
     public void SetABS(Toggle toggle) {
 
-        RCC_Customization.SetABS(RCC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
+        CargoTruck_CC_Customization.SetABS(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
 
     }
 
     public void SetTCS(Toggle toggle) {
 
-        RCC_Customization.SetTCS(RCC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
+        CargoTruck_CC_Customization.SetTCS(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
 
     }
 
     public void SetSH(Toggle toggle) {
 
-        RCC_Customization.SetSH(RCC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
+        CargoTruck_CC_Customization.SetSH(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, toggle.isOn);
 
     }
 
     public void SetSHStrength(Slider slider) {
 
-        RCC_Customization.SetSHStrength(RCC_SceneManager.Instance.activePlayerVehicle, slider.value);
+        CargoTruck_CC_Customization.SetSHStrength(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, slider.value);
 
     }
 
     public void SetTransmission(Toggle toggle) {
 
-        RCC_Customization.SetTransmission(toggle.isOn);
+        CargoTruck_CC_Customization.SetTransmission(toggle.isOn);
 
     }
 
     public void SaveStats() {
 
-        RCC_Customization.SaveStats(RCC_SceneManager.Instance.activePlayerVehicle);
+        CargoTruck_CC_Customization.SaveStats(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle);
 
     }
 
     public void LoadStats() {
 
-        RCC_Customization.LoadStats(RCC_SceneManager.Instance.activePlayerVehicle);
+        CargoTruck_CC_Customization.LoadStats(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle);
         CheckUIs();
 
     }
@@ -399,10 +399,10 @@ public class RCC_CustomizerExample : RCC_Singleton<RCC_CustomizerExample> {
 
         int selectedVehicleIndex = 0;
 
-        if (GameObject.FindObjectOfType<RCC_Demo>())
-            selectedVehicleIndex = GameObject.FindObjectOfType<RCC_Demo>().selectedVehicleIndex;
+        if (GameObject.FindObjectOfType<CargoTruck_CC_Demo>())
+            selectedVehicleIndex = GameObject.FindObjectOfType<CargoTruck_CC_Demo>().selectedVehicleIndex;
 
-        RCC_Customization.ResetStats(RCC_SceneManager.Instance.activePlayerVehicle, RCC_DemoVehicles.Instance.vehicles[selectedVehicleIndex]);
+        CargoTruck_CC_Customization.ResetStats(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle, CargoTruck_CC_DemoVehicles.Instance.vehicles[selectedVehicleIndex]);
 
         CheckUIs();
 

@@ -11,15 +11,15 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections;
 
-[CustomEditor(typeof(RCC_Camera))]
-public class RCC_CameraEditor : Editor {
+[CustomEditor(typeof(CargoTruck_CC_Camera))]
+public class CargoTruck_CC_CameraEditor : Editor {
 
-    RCC_Camera RCCCam;
+    CargoTruck_CC_Camera RCCCam;
     Color orgColor;
 
     public override void OnInspectorGUI() {
 
-        RCCCam = (RCC_Camera)target;
+        RCCCam = (CargoTruck_CC_Camera)target;
         serializedObject.Update();
         orgColor = GUI.color;
 
@@ -132,16 +132,16 @@ public class RCC_CameraEditor : Editor {
 
             EditorGUILayout.Space();
 
-            if (!GameObject.FindObjectOfType<RCC_FixedCamera>()) {
+            if (!GameObject.FindObjectOfType<CargoTruck_CC_FixedCamera>()) {
 
                 GUI.color = Color.green;
 
                 if (GUILayout.Button("Create Fixed Camera System")) {
 
-                    GameObject fixedCamera = new GameObject("RCC_FixedCamera");
+                    GameObject fixedCamera = new GameObject("CargoTruck_CC_FixedCamera");
                     fixedCamera.transform.position = Vector3.zero;
                     fixedCamera.transform.rotation = Quaternion.identity;
-                    fixedCamera.AddComponent<RCC_FixedCamera>();
+                    fixedCamera.AddComponent<CargoTruck_CC_FixedCamera>();
 
                 }
 
@@ -150,7 +150,7 @@ public class RCC_CameraEditor : Editor {
                 GUI.color = orgColor;
 
                 if (GUILayout.Button("Select Fixed Camera System"))
-                    Selection.activeGameObject = GameObject.FindObjectOfType<RCC_FixedCamera>().gameObject;
+                    Selection.activeGameObject = GameObject.FindObjectOfType<CargoTruck_CC_FixedCamera>().gameObject;
 
             }
 
@@ -173,13 +173,13 @@ public class RCC_CameraEditor : Editor {
 
             EditorGUILayout.Space();
 
-            if (!GameObject.FindObjectOfType<RCC_CinematicCamera>()) {
+            if (!GameObject.FindObjectOfType<CargoTruck_CC_CinematicCamera>()) {
 
                 GUI.color = Color.green;
 
                 if (GUILayout.Button("Create Cinematic Camera System")) {
 
-                    GameObject cinematicCamera = GameObject.Instantiate(RCC_Settings.Instance.cinematicCamera, Vector3.zero, Quaternion.identity) as GameObject;
+                    GameObject cinematicCamera = GameObject.Instantiate(CargoTruck_CC_Settings.Instance.cinematicCamera, Vector3.zero, Quaternion.identity) as GameObject;
 
                 }
 
@@ -188,7 +188,7 @@ public class RCC_CameraEditor : Editor {
                 GUI.color = orgColor;
 
                 if (GUILayout.Button("Select Cinematic Camera System"))
-                    Selection.activeGameObject = GameObject.FindObjectOfType<RCC_CinematicCamera>().gameObject;
+                    Selection.activeGameObject = GameObject.FindObjectOfType<CargoTruck_CC_CinematicCamera>().gameObject;
 
             }
 

@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class RCC_DamageData {
+public class CargoTruck_CC_DamageData
+{
 
 
-    public List<RCC_DetachablePart> Hood = new List<RCC_DetachablePart>();
-    public List<RCC_DetachablePart> Trunk = new List<RCC_DetachablePart>();
-    public List<RCC_DetachablePart> Door = new List<RCC_DetachablePart>();
-    public List<RCC_DetachablePart> Bumper_F = new List<RCC_DetachablePart>();
-    public List<RCC_DetachablePart> Bumper_R = new List<RCC_DetachablePart>();
+    public List<CargoTruck_CC_DetachablePart> Hood = new List<CargoTruck_CC_DetachablePart>();
+    public List<CargoTruck_CC_DetachablePart> Trunk = new List<CargoTruck_CC_DetachablePart>();
+    public List<CargoTruck_CC_DetachablePart> Door = new List<CargoTruck_CC_DetachablePart>();
+    public List<CargoTruck_CC_DetachablePart> Bumper_F = new List<CargoTruck_CC_DetachablePart>();
+    public List<CargoTruck_CC_DetachablePart> Bumper_R = new List<CargoTruck_CC_DetachablePart>();
 
     public float hoodDamage, trunkDamage, doorDamage, bumper_FDamage, bumper_RDamage = 0f;
 
     private bool initialized = false;
 
-    public void GetParts(RCC_DetachablePart[] allParts) {
+    public void GetParts(CargoTruck_CC_DetachablePart[] allParts) {
 
-        List<RCC_DetachablePart> allDetach = new List<RCC_DetachablePart>();
+        List<CargoTruck_CC_DetachablePart> allDetach = new List<CargoTruck_CC_DetachablePart>();
 
         for (int i = 0; i < allParts.Length; i++) {
 
@@ -26,23 +27,23 @@ public class RCC_DamageData {
 
             switch (allParts[i].partType) {
 
-                case RCC_DetachablePart.DetachablePartType.Hood:
+                case CargoTruck_CC_DetachablePart.DetachablePartType.Hood:
                     Hood.Add(allParts[i]);
                     break;
 
-                case RCC_DetachablePart.DetachablePartType.Trunk:
+                case CargoTruck_CC_DetachablePart.DetachablePartType.Trunk:
                     Trunk.Add(allParts[i]);
                     break;
 
-                case RCC_DetachablePart.DetachablePartType.Door:
+                case CargoTruck_CC_DetachablePart.DetachablePartType.Door:
                     Door.Add(allParts[i]);
                     break;
 
-                case RCC_DetachablePart.DetachablePartType.Bumper_F:
+                case CargoTruck_CC_DetachablePart.DetachablePartType.Bumper_F:
                     Bumper_F.Add(allParts[i]);
                     break;
 
-                case RCC_DetachablePart.DetachablePartType.Bumper_R:
+                case CargoTruck_CC_DetachablePart.DetachablePartType.Bumper_R:
                     Bumper_R.Add(allParts[i]);
                     break;
 
@@ -111,7 +112,7 @@ public class RCC_DamageData {
 
     }
 
-    public float GetPercentage(RCC_DetachablePart.DetachablePartType partType) {
+    public float GetPercentage(CargoTruck_CC_DetachablePart.DetachablePartType partType) {
 
         if (!initialized)
             return 0;
@@ -120,23 +121,23 @@ public class RCC_DamageData {
 
         switch (partType) {
 
-            case RCC_DetachablePart.DetachablePartType.Hood:
+            case CargoTruck_CC_DetachablePart.DetachablePartType.Hood:
                 damagePer = hoodDamage;
                 break;
 
-            case RCC_DetachablePart.DetachablePartType.Trunk:
+            case CargoTruck_CC_DetachablePart.DetachablePartType.Trunk:
                 damagePer = trunkDamage;
                 break;
 
-            case RCC_DetachablePart.DetachablePartType.Door:
+            case CargoTruck_CC_DetachablePart.DetachablePartType.Door:
                 damagePer = doorDamage;
                 break;
 
-            case RCC_DetachablePart.DetachablePartType.Bumper_F:
+            case CargoTruck_CC_DetachablePart.DetachablePartType.Bumper_F:
                 damagePer = bumper_FDamage;
                 break;
 
-            case RCC_DetachablePart.DetachablePartType.Bumper_R:
+            case CargoTruck_CC_DetachablePart.DetachablePartType.Bumper_R:
                 damagePer = bumper_RDamage;
                 break;
 

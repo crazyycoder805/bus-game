@@ -11,7 +11,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RCC_CheckUp {
+public class CargoTruck_CC_CheckUp
+{
 
     public static MeshCollider[] GetMeshColliders(GameObject vehicle) {
 
@@ -67,7 +68,7 @@ public class RCC_CheckUp {
 
         for (int i = 0; i < rigidbodies.Length; i++) {
 
-            if (rigidbodies[i] != vehicle.GetComponent<Rigidbody>() && rigidbodies[i].GetComponent<RCC_HoodCamera>() == null && rigidbodies[i].GetComponent<RCC_WheelCamera>() == null)
+            if (rigidbodies[i] != vehicle.GetComponent<Rigidbody>() && rigidbodies[i].GetComponent<CargoTruck_CC_HoodCamera>() == null && rigidbodies[i].GetComponent<CargoTruck_CC_WheelCamera>() == null)
                 rigids.Add(rigidbodies[i]);
 
         }
@@ -108,7 +109,7 @@ public class RCC_CheckUp {
 
     }
 
-    public static string[] IncorrectConfiguration(RCC_CarControllerV3 vehicle) {
+    public static string[] IncorrectConfiguration(CargoTruck_CC_CarControllerV3 vehicle) {
 
         float minEngineRPM = vehicle.minEngineRPM;
         float maxEngineRPM = vehicle.maxEngineRPM;
@@ -163,9 +164,9 @@ public class RCC_CheckUp {
 
     }
 
-    public static bool[] HaveWrongOverride(RCC_CarControllerV3 vehicle) {
+    public static bool[] HaveWrongOverride(CargoTruck_CC_CarControllerV3 vehicle) {
 
-        RCC_WheelCollider[] allWheels = vehicle.GetComponentsInChildren<RCC_WheelCollider>();
+        CargoTruck_CC_WheelCollider[] allWheels = vehicle.GetComponentsInChildren<CargoTruck_CC_WheelCollider>();
 
         bool powerFound = false;
         bool steerFound = false;

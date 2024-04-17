@@ -18,8 +18,8 @@ using System.Collections;
 public class CargoTruck_CC_Settings : ScriptableObject {
 
     #region singleton
-    private static RCC_Settings instance;
-    public static RCC_Settings Instance { get { if (instance == null) instance = Resources.Load("RCC Assets/RCC_Settings") as RCC_Settings; return instance; } }
+    private static CargoTruck_CC_Settings instance;
+    public static CargoTruck_CC_Settings Instance { get { if (instance == null) instance = Resources.Load("RCC Assets/CargoTruck_CC_Settings") as CargoTruck_CC_Settings; return instance; } }
     #endregion
 
     public int behaviorSelectedIndex;
@@ -53,7 +53,7 @@ public class CargoTruck_CC_Settings : ScriptableObject {
         public bool counterSteering = true;
         public bool limitSteering = true;
         public bool steeringSensitivity = true;
-        public RCC_CarControllerV3.SteeringType steeringType = RCC_CarControllerV3.SteeringType.Curve;
+        public CargoTruck_CC_CarControllerV3.SteeringType steeringType = CargoTruck_CC_CarControllerV3.SteeringType.Curve;
         public bool ABS = false;
         public bool ESP = false;
         public bool TCS = false;
@@ -155,13 +155,13 @@ public class CargoTruck_CC_Settings : ScriptableObject {
     public bool setTagsAndLayers = false;
     public string RCCTag = "Player";
     public string RCCLayer = "RCC";
-    public string WheelColliderLayer = "RCC_WheelCollider";
-    public string DetachablePartLayer = "RCC_DetachablePart";
+    public string WheelColliderLayer = "CargoTruck_CC_WheelCollider";
+    public string DetachablePartLayer = "CargoTruck_CC_DetachablePart";
     public bool tagAllChildrenGameobjects = false;
 
     public GameObject chassisJoint;
     public GameObject exhaustGas;
-    public RCC_SkidmarksManager skidmarksManager;
+    public CargoTruck_CC_SkidmarksManager skidmarksManager;
     public GameObject projector;
     public LayerMask projectorIgnoreLayer;
 
@@ -172,7 +172,7 @@ public class CargoTruck_CC_Settings : ScriptableObject {
     public GameObject lightTrailers;
     public GameObject mirrors;
 
-    public RCC_Camera RCCMainCamera;
+    public CargoTruck_CC_Camera RCCMainCamera;
     public GameObject hoodCamera;
     public GameObject cinematicCamera;
     public GameObject RCCCanvas;

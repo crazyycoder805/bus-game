@@ -16,13 +16,13 @@ using System.Collections.Generic;
 /// <summary>
 /// AI Controller of RCC. It's not professional, but it does the job. Follows all waypoints, or follows/chases the target gameobject.
 /// </summary>
-[RequireComponent(typeof(RCC_CarControllerV3))]
+[RequireComponent(typeof(CargoTruck_CC_CarControllerV3))]
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/AI/RCC AI Car Controller")]
-public class RCC_AICarController : MonoBehaviour {
+public class CargoTruck_CC_AICarController : MonoBehaviour {
 
-    internal RCC_CarControllerV3 carController;     // Main RCC of this vehicle.
+    internal CargoTruck_CC_CarControllerV3 carController;     // Main RCC of this vehicle.
 
-    public RCC_AIWaypointsContainer waypointsContainer;                 // Waypoints Container.
+    public CargoTruck_CC_AIWaypointsContainer waypointsContainer;                 // Waypoints Container.
     public int currentWaypointIndex = 0;                                            // Current index in Waypoint Container.
     public string targetTag = "Player";                                 // Search and chase Gameobjects with tags.
 
@@ -42,7 +42,7 @@ public class RCC_AICarController : MonoBehaviour {
     private float resetTime = 0f;           // This timer was used for deciding go back or not, after crashing.
     private bool reversingNow = false;
 
-    // Steer, Motor, And Brake inputs. Will feed RCC_CarController with these inputs.
+    // Steer, Motor, And Brake inputs. Will feed CargoTruck_CC_CarController with these inputs.
     public float steerInput = 0f;
     public float throttleInput = 0f;
     public float brakeInput = 0f;
@@ -75,28 +75,28 @@ public class RCC_AICarController : MonoBehaviour {
     // Detector with Sphere Collider. Used for finding target Gameobjects in chasing mode.
     private SphereCollider detector;
     public List<Transform> targetsInZone = new List<Transform>();
-    public List<RCC_AIBrakeZone> brakeZones = new List<RCC_AIBrakeZone>();
+    public List<CargoTruck_CC_AIBrakeZone> brakeZones = new List<CargoTruck_CC_AIBrakeZone>();
 
     public Transform targetChase;       // Target Gameobject for chasing.
-    public RCC_AIBrakeZone targetBrake;     //  Target brakezone.
+    public CargoTruck_CC_AIBrakeZone targetBrake;     //  Target brakezone.
 
     // Firing an event when each RCC AI vehicle spawned / enabled.
-    public delegate void onRCCAISpawned(RCC_AICarController RCCAI);
+    public delegate void onRCCAISpawned(CargoTruck_CC_AICarController RCCAI);
     public static event onRCCAISpawned OnRCCAISpawned;
 
     // Firing an event when each RCC AI vehicle disabled / destroyed.
-    public delegate void onRCCAIDestroyed(RCC_AICarController RCCAI);
+    public delegate void onRCCAIDestroyed(CargoTruck_CC_AICarController RCCAI);
     public static event onRCCAIDestroyed OnRCCAIDestroyed;
 
     void Awake() {
 
         // Getting main controller and enabling external controller.
-        carController = GetComponent<RCC_CarControllerV3>();
+        carController = GetComponent<CargoTruck_CC_CarControllerV3>();
         carController.externalController = true;
 
         // If Waypoints Container is not selected in Inspector Panel, find it on scene.
         if (!waypointsContainer)
-            waypointsContainer = FindObjectOfType(typeof(RCC_AIWaypointsContainer)) as RCC_AIWaypointsContainer;
+            waypointsContainer = FindObjectOfType(typeof(CargoTruck_CC_AIWaypointsContainer)) as CargoTruck_CC_AIWaypointsContainer;
 
         // Creating our Navigator and setting properties.
         GameObject navigatorObject = new GameObject("Navigator");
@@ -201,7 +201,7 @@ public class RCC_AICarController : MonoBehaviour {
                 }
 
                 // Next waypoint and its position.
-                RCC_Waypoint currentWaypoint = waypointsContainer.waypoints[currentWaypointIndex];
+                CargoTruck_CC_Waypoint currentWaypoint = waypointsContainer.waypoints[currentWaypointIndex];
 
                 // Checks for the distance to next waypoint. If it is less than written value, then pass to next waypoint.
                 float distanceToNextWaypoint = Vector3.Distance(transform.position, currentWaypoint.transform.position);
@@ -565,10 +565,10 @@ public class RCC_AICarController : MonoBehaviour {
 
         }
 
-        if (col.GetComponent<RCC_AIBrakeZone>()) {
+        if (col.GetComponent<CargoTruck_CC_AIBrakeZone>()) {
 
-            if (!brakeZones.Contains(col.GetComponent<RCC_AIBrakeZone>()))
-                brakeZones.Add(col.GetComponent<RCC_AIBrakeZone>());
+            if (!brakeZones.Contains(col.GetComponent<CargoTruck_CC_AIBrakeZone>()))
+                brakeZones.Add(col.GetComponent<CargoTruck_CC_AIBrakeZone>());
 
         }
 
@@ -599,14 +599,14 @@ public class RCC_AICarController : MonoBehaviour {
 
     }
 
-    private RCC_AIBrakeZone GetClosestBrakeZone(RCC_AIBrakeZone[] enemies) {
+    private CargoTruck_CC_AIBrakeZone GetClosestBrakeZone(CargoTruck_CC_AIBrakeZone[] enemies) {
 
-        RCC_AIBrakeZone bestTarget = null;
+        CargoTruck_CC_AIBrakeZone bestTarget = null;
 
         float closestDistanceSqr = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
 
-        foreach (RCC_AIBrakeZone potentialTarget in enemies) {
+        foreach (CargoTruck_CC_AIBrakeZone potentialTarget in enemies) {
 
             Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
             float dSqrToTarget = directionToTarget.sqrMagnitude;

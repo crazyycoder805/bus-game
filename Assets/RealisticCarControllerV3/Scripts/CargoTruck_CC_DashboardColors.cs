@@ -15,7 +15,7 @@ using UnityEngine.UI;
 /// Changes HUD image colors by UI Sliders.
 /// </summary>
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/UI/RCC UI Dashboard Colors")]
-public class RCC_DashboardColors : MonoBehaviour {
+public class CargoTruck_CC_DashboardColors : MonoBehaviour {
 
     public Image[] huds;
     public Color hudColor = Color.white;

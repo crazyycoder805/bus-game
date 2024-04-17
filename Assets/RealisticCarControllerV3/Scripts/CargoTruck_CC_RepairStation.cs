@@ -14,14 +14,14 @@ using UnityEngine;
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/Misc/RCC Repair Station")]
 public class CargoTruck_CC_RepairStation : MonoBehaviour {
 
-    private RCC_CarControllerV3 targetVehicle;
+    private CargoTruck_CC_CarControllerV3 targetVehicle;
 
     void OnTriggerEnter(Collider col) {
 
         if (targetVehicle == null) {
 
-            if (col.gameObject.GetComponentInParent<RCC_CarControllerV3>())
-                targetVehicle = col.gameObject.GetComponentInParent<RCC_CarControllerV3>();
+            if (col.gameObject.GetComponentInParent<CargoTruck_CC_CarControllerV3>())
+                targetVehicle = col.gameObject.GetComponentInParent<CargoTruck_CC_CarControllerV3>();
 
         }
 
@@ -32,9 +32,9 @@ public class CargoTruck_CC_RepairStation : MonoBehaviour {
 
     void OnTriggerExit(Collider col) {
 
-        if (col.gameObject.GetComponentInParent<RCC_CarControllerV3>()) {
+        if (col.gameObject.GetComponentInParent<CargoTruck_CC_CarControllerV3>()) {
 
-            col.gameObject.GetComponentInParent<RCC_CarControllerV3>().Repair();
+            col.gameObject.GetComponentInParent<CargoTruck_CC_CarControllerV3>().Repair();
             targetVehicle = null;
 
         }

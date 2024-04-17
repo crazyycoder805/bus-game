@@ -12,10 +12,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/Misc/RCC Detachable Part")]
-public class RCC_DetachablePart : MonoBehaviour {
+public class CargoTruck_CC_DetachablePart : MonoBehaviour {
 
     private ConfigurableJoint joint;        //	Configurable Joint.
-    private RCC_Joint jointProperties;      //	Joint properties class.
+    private CargoTruck_CC_Joint jointProperties;      //	Joint properties class.
     private Rigidbody rigid;        //	Rigidbody.
     public Transform COM;       //	Center of mass.
     public Collider partCollider;
@@ -78,7 +78,7 @@ public class RCC_DetachablePart : MonoBehaviour {
     /// </summary>
     private void GetJointProperties() {
 
-        jointProperties = new RCC_Joint();
+        jointProperties = new CargoTruck_CC_Joint();
         jointProperties.GetProperties(joint);
 
     }
@@ -89,7 +89,7 @@ public class RCC_DetachablePart : MonoBehaviour {
     private IEnumerator LockJoint() {
 
         yield return new WaitForFixedUpdate();
-        RCC_Joint.LockPart(joint);
+        CargoTruck_CC_Joint.LockPart(joint);
 
     }
 
@@ -226,7 +226,7 @@ public class RCC_DetachablePart : MonoBehaviour {
         if (!cJoint)
             cJoint = gameObject.AddComponent<ConfigurableJoint>();
 
-        cJoint.connectedBody = GetComponentInParent<RCC_CarControllerV3>().gameObject.GetComponent<Rigidbody>();
+        cJoint.connectedBody = GetComponentInParent<CargoTruck_CC_CarControllerV3>().gameObject.GetComponent<Rigidbody>();
 
         if (!partCollider)
             partCollider = GetComponentInChildren<Collider>();

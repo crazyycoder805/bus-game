@@ -15,7 +15,7 @@ using System.Collections.Generic;
 /// Receiving inputs from active vehicle on your scene, and feeds dashboard needles, texts, images.
 /// </summary>
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/UI/RCC UI Dashboard Inputs")]
-public class RCC_DashboardInputs : MonoBehaviour {
+public class CargoTruck_CC_DashboardInputs : MonoBehaviour {
 
     public GameObject RPMNeedle;
     public GameObject KMHNeedle;
@@ -47,7 +47,7 @@ public class RCC_DashboardInputs : MonoBehaviour {
     internal bool Park = false;
     internal bool Headlights = false;
 
-    internal RCC_CarControllerV3.IndicatorsOn indicators;
+    internal CargoTruck_CC_CarControllerV3.IndicatorsOn indicators;
 
     void Update() {
 
@@ -57,15 +57,15 @@ public class RCC_DashboardInputs : MonoBehaviour {
 
     void GetValues() {
 
-        if (!RCC_SceneManager.Instance.activePlayerVehicle)
+        if (!CargoTruck_CC_SceneManager.Instance.activePlayerVehicle)
             return;
 
-        if (!RCC_SceneManager.Instance.activePlayerVehicle.canControl || RCC_SceneManager.Instance.activePlayerVehicle.externalController)
+        if (!CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.canControl || CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.externalController)
             return;
 
         if (NOSGauge) {
 
-            if (RCC_SceneManager.Instance.activePlayerVehicle.useNOS) {
+            if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.useNOS) {
 
                 if (!NOSGauge.activeSelf)
                     NOSGauge.SetActive(true);
@@ -81,7 +81,7 @@ public class RCC_DashboardInputs : MonoBehaviour {
 
         if (turboGauge) {
 
-            if (RCC_SceneManager.Instance.activePlayerVehicle.useTurbo) {
+            if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.useTurbo) {
 
                 if (!turboGauge.activeSelf)
                     turboGauge.SetActive(true);
@@ -97,7 +97,7 @@ public class RCC_DashboardInputs : MonoBehaviour {
 
         if (heatGauge) {
 
-            if (RCC_SceneManager.Instance.activePlayerVehicle.useEngineHeat) {
+            if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.useEngineHeat) {
 
                 if (!heatGauge.activeSelf)
                     heatGauge.SetActive(true);
@@ -113,7 +113,7 @@ public class RCC_DashboardInputs : MonoBehaviour {
 
         if (fuelGauge) {
 
-            if (RCC_SceneManager.Instance.activePlayerVehicle.useFuelConsumption) {
+            if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.useFuelConsumption) {
 
                 if (!fuelGauge.activeSelf)
                     fuelGauge.SetActive(true);
@@ -127,22 +127,22 @@ public class RCC_DashboardInputs : MonoBehaviour {
 
         }
 
-        RPM = RCC_SceneManager.Instance.activePlayerVehicle.engineRPM;
-        KMH = RCC_SceneManager.Instance.activePlayerVehicle.speed;
-        direction = RCC_SceneManager.Instance.activePlayerVehicle.direction;
-        Gear = RCC_SceneManager.Instance.activePlayerVehicle.currentGear;
-        changingGear = RCC_SceneManager.Instance.activePlayerVehicle.changingGear;
-        NGear = RCC_SceneManager.Instance.activePlayerVehicle.NGear;
+        RPM = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.engineRPM;
+        KMH = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.speed;
+        direction = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.direction;
+        Gear = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.currentGear;
+        changingGear = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.changingGear;
+        NGear = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.NGear;
 
-        ABS = RCC_SceneManager.Instance.activePlayerVehicle.ABSAct;
-        ESP = RCC_SceneManager.Instance.activePlayerVehicle.ESPAct;
-        Park = RCC_SceneManager.Instance.activePlayerVehicle.handbrakeInput > .1f ? true : false;
-        Headlights = RCC_SceneManager.Instance.activePlayerVehicle.lowBeamHeadLightsOn || RCC_SceneManager.Instance.activePlayerVehicle.highBeamHeadLightsOn;
-        indicators = RCC_SceneManager.Instance.activePlayerVehicle.indicatorsOn;
+        ABS = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.ABSAct;
+        ESP = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.ESPAct;
+        Park = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.handbrakeInput > .1f ? true : false;
+        Headlights = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.lowBeamHeadLightsOn || CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.highBeamHeadLightsOn;
+        indicators = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.indicatorsOn;
 
         if (RPMNeedle) {
 
-            RPMNeedleRotation = (RCC_SceneManager.Instance.activePlayerVehicle.engineRPM / 50f);
+            RPMNeedleRotation = (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.engineRPM / 50f);
             RPMNeedleRotation = Mathf.Clamp(RPMNeedleRotation, 0f, 180f);
             RPMNeedle.transform.eulerAngles = new Vector3(RPMNeedle.transform.eulerAngles.x, RPMNeedle.transform.eulerAngles.y, -RPMNeedleRotation);
 
@@ -150,10 +150,10 @@ public class RCC_DashboardInputs : MonoBehaviour {
 
         if (KMHNeedle) {
 
-            if (RCC_Settings.Instance.units == RCC_Settings.Units.KMH)
-                KMHNeedleRotation = (RCC_SceneManager.Instance.activePlayerVehicle.speed);
+            if (CargoTruck_CC_Settings.Instance.units == CargoTruck_CC_Settings.Units.KMH)
+                KMHNeedleRotation = (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.speed);
             else
-                KMHNeedleRotation = (RCC_SceneManager.Instance.activePlayerVehicle.speed * 0.62f);
+                KMHNeedleRotation = (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.speed * 0.62f);
 
             KMHNeedle.transform.eulerAngles = new Vector3(KMHNeedle.transform.eulerAngles.x, KMHNeedle.transform.eulerAngles.y, -KMHNeedleRotation);
 
@@ -161,28 +161,28 @@ public class RCC_DashboardInputs : MonoBehaviour {
 
         if (turboNeedle) {
 
-            BoostNeedleRotation = (RCC_SceneManager.Instance.activePlayerVehicle.turboBoost / 30f) * 270f;
+            BoostNeedleRotation = (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.turboBoost / 30f) * 270f;
             turboNeedle.transform.eulerAngles = new Vector3(turboNeedle.transform.eulerAngles.x, turboNeedle.transform.eulerAngles.y, -BoostNeedleRotation);
 
         }
 
         if (NoSNeedle) {
 
-            NoSNeedleRotation = (RCC_SceneManager.Instance.activePlayerVehicle.NoS / 100f) * 270f;
+            NoSNeedleRotation = (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.NoS / 100f) * 270f;
             NoSNeedle.transform.eulerAngles = new Vector3(NoSNeedle.transform.eulerAngles.x, NoSNeedle.transform.eulerAngles.y, -NoSNeedleRotation);
 
         }
 
         if (heatNeedle) {
 
-            heatNeedleRotation = (RCC_SceneManager.Instance.activePlayerVehicle.engineHeat / 110f) * 270f;
+            heatNeedleRotation = (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.engineHeat / 110f) * 270f;
             heatNeedle.transform.eulerAngles = new Vector3(heatNeedle.transform.eulerAngles.x, heatNeedle.transform.eulerAngles.y, -heatNeedleRotation);
 
         }
 
         if (fuelNeedle) {
 
-            fuelNeedleRotation = (RCC_SceneManager.Instance.activePlayerVehicle.fuelTank / RCC_SceneManager.Instance.activePlayerVehicle.fuelTankCapacity) * 270f;
+            fuelNeedleRotation = (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.fuelTank / CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.fuelTankCapacity) * 270f;
             fuelNeedle.transform.eulerAngles = new Vector3(fuelNeedle.transform.eulerAngles.x, fuelNeedle.transform.eulerAngles.y, -fuelNeedleRotation);
 
         }

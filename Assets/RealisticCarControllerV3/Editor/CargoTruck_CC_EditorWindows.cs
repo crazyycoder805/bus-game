@@ -13,50 +13,50 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class RCC_EditorWindows : Editor {
+public class CargoTruck_CC_EditorWindows : Editor {
 
-    private static RCC_CarControllerV3 SelectedCar() {
+    private static CargoTruck_CC_CarControllerV3 SelectedCar() {
 
         if (Selection.activeGameObject == null)
             return null;
 
-        return Selection.activeGameObject.GetComponentInParent<RCC_CarControllerV3>();
+        return Selection.activeGameObject.GetComponentInParent<CargoTruck_CC_CarControllerV3>();
 
     }
 
     #region Edit Settings
     [MenuItem("Tools/BoneCracker Games/Realistic Car Controller/Edit RCC Settings #s", false, -100)]
     public static void OpenRCCSettings() {
-        Selection.activeObject = RCC_Settings.Instance;
+        Selection.activeObject = CargoTruck_CC_Settings.Instance;
     }
     #endregion
 
     #region Configure
     [MenuItem("Tools/BoneCracker Games/Realistic Car Controller/Configure Demo Vehicles", false, -65)]
     public static void OpenDemoVehiclesSettings() {
-        Selection.activeObject = RCC_DemoVehicles.Instance;
+        Selection.activeObject = CargoTruck_CC_DemoVehicles.Instance;
     }
 
-#if RCC_PHOTON && PHOTON_UNITY_NETWORKING
+#if CargoTruck_CC_PHOTON && PHOTON_UNITY_NETWORKING
 	[MenuItem("Tools/BoneCracker Games/Realistic Car Controller/Configure Photon Demo Vehicles", false, -65)]
 	public static void OpenPhotonDemoVehiclesSettings(){
-		Selection.activeObject = RCC_PhotonDemoVehicles.Instance;
+		Selection.activeObject = CargoTruck_CC_PhotonDemoVehicles.Instance;
 	}
 #endif
 
     [MenuItem("Tools/BoneCracker Games/Realistic Car Controller/Configure Ground Materials", false, -65)]
     public static void OpenGroundMaterialsSettings() {
-        Selection.activeObject = RCC_GroundMaterials.Instance;
+        Selection.activeObject = CargoTruck_CC_GroundMaterials.Instance;
     }
 
     [MenuItem("Tools/BoneCracker Games/Realistic Car Controller/Configure Changable Wheels", false, -65)]
     public static void OpenChangableWheelSettings() {
-        Selection.activeObject = RCC_ChangableWheels.Instance;
+        Selection.activeObject = CargoTruck_CC_ChangableWheels.Instance;
     }
 
     [MenuItem("Tools/BoneCracker Games/Realistic Car Controller/Configure Recorded Clips", false, -65)]
     public static void OpenRecordSettings() {
-        Selection.activeObject = RCC_Records.Instance;
+        Selection.activeObject = CargoTruck_CC_Records.Instance;
     }
     #endregion
 
@@ -64,15 +64,15 @@ public class RCC_EditorWindows : Editor {
     [MenuItem("Tools/BoneCracker Games/Realistic Car Controller/Create/Cameras/Add RCC Camera To Scene", false, -50)]
     public static void CreateRCCCamera() {
 
-        if (GameObject.FindObjectOfType<RCC_Camera>()) {
+        if (GameObject.FindObjectOfType<CargoTruck_CC_Camera>()) {
 
             EditorUtility.DisplayDialog("Scene has RCC Camera already!", "Scene has RCC Camera already!", "Close");
-            Selection.activeGameObject = GameObject.FindObjectOfType<RCC_Camera>().gameObject;
+            Selection.activeGameObject = GameObject.FindObjectOfType<CargoTruck_CC_Camera>().gameObject;
 
         } else {
 
-            GameObject cam = Instantiate(RCC_Settings.Instance.RCCMainCamera.gameObject);
-            cam.name = RCC_Settings.Instance.RCCMainCamera.name;
+            GameObject cam = Instantiate(CargoTruck_CC_Settings.Instance.RCCMainCamera.gameObject);
+            cam.name = CargoTruck_CC_Settings.Instance.RCCMainCamera.name;
             Selection.activeGameObject = cam.gameObject;
 
         }
@@ -88,16 +88,16 @@ public class RCC_EditorWindows : Editor {
 
         } else {
 
-            if (SelectedCar().gameObject.GetComponentInChildren<RCC_HoodCamera>()) {
+            if (SelectedCar().gameObject.GetComponentInChildren<CargoTruck_CC_HoodCamera>()) {
 
                 EditorUtility.DisplayDialog("Your Vehicle Has Hood Camera Already!", "Your vehicle has hood camera already!", "Close");
-                Selection.activeGameObject = SelectedCar().gameObject.GetComponentInChildren<RCC_HoodCamera>().gameObject;
+                Selection.activeGameObject = SelectedCar().gameObject.GetComponentInChildren<CargoTruck_CC_HoodCamera>().gameObject;
                 return;
 
             }
 
-            GameObject hoodCam = (GameObject)Instantiate(RCC_Settings.Instance.hoodCamera, SelectedCar().transform.position, SelectedCar().transform.rotation);
-            hoodCam.name = RCC_Settings.Instance.hoodCamera.name;
+            GameObject hoodCam = (GameObject)Instantiate(CargoTruck_CC_Settings.Instance.hoodCamera, SelectedCar().transform.position, SelectedCar().transform.rotation);
+            hoodCam.name = CargoTruck_CC_Settings.Instance.hoodCamera.name;
             hoodCam.transform.SetParent(SelectedCar().transform, true);
             hoodCam.GetComponent<ConfigurableJoint>().connectedBody = SelectedCar().gameObject.GetComponent<Rigidbody>();
             hoodCam.GetComponent<ConfigurableJoint>().connectedMassScale = 0f;
@@ -126,15 +126,15 @@ public class RCC_EditorWindows : Editor {
 
         } else {
 
-            if (SelectedCar().gameObject.GetComponentInChildren<RCC_WheelCamera>()) {
+            if (SelectedCar().gameObject.GetComponentInChildren<CargoTruck_CC_WheelCamera>()) {
                 EditorUtility.DisplayDialog("Your Vehicle Has Wheel Camera Already!", "Your vehicle has wheel camera already!", "Close");
-                Selection.activeGameObject = SelectedCar().gameObject.GetComponentInChildren<RCC_WheelCamera>().gameObject;
+                Selection.activeGameObject = SelectedCar().gameObject.GetComponentInChildren<CargoTruck_CC_WheelCamera>().gameObject;
                 return;
             }
 
             GameObject wheelCam = new GameObject("WheelCamera");
             wheelCam.transform.SetParent(SelectedCar().transform, false);
-            wheelCam.AddComponent<RCC_WheelCamera>();
+            wheelCam.AddComponent<CargoTruck_CC_WheelCamera>();
             Selection.activeGameObject = wheelCam;
 
         }
@@ -173,8 +173,8 @@ public class RCC_EditorWindows : Editor {
 
             }
 
-            GameObject headLight = GameObject.Instantiate(RCC_Settings.Instance.headLights, lightsMain.transform.position, lightsMain.transform.rotation) as GameObject;
-            headLight.name = RCC_Settings.Instance.headLights.name;
+            GameObject headLight = GameObject.Instantiate(CargoTruck_CC_Settings.Instance.headLights, lightsMain.transform.position, lightsMain.transform.rotation) as GameObject;
+            headLight.name = CargoTruck_CC_Settings.Instance.headLights.name;
             headLight.transform.SetParent(lightsMain.transform);
             headLight.transform.localRotation = Quaternion.identity;
             headLight.transform.localPosition = new Vector3(0f, 0f, 2f);
@@ -216,8 +216,8 @@ public class RCC_EditorWindows : Editor {
 
             }
 
-            GameObject brakeLight = GameObject.Instantiate(RCC_Settings.Instance.brakeLights, lightsMain.transform.position, lightsMain.transform.rotation) as GameObject;
-            brakeLight.name = RCC_Settings.Instance.brakeLights.name;
+            GameObject brakeLight = GameObject.Instantiate(CargoTruck_CC_Settings.Instance.brakeLights, lightsMain.transform.position, lightsMain.transform.rotation) as GameObject;
+            brakeLight.name = CargoTruck_CC_Settings.Instance.brakeLights.name;
             brakeLight.transform.SetParent(lightsMain.transform);
             brakeLight.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
             brakeLight.transform.localPosition = new Vector3(0f, 0f, -2f);
@@ -259,8 +259,8 @@ public class RCC_EditorWindows : Editor {
 
             }
 
-            GameObject reverseLight = GameObject.Instantiate(RCC_Settings.Instance.reverseLights, lightsMain.transform.position, lightsMain.transform.rotation) as GameObject;
-            reverseLight.name = RCC_Settings.Instance.reverseLights.name;
+            GameObject reverseLight = GameObject.Instantiate(CargoTruck_CC_Settings.Instance.reverseLights, lightsMain.transform.position, lightsMain.transform.rotation) as GameObject;
+            reverseLight.name = CargoTruck_CC_Settings.Instance.reverseLights.name;
             reverseLight.transform.SetParent(lightsMain.transform);
             reverseLight.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
             reverseLight.transform.localPosition = new Vector3(0f, 0f, -2f);
@@ -302,9 +302,9 @@ public class RCC_EditorWindows : Editor {
 
             }
 
-            GameObject indicatorLight = GameObject.Instantiate(RCC_Settings.Instance.indicatorLights, lightsMain.transform.position, lightsMain.transform.rotation) as GameObject;
+            GameObject indicatorLight = GameObject.Instantiate(CargoTruck_CC_Settings.Instance.indicatorLights, lightsMain.transform.position, lightsMain.transform.rotation) as GameObject;
             Vector3 relativePos = SelectedCar().transform.InverseTransformPoint(indicatorLight.transform.position);
-            indicatorLight.name = RCC_Settings.Instance.indicatorLights.name;
+            indicatorLight.name = CargoTruck_CC_Settings.Instance.indicatorLights.name;
             indicatorLight.transform.SetParent(lightsMain.transform);
 
             if (relativePos.z > 0f)
@@ -334,15 +334,15 @@ public class RCC_EditorWindows : Editor {
     [MenuItem("Tools/BoneCracker Games/Realistic Car Controller/Create/UI/Add RCC Canvas To Scene", false, -50)]
     public static void CreateRCCCanvas() {
 
-        if (GameObject.FindObjectOfType<RCC_DashboardInputs>()) {
+        if (GameObject.FindObjectOfType<CargoTruck_CC_DashboardInputs>()) {
 
             EditorUtility.DisplayDialog("Scene has RCC Canvas already!", "Scene has RCC Canvas already!", "Close");
-            Selection.activeGameObject = GameObject.FindObjectOfType<RCC_DashboardInputs>().gameObject;
+            Selection.activeGameObject = GameObject.FindObjectOfType<CargoTruck_CC_DashboardInputs>().gameObject;
 
         } else {
 
-            GameObject canvas = Instantiate(RCC_Settings.Instance.RCCCanvas);
-            canvas.name = RCC_Settings.Instance.RCCCanvas.name;
+            GameObject canvas = Instantiate(CargoTruck_CC_Settings.Instance.RCCCanvas);
+            canvas.name = CargoTruck_CC_Settings.Instance.RCCCanvas.name;
             Selection.activeGameObject = canvas;
 
         }
@@ -369,8 +369,8 @@ public class RCC_EditorWindows : Editor {
                 exhaustsMain = SelectedCar().transform.Find("Exhausts").gameObject;
             }
 
-            GameObject exhaust = (GameObject)Instantiate(RCC_Settings.Instance.exhaustGas, SelectedCar().transform.position, SelectedCar().transform.rotation * Quaternion.Euler(0f, 180f, 0f));
-            exhaust.name = RCC_Settings.Instance.exhaustGas.name;
+            GameObject exhaust = (GameObject)Instantiate(CargoTruck_CC_Settings.Instance.exhaustGas, SelectedCar().transform.position, SelectedCar().transform.rotation * Quaternion.Euler(0f, 180f, 0f));
+            exhaust.name = CargoTruck_CC_Settings.Instance.exhaustGas.name;
             exhaust.transform.SetParent(exhaustsMain.transform);
             exhaust.transform.localPosition = new Vector3(1f, 0f, -2f);
             Selection.activeGameObject = exhaust;
@@ -428,10 +428,10 @@ public class RCC_EditorWindows : Editor {
     #region Static Methods
     public static void CreateMirrors(GameObject vehicle) {
 
-        if (!vehicle.transform.GetComponentInChildren<RCC_Mirror>()) {
+        if (!vehicle.transform.GetComponentInChildren<CargoTruck_CC_Mirror>()) {
 
-            GameObject mirrors = (GameObject)Instantiate(RCC_Settings.Instance.mirrors, vehicle.transform.position, vehicle.transform.rotation);
-            mirrors.transform.SetParent(vehicle.GetComponent<RCC_CarControllerV3>().transform, true);
+            GameObject mirrors = (GameObject)Instantiate(CargoTruck_CC_Settings.Instance.mirrors, vehicle.transform.position, vehicle.transform.rotation);
+            mirrors.transform.SetParent(vehicle.GetComponent<CargoTruck_CC_CarControllerV3>().transform, true);
             mirrors.name = "Mirrors";
             Selection.activeGameObject = mirrors;
             EditorUtility.DisplayDialog("Created Mirrors!", "Created mirrors. Adjust their positions.", "Close");
@@ -446,11 +446,11 @@ public class RCC_EditorWindows : Editor {
     #endregion
 
     #region Logitech
-#if RCC_LOGITECH
+#if CargoTruck_CC_LOGITECH
 	[MenuItem("Tools/BoneCracker Games/Realistic Car Controller/Create/Logitech/Logitech Manager", false, -50)]
 	public static void CreateLogitech() {
 
-		RCC_LogitechSteeringWheel logi = RCC_LogitechSteeringWheel.Instance;
+		CargoTruck_CC_LogitechSteeringWheel logi = CargoTruck_CC_LogitechSteeringWheel.Instance;
 		Selection.activeGameObject = logi.gameObject;
 
 	}
@@ -461,7 +461,7 @@ public class RCC_EditorWindows : Editor {
     public static void ExportProjectSettings() {
 
         string[] projectContent = new string[] { "ProjectSettings/TagManager.asset" };
-        AssetDatabase.ExportPackage(projectContent, "RCC_ProjectSettings.unitypackage", ExportPackageOptions.Interactive | ExportPackageOptions.Recurse | ExportPackageOptions.IncludeDependencies);
+        AssetDatabase.ExportPackage(projectContent, "CargoTruck_CC_ProjectSettings.unitypackage", ExportPackageOptions.Interactive | ExportPackageOptions.Recurse | ExportPackageOptions.IncludeDependencies);
         Debug.Log("Project Exported");
 
     }

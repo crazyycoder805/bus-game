@@ -14,9 +14,9 @@ using System.Collections;
 /// General lighting system for vehicles. It has all kind of lights such as Headlight, Brake Light, Indicator Light, Reverse Light.
 /// </summary>
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/Light/RCC Light")]
-public class RCC_Light : RCC_Core {
+public class CargoTruck_CC_Light : CargoTruck_CC_Core {
 
-    [HideInInspector] public RCC_CarControllerV3 carController;
+    [HideInInspector] public CargoTruck_CC_CarControllerV3 carController;
 
     private Light _light;
     private Projector projector;
@@ -39,7 +39,7 @@ public class RCC_Light : RCC_Core {
     private bool parkLightFound = false;
     private bool highBeamLightFound = false;
 
-    public RCC_Emission[] emission;
+    public CargoTruck_CC_Emission[] emission;
     public bool useEmissionTexture = false;
 
     public float strength = 100f;       //	Strength of the light. 
@@ -50,14 +50,14 @@ public class RCC_Light : RCC_Core {
     private bool broken = false;            //	Is this light broken currently?
 
     // For Indicators.
-    private RCC_CarControllerV3.IndicatorsOn indicatorsOn;
+    private CargoTruck_CC_CarControllerV3.IndicatorsOn indicatorsOn;
     private AudioSource indicatorSound;
-    public AudioClip indicatorClip { get { return RCC_Settings.Instance.indicatorClip; } }
+    public AudioClip indicatorClip { get { return CargoTruck_CC_Settings.Instance.indicatorClip; } }
 
     private void Awake() {
 
         // Getting main car controller if light is attached to vehicle.
-        carController = GetComponentInParent<RCC_CarControllerV3>();
+        carController = GetComponentInParent<CargoTruck_CC_CarControllerV3>();
         orgStrength = strength;     //	Getting original strength of the light. We will be using this original value while restoring the light.
 
         // Do not init the light if it's not attached to the vehicle (Used for trailers. Trailers have not main car controller script. Assigning car controller of the light when trailer is attached/detached.).
@@ -78,22 +78,22 @@ public class RCC_Light : RCC_Core {
             if (_light.flare != null)
                 _light.flare = null;
 
-            //lensFlare. |= (1 << LayerMask.NameToLayer(RCC_Settings.Instance.RCCLayer));
+            //lensFlare. |= (1 << LayerMask.NameToLayer(CargoTruck_CC_Settings.Instance.RCCLayer));
 
         }
 
-        if (RCC_Settings.Instance.useLightProjectorForLightingEffect) {
+        if (CargoTruck_CC_Settings.Instance.useLightProjectorForLightingEffect) {
 
             projector = GetComponent<Projector>();
 
             if (projector == null) {
 
-                projector = (Instantiate(RCC_Settings.Instance.projector, transform.position, transform.rotation)).GetComponent<Projector>();
+                projector = (Instantiate(CargoTruck_CC_Settings.Instance.projector, transform.position, transform.rotation)).GetComponent<Projector>();
                 projector.transform.SetParent(transform, true);
 
             }
 
-            projector.ignoreLayers = RCC_Settings.Instance.projectorIgnoreLayer;
+            projector.ignoreLayers = CargoTruck_CC_Settings.Instance.projectorIgnoreLayer;
 
             if (lightType != LightType.HeadLight)
                 projector.transform.localRotation = Quaternion.Euler(20f, 0f, 0f);
@@ -103,7 +103,7 @@ public class RCC_Light : RCC_Core {
 
         }
 
-        if (RCC_Settings.Instance.useLightsAsVertexLights) {
+        if (CargoTruck_CC_Settings.Instance.useLightsAsVertexLights) {
 
             _light.renderMode = LightRenderMode.ForceVertex;
             _light.cullingMask = 0;
@@ -117,13 +117,13 @@ public class RCC_Light : RCC_Core {
         if (lightType == LightType.Indicator) {
 
             if (!carController.transform.Find("All Audio Sources/Indicator Sound AudioSource"))
-                indicatorSound = NewAudioSource(RCC_Settings.Instance.audioMixer, carController.gameObject, "Indicator Sound AudioSource", 1f, 3f, 1, indicatorClip, false, false, false);
+                indicatorSound = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, carController.gameObject, "Indicator Sound AudioSource", 1f, 3f, 1, indicatorClip, false, false, false);
             else
                 indicatorSound = carController.transform.Find("All Audio Sources/Indicator Sound AudioSource").GetComponent<AudioSource>();
 
         }
 
-        RCC_Light[] allLights = carController.GetComponentsInChildren<RCC_Light>();
+        CargoTruck_CC_Light[] allLights = carController.GetComponentsInChildren<CargoTruck_CC_Light>();
 
         for (int i = 0; i < allLights.Length; i++) {
 
@@ -157,7 +157,7 @@ public class RCC_Light : RCC_Core {
         if (!carController)
             return;
 
-        if (RCC_Settings.Instance.useLightProjectorForLightingEffect)
+        if (CargoTruck_CC_Settings.Instance.useLightProjectorForLightingEffect)
             Projectors();
 
         if (lensFlare)
@@ -168,7 +168,7 @@ public class RCC_Light : RCC_Core {
 
         if (useEmissionTexture) {
 
-            foreach (RCC_Emission item in emission)
+            foreach (CargoTruck_CC_Emission item in emission)
                 item.Emission(_light);
 
         }
@@ -260,7 +260,7 @@ public class RCC_Light : RCC_Core {
 
         switch (indicatorsOn) {
 
-            case RCC_CarControllerV3.IndicatorsOn.Left:
+            case CargoTruck_CC_CarControllerV3.IndicatorsOn.Left:
 
                 if (relativePos.x > 0f) {
                     Lighting(0);
@@ -280,7 +280,7 @@ public class RCC_Light : RCC_Core {
                     carController.indicatorTimer = 0f;
                 break;
 
-            case RCC_CarControllerV3.IndicatorsOn.Right:
+            case CargoTruck_CC_CarControllerV3.IndicatorsOn.Right:
 
                 if (relativePos.x < 0f) {
                     Lighting(0);
@@ -300,7 +300,7 @@ public class RCC_Light : RCC_Core {
                     carController.indicatorTimer = 0f;
                 break;
 
-            case RCC_CarControllerV3.IndicatorsOn.All:
+            case CargoTruck_CC_CarControllerV3.IndicatorsOn.All:
 
                 if (carController.indicatorTimer >= .5f) {
                     Lighting(0);
@@ -315,7 +315,7 @@ public class RCC_Light : RCC_Core {
                     carController.indicatorTimer = 0f;
                 break;
 
-            case RCC_CarControllerV3.IndicatorsOn.Off:
+            case CargoTruck_CC_CarControllerV3.IndicatorsOn.Off:
 
                 Lighting(0);
                 carController.indicatorTimer = 0f;
@@ -348,7 +348,7 @@ public class RCC_Light : RCC_Core {
             refreshTimer = 0f;
 
             if (!mainCamera)
-                mainCamera = RCC_SceneManager.Instance.activeMainCamera;
+                mainCamera = CargoTruck_CC_SceneManager.Instance.activeMainCamera;
 
             if (!mainCamera)
                 return;
@@ -446,7 +446,7 @@ public class RCC_Light : RCC_Core {
         CheckRotation();
         CheckLensFlare();
 
-        foreach (RCC_Emission item in emission)
+        foreach (CargoTruck_CC_Emission item in emission)
             item.multiplier = 1f;
 
     }

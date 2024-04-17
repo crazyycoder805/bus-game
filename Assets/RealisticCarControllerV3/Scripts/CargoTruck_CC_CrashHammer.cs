@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class RCC_CrashHammer : MonoBehaviour {
+public class CargoTruck_CC_CrashHammer : MonoBehaviour {
 
     public Transform hingePoint;
     private Rigidbody rigid;

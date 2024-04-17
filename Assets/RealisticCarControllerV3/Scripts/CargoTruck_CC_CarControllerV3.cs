@@ -19,7 +19,7 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// Main vehicle controller script that includes Wheels, Steering, Suspensions, Mechanic Configuration, Stability, Lights, Sounds, and Damage in AIO.
 /// </summary>
-public class RCC_CarControllerV3 : RCC_Core {
+public class CargoTruck_CC_CarControllerV3 : CargoTruck_CC_Core {
 
     public bool canControl = true;              // Enables / Disables controlling the vehicle. If enabled, vehicle can receive all inputs from the InputManager.
     public bool isGrounded = false;             // Is vehicle grounded completely now?
@@ -34,19 +34,19 @@ public class RCC_CarControllerV3 : RCC_Core {
     public Transform[] ExtraRearWheelsTransform;        // Extra wheels in case your vehicle has extra wheels.
 
     // Wheel colliders of the vehicle.
-    public RCC_WheelCollider FrontLeftWheelCollider;
-    public RCC_WheelCollider FrontRightWheelCollider;
-    public RCC_WheelCollider RearLeftWheelCollider;
-    public RCC_WheelCollider RearRightWheelCollider;
-    public RCC_WheelCollider[] ExtraRearWheelsCollider;     // Extra Wheels. In case of if your vehicle has extra wheels.
+    public CargoTruck_CC_WheelCollider FrontLeftWheelCollider;
+    public CargoTruck_CC_WheelCollider FrontRightWheelCollider;
+    public CargoTruck_CC_WheelCollider RearLeftWheelCollider;
+    public CargoTruck_CC_WheelCollider RearRightWheelCollider;
+    public CargoTruck_CC_WheelCollider[] ExtraRearWheelsCollider;     // Extra Wheels. In case of if your vehicle has extra wheels.
 
-    private RCC_WheelCollider[] _allWheelColliders;
-    public RCC_WheelCollider[] allWheelColliders {
+    private CargoTruck_CC_WheelCollider[] _allWheelColliders;
+    public CargoTruck_CC_WheelCollider[] allWheelColliders {
 
         get {
 
             if (_allWheelColliders == null || _allWheelColliders.Length <= 0)
-                _allWheelColliders = GetComponentsInChildren<RCC_WheelCollider>(true);
+                _allWheelColliders = GetComponentsInChildren<CargoTruck_CC_WheelCollider>(true);
 
             return _allWheelColliders;
 
@@ -139,7 +139,7 @@ public class RCC_CarControllerV3 : RCC_Core {
     [Range(.02f, .4f)] public float engineInertia = .15f;       // Engine inertia. Engine reacts faster on lower values.
     public bool useRevLimiter = true;                               // Rev limiter above maximum engine RPM. Cuts gas when RPM exceeds maximum engine RPM.
     public bool useExhaustFlame = true;                         // Exhaust blows flame when driver cuts gas at certain RPMs.
-    public bool runEngineAtAwake { get { return RCC_Settings.Instance.runEngineAtAwake; } }         // Engine running at Awake?
+    public bool runEngineAtAwake { get { return CargoTruck_CC_Settings.Instance.runEngineAtAwake; } }         // Engine running at Awake?
     public bool engineRunning = false;                                                                      // Engine running now?
 
     //	Comparing old and new values to recreate engine torque curve.
@@ -213,10 +213,10 @@ public class RCC_CarControllerV3 : RCC_Core {
     public int direction = 1;                           // Reverse gear currently?
     internal bool canGoReverseNow = false;  //	If speed is low enough and player pushes the brake button, enable this bool to go reverse.
     public float launched = 0f;
-    public bool autoReverse { get { if (!externalController) return RCC_Settings.Instance.autoReverse; else return true; } }                            // Enables / Disables auto reversing when player press brake button. Useful for if you are making parking style game.
-    public bool automaticGear { get { if (!externalController) return RCC_Settings.Instance.useAutomaticGear; else return true; } }                // Enables / Disables automatic gear shifting.
+    public bool autoReverse { get { if (!externalController) return CargoTruck_CC_Settings.Instance.autoReverse; else return true; } }                            // Enables / Disables auto reversing when player press brake button. Useful for if you are making parking style game.
+    public bool automaticGear { get { if (!externalController) return CargoTruck_CC_Settings.Instance.useAutomaticGear; else return true; } }                // Enables / Disables automatic gear shifting.
     internal bool semiAutomaticGear = false;            // Enables / Disables semi-automatic gear shifting.
-    public bool useAutomaticClutch { get { return RCC_Settings.Instance.useAutomaticClutch; } }
+    public bool useAutomaticClutch { get { return CargoTruck_CC_Settings.Instance.useAutomaticClutch; } }
     #endregion
 
     #region Audio
@@ -249,21 +249,21 @@ public class RCC_CarControllerV3 : RCC_Core {
     public AudioClip engineClipLowOff;
 
     // Shared AudioSources and AudioClips.
-    private AudioClip[] gearShiftingClips { get { return RCC_Settings.Instance.gearShiftingClips; } }
+    private AudioClip[] gearShiftingClips { get { return CargoTruck_CC_Settings.Instance.gearShiftingClips; } }
     private AudioSource crashSound;
-    private AudioClip[] crashClips { get { return RCC_Settings.Instance.crashClips; } }
+    private AudioClip[] crashClips { get { return CargoTruck_CC_Settings.Instance.crashClips; } }
     private AudioSource reversingSound;
-    private AudioClip reversingClip { get { return RCC_Settings.Instance.reversingClip; } }
+    private AudioClip reversingClip { get { return CargoTruck_CC_Settings.Instance.reversingClip; } }
     private AudioSource windSound;
-    private AudioClip windClip { get { return RCC_Settings.Instance.windClip; } }
+    private AudioClip windClip { get { return CargoTruck_CC_Settings.Instance.windClip; } }
     private AudioSource brakeSound;
-    private AudioClip brakeClip { get { return RCC_Settings.Instance.brakeClip; } }
+    private AudioClip brakeClip { get { return CargoTruck_CC_Settings.Instance.brakeClip; } }
     private AudioSource NOSSound;
-    private AudioClip NOSClip { get { return RCC_Settings.Instance.NOSClip; } }
+    private AudioClip NOSClip { get { return CargoTruck_CC_Settings.Instance.NOSClip; } }
     private AudioSource turboSound;
-    private AudioClip turboClip { get { return RCC_Settings.Instance.turboClip; } }
+    private AudioClip turboClip { get { return CargoTruck_CC_Settings.Instance.turboClip; } }
     private AudioSource blowSound;
-    private AudioClip[] blowClip { get { return RCC_Settings.Instance.blowoutClip; } }
+    private AudioClip[] blowClip { get { return CargoTruck_CC_Settings.Instance.blowoutClip; } }
 
     // Min / Max sound pitches and volumes.
     [Range(0f, 1f)] public float minEngineSoundPitch = .75f;
@@ -281,8 +281,8 @@ public class RCC_CarControllerV3 : RCC_Core {
     #endregion
 
     #region Inputs
-    // Inputs. All values are clamped 0f - 1f. They will receive proper input values from RCC_InputManager class.
-    public RCC_Inputs inputs;
+    // Inputs. All values are clamped 0f - 1f. They will receive proper input values from CargoTruck_CC_InputManager class.
+    public CargoTruck_CC_Inputs inputs;
 
     [HideInInspector] public float throttleInput = 0f;
     [HideInInspector] public float brakeInput = 0f;
@@ -311,13 +311,13 @@ public class RCC_CarControllerV3 : RCC_Core {
 
     #region Damage
     // Damage.
-    public RCC_Damage damage;
+    public CargoTruck_CC_Damage damage;
     public bool useDamage = true;      // Use deformation on collisions.
     public bool useCollisionParticles = true;        //	Use particles on coliisions.
     public bool useCollisionAudio = true;       //	Play crash audio clips on collisions
 
-    public GameObject contactSparkle { get { return RCC_Settings.Instance.contactParticles; } }     // Contact Particles for collisions. It must be Particle System.
-    public GameObject scratchSparkle { get { return RCC_Settings.Instance.scratchParticles; } }     // Scratch Particles for collisions. It must be Particle System.
+    public GameObject contactSparkle { get { return CargoTruck_CC_Settings.Instance.contactParticles; } }     // Contact Particles for collisions. It must be Particle System.
+    public GameObject scratchSparkle { get { return CargoTruck_CC_Settings.Instance.scratchParticles; } }     // Scratch Particles for collisions. It must be Particle System.
 
     private List<ParticleSystem> contactSparkeList = new List<ParticleSystem>();    // Array for Contact Particles.
     private List<ParticleSystem> scratchSparkeList = new List<ParticleSystem>();    // Array for Contact Particles.
@@ -393,28 +393,28 @@ public class RCC_CarControllerV3 : RCC_Core {
     /// <summary>
     /// On RCC player vehicle spawned.
     /// </summary>
-    public delegate void onRCCPlayerSpawned(RCC_CarControllerV3 RCC);
+    public delegate void onRCCPlayerSpawned(CargoTruck_CC_CarControllerV3 RCC);
     public static event onRCCPlayerSpawned OnRCCPlayerSpawned;
 
     /// <summary>
     /// On RCC player vehicle destroyed.
     /// </summary>
-    public delegate void onRCCPlayerDestroyed(RCC_CarControllerV3 RCC);
+    public delegate void onRCCPlayerDestroyed(CargoTruck_CC_CarControllerV3 RCC);
     public static event onRCCPlayerDestroyed OnRCCPlayerDestroyed;
 
     /// <summary>
     /// On RCC player vehicle collision.
     /// </summary>
-    public delegate void onRCCPlayerCollision(RCC_CarControllerV3 RCC, Collision collision);
+    public delegate void onRCCPlayerCollision(CargoTruck_CC_CarControllerV3 RCC, Collision collision);
     public static event onRCCPlayerCollision OnRCCPlayerCollision;
     #endregion
 
-    public RCC_TruckTrailer attachedTrailer;
+    public CargoTruck_CC_TruckTrailer attachedTrailer;
 
     void Awake() {
 
         // Getting Rigidbody and settings.
-        rigid.maxAngularVelocity = RCC_Settings.Instance.maxAngularVelocity;
+        rigid.maxAngularVelocity = CargoTruck_CC_Settings.Instance.maxAngularVelocity;
 
         // Checks the important parameters. Normally, editor script limits them, but your old prefabs may still use out of range.
         gearShiftingThreshold = Mathf.Clamp(gearShiftingThreshold, .25f, 1f);
@@ -479,35 +479,35 @@ public class RCC_CarControllerV3 : RCC_Core {
         changingGear = false;
         currentGear = 0;
 
-        // Firing an event when each RCC car spawned / enabled. This event has been listening by RCC_MobileButtons.cs, RCC_DashboardInputs.cs.
+        // Firing an event when each RCC car spawned / enabled. This event has been listening by CargoTruck_CC_MobileButtons.cs, CargoTruck_CC_DashboardInputs.cs.
         StartCoroutine(RCCPlayerSpawned());
 
         // Listening an event when main behavior changed.
-        RCC_SceneManager.OnBehaviorChanged += CheckBehavior;
+        CargoTruck_CC_SceneManager.OnBehaviorChanged += CheckBehavior;
 
-        // Listening input events on RCC_InputManager.
-        RCC_InputManager.OnStartStopEngine += RCC_InputManager_OnStartStopEngine;
-        RCC_InputManager.OnLowBeamHeadlights += RCC_InputManager_OnLowBeamHeadlights;
-        RCC_InputManager.OnHighBeamHeadlights += RCC_InputManager_OnHighBeamHeadlights;
-        RCC_InputManager.OnIndicatorLeft += RCC_InputManager_OnIndicatorLeft;
-        RCC_InputManager.OnIndicatorRight += RCC_InputManager_OnIndicatorRight;
-        RCC_InputManager.OnIndicatorHazard += RCC_InputManager_OnIndicatorHazard;
-        RCC_InputManager.OnGearShiftUp += RCC_InputManager_OnGearShiftUp;
-        RCC_InputManager.OnGearShiftDown += RCC_InputManager_OnGearShiftDown;
-        RCC_InputManager.OnNGear += RCC_InputManager_OnNGear;
-        RCC_InputManager.OnTrailerDetach += RCC_InputManager_OnTrailerDetach;
+        // Listening input events on CargoTruck_CC_InputManager.
+        CargoTruck_CC_InputManager.OnStartStopEngine += CargoTruck_CC_InputManager_OnStartStopEngine;
+        CargoTruck_CC_InputManager.OnLowBeamHeadlights += CargoTruck_CC_InputManager_OnLowBeamHeadlights;
+        CargoTruck_CC_InputManager.OnHighBeamHeadlights += CargoTruck_CC_InputManager_OnHighBeamHeadlights;
+        CargoTruck_CC_InputManager.OnIndicatorLeft += CargoTruck_CC_InputManager_OnIndicatorLeft;
+        CargoTruck_CC_InputManager.OnIndicatorRight += CargoTruck_CC_InputManager_OnIndicatorRight;
+        CargoTruck_CC_InputManager.OnIndicatorHazard += CargoTruck_CC_InputManager_OnIndicatorHazard;
+        CargoTruck_CC_InputManager.OnGearShiftUp += CargoTruck_CC_InputManager_OnGearShiftUp;
+        CargoTruck_CC_InputManager.OnGearShiftDown += CargoTruck_CC_InputManager_OnGearShiftDown;
+        CargoTruck_CC_InputManager.OnNGear += CargoTruck_CC_InputManager_OnNGear;
+        CargoTruck_CC_InputManager.OnTrailerDetach += CargoTruck_CC_InputManager_OnTrailerDetach;
 
     }
 
     /// <summary>
-    /// Firing an event when each RCC car spawned / enabled. This event has been listening by RCC_MobileButtons.cs, RCC_DashboardInputs.cs.
+    /// Firing an event when each RCC car spawned / enabled. This event has been listening by CargoTruck_CC_MobileButtons.cs, CargoTruck_CC_DashboardInputs.cs.
     /// </summary>
     /// <returns>The player spawned.</returns>
     private IEnumerator RCCPlayerSpawned() {
 
         yield return new WaitForEndOfFrame();
 
-        // Firing an event when each RCC car spawned / enabled. This event has been listening by RCC_SceneManager.
+        // Firing an event when each RCC car spawned / enabled. This event has been listening by CargoTruck_CC_SceneManager.
         if (!externalController) {
 
             if (OnRCCPlayerSpawned != null)
@@ -535,17 +535,17 @@ public class RCC_CarControllerV3 : RCC_Core {
 
             case AudioType.OneSource:
 
-                engineSoundHigh = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High AudioSource", 5, 50, 0, engineClipHigh, true, true, false);
+                engineSoundHigh = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High AudioSource", 5, 50, 0, engineClipHigh, true, true, false);
 
                 if (autoCreateEngineOffSounds) {
 
-                    engineSoundHighOff = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High Off AudioSource", 5, 50, 0, engineClipHigh, true, true, false);
+                    engineSoundHighOff = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High Off AudioSource", 5, 50, 0, engineClipHigh, true, true, false);
 
                     NewLowPassFilter(engineSoundHighOff, 3000f);
 
                 } else {
 
-                    engineSoundHighOff = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High Off AudioSource", 5, 50, 0, engineClipHighOff, true, true, false);
+                    engineSoundHighOff = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High Off AudioSource", 5, 50, 0, engineClipHighOff, true, true, false);
 
                 }
 
@@ -553,21 +553,21 @@ public class RCC_CarControllerV3 : RCC_Core {
 
             case AudioType.TwoSource:
 
-                engineSoundHigh = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High AudioSource", 5, 50, 0, engineClipHigh, true, true, false);
-                engineSoundLow = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound Low AudioSource", 5, 25, 0, engineClipLow, true, true, false);
+                engineSoundHigh = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High AudioSource", 5, 50, 0, engineClipHigh, true, true, false);
+                engineSoundLow = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound Low AudioSource", 5, 25, 0, engineClipLow, true, true, false);
 
                 if (autoCreateEngineOffSounds) {
 
-                    engineSoundHighOff = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High Off AudioSource", 5, 50, 0, engineClipHigh, true, true, false);
-                    engineSoundLowOff = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound Low Off AudioSource", 5, 25, 0, engineClipLow, true, true, false);
+                    engineSoundHighOff = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High Off AudioSource", 5, 50, 0, engineClipHigh, true, true, false);
+                    engineSoundLowOff = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound Low Off AudioSource", 5, 25, 0, engineClipLow, true, true, false);
 
                     NewLowPassFilter(engineSoundHighOff, 3000f);
                     NewLowPassFilter(engineSoundLowOff, 3000f);
 
                 } else {
 
-                    engineSoundHighOff = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High Off AudioSource", 5, 50, 0, engineClipHighOff, true, true, false);
-                    engineSoundLowOff = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound Low Off AudioSource", 5, 25, 0, engineClipLowOff, true, true, false);
+                    engineSoundHighOff = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High Off AudioSource", 5, 50, 0, engineClipHighOff, true, true, false);
+                    engineSoundLowOff = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound Low Off AudioSource", 5, 25, 0, engineClipLowOff, true, true, false);
 
                 }
 
@@ -575,15 +575,15 @@ public class RCC_CarControllerV3 : RCC_Core {
 
             case AudioType.ThreeSource:
 
-                engineSoundHigh = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High AudioSource", 5, 50, 0, engineClipHigh, true, true, false);
-                engineSoundMed = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound Medium AudioSource", 5, 50, 0, engineClipMed, true, true, false);
-                engineSoundLow = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound Low AudioSource", 5, 25, 0, engineClipLow, true, true, false);
+                engineSoundHigh = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High AudioSource", 5, 50, 0, engineClipHigh, true, true, false);
+                engineSoundMed = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound Medium AudioSource", 5, 50, 0, engineClipMed, true, true, false);
+                engineSoundLow = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound Low AudioSource", 5, 25, 0, engineClipLow, true, true, false);
 
                 if (autoCreateEngineOffSounds) {
 
-                    engineSoundHighOff = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High Off AudioSource", 5, 50, 0, engineClipHigh, true, true, false);
-                    engineSoundMedOff = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound Medium Off AudioSource", 5, 50, 0, engineClipMed, true, true, false);
-                    engineSoundLowOff = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound Low Off AudioSource", 5, 25, 0, engineClipLow, true, true, false);
+                    engineSoundHighOff = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High Off AudioSource", 5, 50, 0, engineClipHigh, true, true, false);
+                    engineSoundMedOff = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound Medium Off AudioSource", 5, 50, 0, engineClipMed, true, true, false);
+                    engineSoundLowOff = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound Low Off AudioSource", 5, 25, 0, engineClipLow, true, true, false);
 
                     if (engineSoundHighOff)
                         NewLowPassFilter(engineSoundHighOff, 3000f);
@@ -594,9 +594,9 @@ public class RCC_CarControllerV3 : RCC_Core {
 
                 } else {
 
-                    engineSoundHighOff = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High Off AudioSource", 5, 50, 0, engineClipHighOff, true, true, false);
-                    engineSoundMedOff = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound Medium Off AudioSource", 5, 50, 0, engineClipMedOff, true, true, false);
-                    engineSoundLowOff = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound Low Off AudioSource", 5, 25, 0, engineClipLowOff, true, true, false);
+                    engineSoundHighOff = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High Off AudioSource", 5, 50, 0, engineClipHighOff, true, true, false);
+                    engineSoundMedOff = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound Medium Off AudioSource", 5, 50, 0, engineClipMedOff, true, true, false);
+                    engineSoundLowOff = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound Low Off AudioSource", 5, 25, 0, engineClipLowOff, true, true, false);
 
                 }
 
@@ -604,20 +604,20 @@ public class RCC_CarControllerV3 : RCC_Core {
 
         }
 
-        engineSoundIdle = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound Idle AudioSource", 5, 25, 0, engineClipIdle, true, true, false);
-        reversingSound = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, gearSoundPosition, "Reverse Sound AudioSource", 10, 50, 0, reversingClip, true, false, false);
-        windSound = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, windSoundPosition, "Wind Sound AudioSource", 1, 10, 0, windClip, true, true, false);
-        brakeSound = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, "Brake Sound AudioSource", 1, 10, 0, brakeClip, true, true, false);
+        engineSoundIdle = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound Idle AudioSource", 5, 25, 0, engineClipIdle, true, true, false);
+        reversingSound = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, gearSoundPosition, "Reverse Sound AudioSource", 10, 50, 0, reversingClip, true, false, false);
+        windSound = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, windSoundPosition, "Wind Sound AudioSource", 1, 10, 0, windClip, true, true, false);
+        brakeSound = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, "Brake Sound AudioSource", 1, 10, 0, brakeClip, true, true, false);
 
         if (useNOS)
-            NOSSound = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, exhaustSoundPosition, "NOS Sound AudioSource", 5, 10, .5f, NOSClip, true, false, false);
+            NOSSound = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, exhaustSoundPosition, "NOS Sound AudioSource", 5, 10, .5f, NOSClip, true, false, false);
 
         if (useNOS || useTurbo)
-            blowSound = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, exhaustSoundPosition, "NOS Blow", 1f, 10f, .5f, null, false, false, false);
+            blowSound = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, exhaustSoundPosition, "NOS Blow", 1f, 10f, .5f, null, false, false, false);
 
         if (useTurbo) {
 
-            turboSound = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, turboSoundPosition, "Turbo Sound AudioSource", .1f, .5f, 0f, turboClip, true, true, false);
+            turboSound = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, turboSoundPosition, "Turbo Sound AudioSource", .1f, .5f, 0f, turboClip, true, true, false);
             NewHighPassFilter(turboSound, 10000f, 10);
 
         }
@@ -634,7 +634,7 @@ public class RCC_CarControllerV3 : RCC_Core {
             return;
 
         //	If selected behavior is none, return.
-        if (RCC_Settings.Instance.selectedBehaviorType == null)
+        if (CargoTruck_CC_Settings.Instance.selectedBehaviorType == null)
             return;
 
         // If any behavior is selected in RCC Settings, override changes.
@@ -759,7 +759,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
         if (!engineRunning) {
 
-            engineStartSound = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Start AudioSource", 1, 10, 1, engineStartClip, false, true, true);
+            engineStartSound = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Start AudioSource", 1, 10, 1, engineStartClip, false, true, true);
 
             if (engineStartSound.isPlaying)
                 engineStartSound.Play();
@@ -821,9 +821,9 @@ public class RCC_CarControllerV3 : RCC_Core {
         Inputs();
 
         //Reversing Bool.
-        if (brakeInput > .9f && transform.InverseTransformDirection(rigid.velocity).z < 1f && canGoReverseNow && automaticGear && !semiAutomaticGear && !changingGear && direction != -1 && !RCC_InputManager.logitechHShifterUsed)
+        if (brakeInput > .9f && transform.InverseTransformDirection(rigid.velocity).z < 1f && canGoReverseNow && automaticGear && !semiAutomaticGear && !changingGear && direction != -1 && !CargoTruck_CC_InputManager.logitechHShifterUsed)
             StartCoroutine(ChangeGear(-1));
-        else if (throttleInput < .1f && transform.InverseTransformDirection(rigid.velocity).z > -1f && direction == -1 && !changingGear && automaticGear && !semiAutomaticGear && !RCC_InputManager.logitechHShifterUsed)
+        else if (throttleInput < .1f && transform.InverseTransformDirection(rigid.velocity).z > -1f && direction == -1 && !changingGear && automaticGear && !semiAutomaticGear && !CargoTruck_CC_InputManager.logitechHShifterUsed)
             StartCoroutine(ChangeGear(0));
 
         Audio();
@@ -868,7 +868,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
             if (!externalController) {
 
-                inputs = RCC_InputManager.GetInputs();
+                inputs = CargoTruck_CC_InputManager.GetInputs();
 
                 if (!automaticGear || semiAutomaticGear) {
                     if (!changingGear && !cutGas)
@@ -905,7 +905,7 @@ public class RCC_CarControllerV3 : RCC_Core {
                 boostInput = inputs.boostInput;
                 handbrakeInput = inputs.handbrakeInput;
 
-                if (RCC_InputManager.logitechHShifterUsed) {
+                if (CargoTruck_CC_InputManager.logitechHShifterUsed) {
 
                     currentGear = inputs.gearInput;
 
@@ -973,7 +973,7 @@ public class RCC_CarControllerV3 : RCC_Core {
         boostInput = Mathf.Clamp01(boostInput);
         handbrakeInput = Mathf.Clamp01(handbrakeInput);
 
-        if (RCC_InputManager.logitechSteeringUsed) {
+        if (CargoTruck_CC_InputManager.logitechSteeringUsed) {
 
             steeringType = SteeringType.Constant;
             useSteeringLimiter = false;
@@ -991,7 +991,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
         float sidewaysSlip = 0f;        //	Total sideways slip of all wheels.
 
-        foreach (RCC_WheelCollider w in allWheelColliders)
+        foreach (CargoTruck_CC_WheelCollider w in allWheelColliders)
             sidewaysSlip += w.wheelSlipAmountSideways;
 
         sidewaysSlip /= allWheelColliders.Length;
@@ -1072,7 +1072,7 @@ public class RCC_CarControllerV3 : RCC_Core {
         if (ESP)
             ESPCheck(FrontLeftWheelCollider.wheelCollider.steerAngle);
 
-        if (RCC_Settings.Instance.selectedBehaviorType != null && RCC_Settings.Instance.selectedBehaviorType.applyRelativeTorque) {
+        if (CargoTruck_CC_Settings.Instance.selectedBehaviorType != null && CargoTruck_CC_Settings.Instance.selectedBehaviorType.applyRelativeTorque) {
 
             // If current selected behavior has apply relative torque enabled, and wheel is grounded, apply it.
             if (isGrounded)
@@ -1155,11 +1155,11 @@ public class RCC_CarControllerV3 : RCC_Core {
     /// </summary>
     private void Audio() {
 
-        windSound.volume = Mathf.Lerp(0f, RCC_Settings.Instance.maxWindSoundVolume, speed / 300f);
+        windSound.volume = Mathf.Lerp(0f, CargoTruck_CC_Settings.Instance.maxWindSoundVolume, speed / 300f);
         windSound.pitch = UnityEngine.Random.Range(.9f, 1f);
 
         if (direction == 1)
-            brakeSound.volume = Mathf.Lerp(0f, RCC_Settings.Instance.maxBrakeSoundVolume, Mathf.Clamp01((FrontLeftWheelCollider.wheelCollider.brakeTorque + FrontRightWheelCollider.wheelCollider.brakeTorque) / (brakeTorque * 2f)) * Mathf.Lerp(0f, 1f, FrontLeftWheelCollider.wheelCollider.rpm / 50f));
+            brakeSound.volume = Mathf.Lerp(0f, CargoTruck_CC_Settings.Instance.maxBrakeSoundVolume, Mathf.Clamp01((FrontLeftWheelCollider.wheelCollider.brakeTorque + FrontRightWheelCollider.wheelCollider.brakeTorque) / (brakeTorque * 2f)) * Mathf.Lerp(0f, 1f, FrontLeftWheelCollider.wheelCollider.rpm / 50f));
         else
             brakeSound.volume = 0f;
 
@@ -1232,7 +1232,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
         switch (audioType) {
 
-            case RCC_CarControllerV3.AudioType.OneSource:
+            case CargoTruck_CC_CarControllerV3.AudioType.OneSource:
 
                 engineSoundHigh.volume = volumeLevel * maxEngineSoundVolume;
                 engineSoundHigh.pitch = pitchLevel;
@@ -1254,7 +1254,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
                 break;
 
-            case RCC_CarControllerV3.AudioType.TwoSource:
+            case CargoTruck_CC_CarControllerV3.AudioType.TwoSource:
 
                 engineSoundHigh.volume = highRPM * volumeLevel;
                 engineSoundHigh.pitch = pitchLevel;
@@ -1282,7 +1282,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
                 break;
 
-            case RCC_CarControllerV3.AudioType.ThreeSource:
+            case CargoTruck_CC_CarControllerV3.AudioType.ThreeSource:
 
                 engineSoundHigh.volume = highRPM * volumeLevel;
                 engineSoundHigh.pitch = pitchLevel;
@@ -1622,7 +1622,7 @@ public class RCC_CarControllerV3 : RCC_Core {
     /// </summary>
     private void GearBox() {
 
-        if (automaticGear && !RCC_InputManager.logitechHShifterUsed) {
+        if (automaticGear && !CargoTruck_CC_InputManager.logitechHShifterUsed) {
 
             if (currentGear < gears.Length - 1 && !changingGear) {
 
@@ -1679,12 +1679,12 @@ public class RCC_CarControllerV3 : RCC_Core {
 
         changingGear = true;
 
-        if (RCC_Settings.Instance.useTelemetry)
+        if (CargoTruck_CC_Settings.Instance.useTelemetry)
             print("Shifted to: " + (gear).ToString());
 
         if (gearShiftingClips.Length > 0) {
 
-            gearShiftingSound = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, gearSoundPosition, "Gear Shifting AudioSource", 1f, 5f, RCC_Settings.Instance.maxGearShiftingSoundVolume, gearShiftingClips[UnityEngine.Random.Range(0, gearShiftingClips.Length)], false, true, true);
+            gearShiftingSound = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, gearSoundPosition, "Gear Shifting AudioSource", 1f, 5f, CargoTruck_CC_Settings.Instance.maxGearShiftingSoundVolume, gearShiftingClips[UnityEngine.Random.Range(0, gearShiftingClips.Length)], false, true, true);
 
             if (!gearShiftingSound.isPlaying)
                 gearShiftingSound.Play();
@@ -1779,10 +1779,10 @@ public class RCC_CarControllerV3 : RCC_Core {
             return;
 
         if (!NOSSound)
-            NOSSound = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, exhaustSoundPosition, "NOS Sound AudioSource", 5f, 10f, .5f, NOSClip, true, false, false);
+            NOSSound = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, exhaustSoundPosition, "NOS Sound AudioSource", 5f, 10f, .5f, NOSClip, true, false, false);
 
         if (!blowSound)
-            blowSound = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, exhaustSoundPosition, "NOS Blow", 1f, 10f, .5f, null, false, false, false);
+            blowSound = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, exhaustSoundPosition, "NOS Blow", 1f, 10f, .5f, null, false, false, false);
 
         if (boostInput >= .8f && throttleInput >= .8f && NoS > 5) {
 
@@ -1821,7 +1821,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
         if (!turboSound) {
 
-            turboSound = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, turboSoundPosition, "Turbo Sound AudioSource", .1f, .5f, 0, turboClip, true, true, false);
+            turboSound = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, turboSoundPosition, "Turbo Sound AudioSource", .1f, .5f, 0, turboClip, true, true, false);
             NewHighPassFilter(turboSound, 10000f, 10);
 
         }
@@ -1834,7 +1834,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
                 if (!blowSound.isPlaying) {
 
-                    blowSound.clip = RCC_Settings.Instance.blowoutClip[UnityEngine.Random.Range(0, RCC_Settings.Instance.blowoutClip.Length)];
+                    blowSound.clip = CargoTruck_CC_Settings.Instance.blowoutClip[UnityEngine.Random.Range(0, CargoTruck_CC_Settings.Instance.blowoutClip.Length)];
                     blowSound.Play();
 
                 }
@@ -1884,7 +1884,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
         if (speed < 5 && !rigid.isKinematic) {
 
-            if (!RCC_Settings.Instance.autoReset)
+            if (!CargoTruck_CC_Settings.Instance.autoReset)
                 return;
 
             if (transform.eulerAngles.z < 300 && transform.eulerAngles.z > 60) {
@@ -1917,7 +1917,7 @@ public class RCC_CarControllerV3 : RCC_Core {
         if (collision.relativeVelocity.magnitude < 5)
             return;
 
-        if (OnRCCPlayerCollision != null && this == RCC_SceneManager.Instance.activePlayerVehicle)
+        if (OnRCCPlayerCollision != null && this == CargoTruck_CC_SceneManager.Instance.activePlayerVehicle)
             OnRCCPlayerCollision(this, collision);
 
         if (((1 << collision.gameObject.layer) & damage.damageFilter) != 0) {
@@ -1937,7 +1937,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
                     if (collision.GetContact(0).thisCollider.gameObject.transform != transform.parent) {
 
-                        crashSound = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, "Crash Sound AudioSource", 5f, 20f, RCC_Settings.Instance.maxCrashSoundVolume * (collision.impulse.magnitude / 10000f), crashClips[UnityEngine.Random.Range(0, crashClips.Length)], false, true, true);
+                        crashSound = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, gameObject, "Crash Sound AudioSource", 5f, 20f, CargoTruck_CC_Settings.Instance.maxCrashSoundVolume * (collision.impulse.magnitude / 10000f), crashClips[UnityEngine.Random.Range(0, crashClips.Length)], false, true, true);
 
                         if (!crashSound.isPlaying)
                             crashSound.Play();
@@ -2005,7 +2005,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
         }
 
-        if (OnRCCPlayerCollision != null && this == RCC_SceneManager.Instance.activePlayerVehicle)
+        if (OnRCCPlayerCollision != null && this == CargoTruck_CC_SceneManager.Instance.activePlayerVehicle)
             OnRCCPlayerCollision(this, collision);
 
         if (((1 << collision.gameObject.layer) & damage.damageFilter) != 0) {
@@ -2125,10 +2125,10 @@ public class RCC_CarControllerV3 : RCC_Core {
 
         if (canControl) {
 
-            RCC_Camera rccCam = GetComponentInChildren<RCC_Camera>();
+            CargoTruck_CC_Camera rccCam = GetComponentInChildren<CargoTruck_CC_Camera>();
 
             if (rccCam)
-                gameObject.GetComponentInChildren<RCC_Camera>().transform.SetParent(null);
+                gameObject.GetComponentInChildren<CargoTruck_CC_Camera>().transform.SetParent(null);
 
         }
 
@@ -2173,7 +2173,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
     }
 
-    private void RCC_InputManager_OnTrailerDetach() {
+    private void CargoTruck_CC_InputManager_OnTrailerDetach() {
 
         if (!canControl || externalController)
             return;
@@ -2182,7 +2182,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
     }
 
-    private void RCC_InputManager_OnGearShiftDown() {
+    private void CargoTruck_CC_InputManager_OnGearShiftDown() {
 
         if (!canControl || externalController)
             return;
@@ -2191,7 +2191,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
     }
 
-    private void RCC_InputManager_OnGearShiftUp() {
+    private void CargoTruck_CC_InputManager_OnGearShiftUp() {
 
         if (!canControl || externalController)
             return;
@@ -2200,7 +2200,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
     }
 
-    private void RCC_InputManager_OnNGear(bool state) {
+    private void CargoTruck_CC_InputManager_OnNGear(bool state) {
 
         if (!canControl || externalController)
             return;
@@ -2209,7 +2209,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
     }
 
-    private void RCC_InputManager_OnIndicatorHazard() {
+    private void CargoTruck_CC_InputManager_OnIndicatorHazard() {
 
         if (!canControl || externalController)
             return;
@@ -2221,7 +2221,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
     }
 
-    private void RCC_InputManager_OnIndicatorRight() {
+    private void CargoTruck_CC_InputManager_OnIndicatorRight() {
 
         if (!canControl || externalController)
             return;
@@ -2233,7 +2233,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
     }
 
-    private void RCC_InputManager_OnIndicatorLeft() {
+    private void CargoTruck_CC_InputManager_OnIndicatorLeft() {
 
         if (!canControl || externalController)
             return;
@@ -2245,7 +2245,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
     }
 
-    private void RCC_InputManager_OnHighBeamHeadlights() {
+    private void CargoTruck_CC_InputManager_OnHighBeamHeadlights() {
 
         if (!canControl || externalController)
             return;
@@ -2254,7 +2254,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
     }
 
-    private void RCC_InputManager_OnLowBeamHeadlights() {
+    private void CargoTruck_CC_InputManager_OnLowBeamHeadlights() {
 
         if (!canControl || externalController)
             return;
@@ -2263,7 +2263,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
     }
 
-    private void RCC_InputManager_OnStartStopEngine() {
+    private void CargoTruck_CC_InputManager_OnStartStopEngine() {
 
         if (!canControl || externalController)
             return;
@@ -2274,19 +2274,19 @@ public class RCC_CarControllerV3 : RCC_Core {
 
     void OnDisable() {
 
-        RCC_SceneManager.OnBehaviorChanged -= CheckBehavior;
+        CargoTruck_CC_SceneManager.OnBehaviorChanged -= CheckBehavior;
 
         // Listening input events.
-        RCC_InputManager.OnStartStopEngine -= RCC_InputManager_OnStartStopEngine;
-        RCC_InputManager.OnLowBeamHeadlights -= RCC_InputManager_OnLowBeamHeadlights;
-        RCC_InputManager.OnHighBeamHeadlights -= RCC_InputManager_OnHighBeamHeadlights;
-        RCC_InputManager.OnIndicatorLeft -= RCC_InputManager_OnIndicatorLeft;
-        RCC_InputManager.OnIndicatorRight -= RCC_InputManager_OnIndicatorRight;
-        RCC_InputManager.OnIndicatorHazard -= RCC_InputManager_OnIndicatorHazard;
-        RCC_InputManager.OnGearShiftUp -= RCC_InputManager_OnGearShiftUp;
-        RCC_InputManager.OnGearShiftDown -= RCC_InputManager_OnGearShiftDown;
-        RCC_InputManager.OnNGear -= RCC_InputManager_OnNGear;
-        RCC_InputManager.OnTrailerDetach -= RCC_InputManager_OnTrailerDetach;
+        CargoTruck_CC_InputManager.OnStartStopEngine -= CargoTruck_CC_InputManager_OnStartStopEngine;
+        CargoTruck_CC_InputManager.OnLowBeamHeadlights -= CargoTruck_CC_InputManager_OnLowBeamHeadlights;
+        CargoTruck_CC_InputManager.OnHighBeamHeadlights -= CargoTruck_CC_InputManager_OnHighBeamHeadlights;
+        CargoTruck_CC_InputManager.OnIndicatorLeft -= CargoTruck_CC_InputManager_OnIndicatorLeft;
+        CargoTruck_CC_InputManager.OnIndicatorRight -= CargoTruck_CC_InputManager_OnIndicatorRight;
+        CargoTruck_CC_InputManager.OnIndicatorHazard -= CargoTruck_CC_InputManager_OnIndicatorHazard;
+        CargoTruck_CC_InputManager.OnGearShiftUp -= CargoTruck_CC_InputManager_OnGearShiftUp;
+        CargoTruck_CC_InputManager.OnGearShiftDown -= CargoTruck_CC_InputManager_OnGearShiftDown;
+        CargoTruck_CC_InputManager.OnNGear -= CargoTruck_CC_InputManager_OnNGear;
+        CargoTruck_CC_InputManager.OnTrailerDetach -= CargoTruck_CC_InputManager_OnTrailerDetach;
 
     }
 

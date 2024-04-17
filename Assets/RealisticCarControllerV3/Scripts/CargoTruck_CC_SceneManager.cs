@@ -16,26 +16,26 @@ using UnityEngine;
 /// 
 /// </summary>
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/Main/RCC Scene Manager")]
-public class CargoTruck_CC_SceneManager : RCC_Singleton<CargoTruck_CC_SceneManager> {
+public class CargoTruck_CC_SceneManager : CargoTruck_CC_Singleton<CargoTruck_CC_SceneManager> {
 
-    public RCC_CarControllerV3 activePlayerVehicle;
-    private RCC_CarControllerV3 lastActivePlayerVehicle;
-    public RCC_Camera activePlayerCamera;
-    public RCC_UIDashboardDisplay activePlayerCanvas;
+    public CargoTruck_CC_CarControllerV3 activePlayerVehicle;
+    private CargoTruck_CC_CarControllerV3 lastActivePlayerVehicle;
+    public CargoTruck_CC_Camera activePlayerCamera;
+    public CargoTruck_CC_UIDashboardDisplay activePlayerCanvas;
     public Camera activeMainCamera;
 
     public bool registerFirstVehicleAsPlayer = true;
     public bool disableUIWhenNoPlayerVehicle = false;
     public bool loadCustomizationAtFirst = true;
 
-    public List<RCC_Recorder> allRecorders = new List<RCC_Recorder>();
+    public List<CargoTruck_CC_Recorder> allRecorders = new List<CargoTruck_CC_Recorder>();
     public enum RecordMode { Neutral, Play, Record }
     public RecordMode recordMode;
 
     // Default time scale of the game.
     private float orgTimeScale = 1f;
 
-    public List<RCC_CarControllerV3> allVehicles = new List<RCC_CarControllerV3>();
+    public List<CargoTruck_CC_CarControllerV3> allVehicles = new List<CargoTruck_CC_CarControllerV3>();
 
 #if BCG_ENTEREXIT
     public BCG_EnterExitPlayer activePlayerCharacter;
@@ -71,23 +71,23 @@ public class CargoTruck_CC_SceneManager : RCC_Singleton<CargoTruck_CC_SceneManag
     void Awake() {
 
         // Overriding Fixed TimeStep.
-        if (RCC_Settings.Instance.overrideFixedTimeStep)
-            Time.fixedDeltaTime = RCC_Settings.Instance.fixedTimeStep;
+        if (CargoTruck_CC_Settings.Instance.overrideFixedTimeStep)
+            Time.fixedDeltaTime = CargoTruck_CC_Settings.Instance.fixedTimeStep;
 
         // Overriding FPS.
-        if (RCC_Settings.Instance.overrideFPS)
-            Application.targetFrameRate = RCC_Settings.Instance.maxFPS;
+        if (CargoTruck_CC_Settings.Instance.overrideFPS)
+            Application.targetFrameRate = CargoTruck_CC_Settings.Instance.maxFPS;
 
-        if (RCC_Settings.Instance.useTelemetry)
-            Instantiate(RCC_Settings.Instance.RCCTelemetry, Vector3.zero, Quaternion.identity);
+        if (CargoTruck_CC_Settings.Instance.useTelemetry)
+            Instantiate(CargoTruck_CC_Settings.Instance.RCCTelemetry, Vector3.zero, Quaternion.identity);
 
-        RCC_Camera.OnBCGCameraSpawned += RCC_Camera_OnBCGCameraSpawned;
-        RCC_CarControllerV3.OnRCCPlayerSpawned += RCC_CarControllerV3_OnRCCSpawned;
-        RCC_AICarController.OnRCCAISpawned += RCC_AICarController_OnRCCAISpawned;
-        RCC_CarControllerV3.OnRCCPlayerDestroyed += RCC_CarControllerV3_OnRCCPlayerDestroyed;
-        RCC_AICarController.OnRCCAIDestroyed += RCC_AICarController_OnRCCAIDestroyed;
-        RCC_InputManager.OnSlowMotion += RCC_InputManager_OnSlowMotion;
-        activePlayerCanvas = GameObject.FindObjectOfType<RCC_UIDashboardDisplay>();
+        CargoTruck_CC_Camera.OnBCGCameraSpawned += CargoTruck_CC_Camera_OnBCGCameraSpawned;
+        CargoTruck_CC_CarControllerV3.OnRCCPlayerSpawned += CargoTruck_CC_CarControllerV3_OnRCCSpawned;
+        CargoTruck_CC_AICarController.OnRCCAISpawned += CargoTruck_CC_AICarController_OnRCCAISpawned;
+        CargoTruck_CC_CarControllerV3.OnRCCPlayerDestroyed += CargoTruck_CC_CarControllerV3_OnRCCPlayerDestroyed;
+        CargoTruck_CC_AICarController.OnRCCAIDestroyed += CargoTruck_CC_AICarController_OnRCCAIDestroyed;
+        CargoTruck_CC_InputManager.OnSlowMotion += CargoTruck_CC_InputManager_OnSlowMotion;
+        activePlayerCanvas = GameObject.FindObjectOfType<CargoTruck_CC_UIDashboardDisplay>();
 
 #if BCG_ENTEREXIT
         BCG_EnterExitPlayer.OnBCGPlayerSpawned += BCG_EnterExitPlayer_OnBCGPlayerSpawned;
@@ -97,23 +97,23 @@ public class CargoTruck_CC_SceneManager : RCC_Singleton<CargoTruck_CC_SceneManag
         // Getting default time scale of the game.
         orgTimeScale = Time.timeScale;
 
-        if (RCC_Settings.Instance.lockAndUnlockCursor)
+        if (CargoTruck_CC_Settings.Instance.lockAndUnlockCursor)
             Cursor.lockState = CursorLockMode.Locked;
 
     }
 
     #region ONSPAWNED
 
-    void RCC_CarControllerV3_OnRCCSpawned(RCC_CarControllerV3 RCC) {
+    void CargoTruck_CC_CarControllerV3_OnRCCSpawned(CargoTruck_CC_CarControllerV3 RCC) {
 
         if (!allVehicles.Contains(RCC)) {
 
             allVehicles.Add(RCC);
 
-            allRecorders = new List<RCC_Recorder>();
-            allRecorders.AddRange(gameObject.GetComponentsInChildren<RCC_Recorder>());
+            allRecorders = new List<CargoTruck_CC_Recorder>();
+            allRecorders.AddRange(gameObject.GetComponentsInChildren<CargoTruck_CC_Recorder>());
 
-            RCC_Recorder recorder = null;
+            CargoTruck_CC_Recorder recorder = null;
 
             if (allRecorders != null && allRecorders.Count > 0) {
 
@@ -130,7 +130,7 @@ public class CargoTruck_CC_SceneManager : RCC_Singleton<CargoTruck_CC_SceneManag
 
             if (recorder == null) {
 
-                recorder = gameObject.AddComponent<RCC_Recorder>();
+                recorder = gameObject.AddComponent<CargoTruck_CC_Recorder>();
                 recorder.carController = RCC;
 
             }
@@ -149,16 +149,16 @@ public class CargoTruck_CC_SceneManager : RCC_Singleton<CargoTruck_CC_SceneManag
 
     }
 
-    void RCC_AICarController_OnRCCAISpawned(RCC_AICarController RCCAI) {
+    void CargoTruck_CC_AICarController_OnRCCAISpawned(CargoTruck_CC_AICarController RCCAI) {
 
         if (!allVehicles.Contains(RCCAI.carController)) {
 
             allVehicles.Add(RCCAI.carController);
 
-            allRecorders = new List<RCC_Recorder>();
-            allRecorders.AddRange(gameObject.GetComponentsInChildren<RCC_Recorder>());
+            allRecorders = new List<CargoTruck_CC_Recorder>();
+            allRecorders.AddRange(gameObject.GetComponentsInChildren<CargoTruck_CC_Recorder>());
 
-            RCC_Recorder recorder = null;
+            CargoTruck_CC_Recorder recorder = null;
 
             if (allRecorders != null && allRecorders.Count > 0) {
 
@@ -175,7 +175,7 @@ public class CargoTruck_CC_SceneManager : RCC_Singleton<CargoTruck_CC_SceneManag
 
             if (recorder == null) {
 
-                recorder = gameObject.AddComponent<RCC_Recorder>();
+                recorder = gameObject.AddComponent<CargoTruck_CC_Recorder>();
                 recorder.carController = RCCAI.carController;
 
             }
@@ -186,9 +186,9 @@ public class CargoTruck_CC_SceneManager : RCC_Singleton<CargoTruck_CC_SceneManag
 
     }
 
-    void RCC_Camera_OnBCGCameraSpawned(GameObject BCGCamera) {
+    void CargoTruck_CC_Camera_OnBCGCameraSpawned(GameObject BCGCamera) {
 
-        activePlayerCamera = BCGCamera.GetComponent<RCC_Camera>();
+        activePlayerCamera = BCGCamera.GetComponent<CargoTruck_CC_Camera>();
 
     }
 
@@ -204,7 +204,7 @@ public class CargoTruck_CC_SceneManager : RCC_Singleton<CargoTruck_CC_SceneManag
 
     #region ONDESTROYED
 
-    void RCC_CarControllerV3_OnRCCPlayerDestroyed(RCC_CarControllerV3 RCC) {
+    void CargoTruck_CC_CarControllerV3_OnRCCPlayerDestroyed(CargoTruck_CC_CarControllerV3 RCC) {
 
         if (allVehicles.Contains(RCC))
             allVehicles.Remove(RCC);
@@ -213,7 +213,7 @@ public class CargoTruck_CC_SceneManager : RCC_Singleton<CargoTruck_CC_SceneManag
 
     }
 
-    void RCC_AICarController_OnRCCAIDestroyed(RCC_AICarController RCCAI) {
+    void CargoTruck_CC_AICarController_OnRCCAIDestroyed(CargoTruck_CC_AICarController RCCAI) {
 
         if (allVehicles.Contains(RCCAI.carController))
             allVehicles.Remove(RCCAI.carController);
@@ -296,19 +296,19 @@ public class CargoTruck_CC_SceneManager : RCC_Singleton<CargoTruck_CC_SceneManag
 
             switch (allRecorders[0].mode) {
 
-                case RCC_Recorder.Mode.Neutral:
+                case CargoTruck_CC_Recorder.Mode.Neutral:
 
                     recordMode = RecordMode.Neutral;
 
                     break;
 
-                case RCC_Recorder.Mode.Play:
+                case CargoTruck_CC_Recorder.Mode.Play:
 
                     recordMode = RecordMode.Play;
 
                     break;
 
-                case RCC_Recorder.Mode.Record:
+                case CargoTruck_CC_Recorder.Mode.Record:
 
                     recordMode = RecordMode.Record;
 
@@ -357,8 +357,8 @@ public class CargoTruck_CC_SceneManager : RCC_Singleton<CargoTruck_CC_SceneManag
 
         yield return new WaitForFixedUpdate();
 
-        allRecorders = new List<RCC_Recorder>();
-        allRecorders.AddRange(gameObject.GetComponentsInChildren<RCC_Recorder>());
+        allRecorders = new List<CargoTruck_CC_Recorder>();
+        allRecorders.AddRange(gameObject.GetComponentsInChildren<CargoTruck_CC_Recorder>());
 
         if (allRecorders != null && allRecorders.Count > 0) {
 
@@ -372,12 +372,12 @@ public class CargoTruck_CC_SceneManager : RCC_Singleton<CargoTruck_CC_SceneManag
         }
         yield return new WaitForFixedUpdate();
 
-        allRecorders = new List<RCC_Recorder>();
-        allRecorders.AddRange(gameObject.GetComponentsInChildren<RCC_Recorder>());
+        allRecorders = new List<CargoTruck_CC_Recorder>();
+        allRecorders.AddRange(gameObject.GetComponentsInChildren<CargoTruck_CC_Recorder>());
 
     }
 
-    public void RegisterPlayer(RCC_CarControllerV3 playerVehicle) {
+    public void RegisterPlayer(CargoTruck_CC_CarControllerV3 playerVehicle) {
 
         activePlayerVehicle = playerVehicle;
 
@@ -385,14 +385,14 @@ public class CargoTruck_CC_SceneManager : RCC_Singleton<CargoTruck_CC_SceneManag
             activePlayerCamera.SetTarget(activePlayerVehicle.gameObject);
 
         if (loadCustomizationAtFirst)
-            RCC_Customization.LoadStats(RCC_SceneManager.Instance.activePlayerVehicle);
+            CargoTruck_CC_Customization.LoadStats(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle);
 
-        if (FindObjectOfType<RCC_CustomizerExample>())
-            FindObjectOfType<RCC_CustomizerExample>().CheckUIs();
+        if (FindObjectOfType<CargoTruck_CC_CustomizerExample>())
+            FindObjectOfType<CargoTruck_CC_CustomizerExample>().CheckUIs();
 
     }
 
-    public void RegisterPlayer(RCC_CarControllerV3 playerVehicle, bool isControllable) {
+    public void RegisterPlayer(CargoTruck_CC_CarControllerV3 playerVehicle, bool isControllable) {
 
         activePlayerVehicle = playerVehicle;
         activePlayerVehicle.SetCanControl(isControllable);
@@ -401,14 +401,14 @@ public class CargoTruck_CC_SceneManager : RCC_Singleton<CargoTruck_CC_SceneManag
             activePlayerCamera.SetTarget(activePlayerVehicle.gameObject);
 
         if (loadCustomizationAtFirst)
-            RCC_Customization.LoadStats(RCC_SceneManager.Instance.activePlayerVehicle);
+            CargoTruck_CC_Customization.LoadStats(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle);
 
-        if (FindObjectOfType<RCC_CustomizerExample>())
-            FindObjectOfType<RCC_CustomizerExample>().CheckUIs();
+        if (FindObjectOfType<CargoTruck_CC_CustomizerExample>())
+            FindObjectOfType<CargoTruck_CC_CustomizerExample>().CheckUIs();
 
     }
 
-    public void RegisterPlayer(RCC_CarControllerV3 playerVehicle, bool isControllable, bool engineState) {
+    public void RegisterPlayer(CargoTruck_CC_CarControllerV3 playerVehicle, bool isControllable, bool engineState) {
 
         activePlayerVehicle = playerVehicle;
         activePlayerVehicle.SetCanControl(isControllable);
@@ -418,10 +418,10 @@ public class CargoTruck_CC_SceneManager : RCC_Singleton<CargoTruck_CC_SceneManag
             activePlayerCamera.SetTarget(activePlayerVehicle.gameObject);
 
         if (loadCustomizationAtFirst)
-            RCC_Customization.LoadStats(RCC_SceneManager.Instance.activePlayerVehicle);
+            CargoTruck_CC_Customization.LoadStats(CargoTruck_CC_SceneManager.Instance.activePlayerVehicle);
 
-        if (FindObjectOfType<RCC_CustomizerExample>())
-            FindObjectOfType<RCC_CustomizerExample>().CheckUIs();
+        if (FindObjectOfType<CargoTruck_CC_CustomizerExample>())
+            FindObjectOfType<CargoTruck_CC_CustomizerExample>().CheckUIs();
 
     }
 
@@ -441,20 +441,20 @@ public class CargoTruck_CC_SceneManager : RCC_Singleton<CargoTruck_CC_SceneManag
 
         if (!activePlayerVehicle || !activePlayerVehicle.canControl || !activePlayerVehicle.gameObject.activeInHierarchy || !activePlayerVehicle.enabled) {
 
-            //			if (activePlayerCanvas.displayType == RCC_UIDashboardDisplay.DisplayType.Full)
-            //				activePlayerCanvas.SetDisplayType(RCC_UIDashboardDisplay.DisplayType.Off);
+            //			if (activePlayerCanvas.displayType == CargoTruck_CC_UIDashboardDisplay.DisplayType.Full)
+            //				activePlayerCanvas.SetDisplayType(CargoTruck_CC_UIDashboardDisplay.DisplayType.Off);
 
-            activePlayerCanvas.SetDisplayType(RCC_UIDashboardDisplay.DisplayType.Off);
+            activePlayerCanvas.SetDisplayType(CargoTruck_CC_UIDashboardDisplay.DisplayType.Off);
 
             return;
 
         }
 
         //		if(!activePlayerCanvas.gameObject.activeInHierarchy)
-        //			activePlayerCanvas.displayType = RCC_UIDashboardDisplay.DisplayType.Full;
+        //			activePlayerCanvas.displayType = CargoTruck_CC_UIDashboardDisplay.DisplayType.Full;
 
-        if (activePlayerCanvas.displayType != RCC_UIDashboardDisplay.DisplayType.Customization)
-            activePlayerCanvas.displayType = RCC_UIDashboardDisplay.DisplayType.Full;
+        if (activePlayerCanvas.displayType != CargoTruck_CC_UIDashboardDisplay.DisplayType.Customization)
+            activePlayerCanvas.displayType = CargoTruck_CC_UIDashboardDisplay.DisplayType.Full;
 
     }
 
@@ -463,8 +463,8 @@ public class CargoTruck_CC_SceneManager : RCC_Singleton<CargoTruck_CC_SceneManag
     ///</summary>
     public static void SetBehavior(int behaviorIndex) {
 
-        RCC_Settings.Instance.overrideBehavior = true;
-        RCC_Settings.Instance.behaviorSelectedIndex = behaviorIndex;
+        CargoTruck_CC_Settings.Instance.overrideBehavior = true;
+        CargoTruck_CC_Settings.Instance.behaviorSelectedIndex = behaviorIndex;
 
         if (OnBehaviorChanged != null)
             OnBehaviorChanged();
@@ -514,7 +514,7 @@ public class CargoTruck_CC_SceneManager : RCC_Singleton<CargoTruck_CC_SceneManag
     /// <param name="vehicle"></param>
     /// <param name="position"></param>
     /// <param name="rotation"></param>
-    public void Transport(RCC_CarControllerV3 vehicle, Vector3 position, Quaternion rotation) {
+    public void Transport(CargoTruck_CC_CarControllerV3 vehicle, Vector3 position, Quaternion rotation) {
 
         if (vehicle) {
 
@@ -538,7 +538,7 @@ public class CargoTruck_CC_SceneManager : RCC_Singleton<CargoTruck_CC_SceneManag
 
     }
 
-    private IEnumerator Freeze(RCC_CarControllerV3 vehicle) {
+    private IEnumerator Freeze(CargoTruck_CC_CarControllerV3 vehicle) {
 
         float timer = 1f;
 
@@ -556,7 +556,7 @@ public class CargoTruck_CC_SceneManager : RCC_Singleton<CargoTruck_CC_SceneManag
 
     }
 
-    private void RCC_InputManager_OnSlowMotion(bool state) {
+    private void CargoTruck_CC_InputManager_OnSlowMotion(bool state) {
 
         if (state)
             Time.timeScale = .2f;
@@ -567,13 +567,13 @@ public class CargoTruck_CC_SceneManager : RCC_Singleton<CargoTruck_CC_SceneManag
 
     void OnDisable() {
 
-        RCC_Camera.OnBCGCameraSpawned -= RCC_Camera_OnBCGCameraSpawned;
+        CargoTruck_CC_Camera.OnBCGCameraSpawned -= CargoTruck_CC_Camera_OnBCGCameraSpawned;
 
-        RCC_CarControllerV3.OnRCCPlayerSpawned -= RCC_CarControllerV3_OnRCCSpawned;
-        RCC_AICarController.OnRCCAISpawned -= RCC_AICarController_OnRCCAISpawned;
-        RCC_CarControllerV3.OnRCCPlayerDestroyed -= RCC_CarControllerV3_OnRCCPlayerDestroyed;
-        RCC_AICarController.OnRCCAIDestroyed -= RCC_AICarController_OnRCCAIDestroyed;
-        RCC_InputManager.OnSlowMotion -= RCC_InputManager_OnSlowMotion;
+        CargoTruck_CC_CarControllerV3.OnRCCPlayerSpawned -= CargoTruck_CC_CarControllerV3_OnRCCSpawned;
+        CargoTruck_CC_AICarController.OnRCCAISpawned -= CargoTruck_CC_AICarController_OnRCCAISpawned;
+        CargoTruck_CC_CarControllerV3.OnRCCPlayerDestroyed -= CargoTruck_CC_CarControllerV3_OnRCCPlayerDestroyed;
+        CargoTruck_CC_AICarController.OnRCCAIDestroyed -= CargoTruck_CC_AICarController_OnRCCAIDestroyed;
+        CargoTruck_CC_InputManager.OnSlowMotion -= CargoTruck_CC_InputManager_OnSlowMotion;
 
 #if BCG_ENTEREXIT
         BCG_EnterExitPlayer.OnBCGPlayerSpawned -= BCG_EnterExitPlayer_OnBCGPlayerSpawned;

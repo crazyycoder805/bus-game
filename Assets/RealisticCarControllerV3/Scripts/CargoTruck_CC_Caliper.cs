@@ -15,9 +15,9 @@ using UnityEngine;
 /// Rotates the brake caliper.
 /// </summary>
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/Misc/RCC Visual Brake Caliper")]
-public class RCC_Caliper : MonoBehaviour {
+public class CargoTruck_CC_Caliper : MonoBehaviour {
 
-    public RCC_WheelCollider wheelCollider;     //	Actual WheelCollider.
+    public CargoTruck_CC_WheelCollider wheelCollider;     //	Actual WheelCollider.
     private GameObject newPivot;                        //	Creating new center pivot for correct position.
     private Quaternion defLocalRotation;            //	Default rotation.
 

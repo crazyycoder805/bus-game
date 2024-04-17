@@ -11,7 +11,8 @@ using UnityEditor;
 using UnityEngine;
 using System.Collections;
 
-public class RCC_Installation {
+public class CargoTruck_CC_Installation
+{
 
     public static void Check() {
 

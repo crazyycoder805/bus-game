@@ -18,7 +18,7 @@ using System.Collections.Generic;
 /// </summary>
 [RequireComponent(typeof(WheelCollider))]
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/Main/RCC Wheel Collider")]
-public class CargoTruck_CC_WheelCollider : RCC_Core {
+public class CargoTruck_CC_WheelCollider : CargoTruck_CC_Core {
 
     // WheelCollider.
     private WheelCollider _wheelCollider;
@@ -31,11 +31,11 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
     }
 
     // Car controller.
-    private RCC_CarControllerV3 _carController;
-    public RCC_CarControllerV3 carController {
+    private CargoTruck_CC_CarControllerV3 _carController;
+    public CargoTruck_CC_CarControllerV3 carController {
         get {
             if (_carController == null)
-                _carController = GetComponentInParent<RCC_CarControllerV3>();
+                _carController = GetComponentInParent<CargoTruck_CC_CarControllerV3>();
             return _carController;
         }
     }
@@ -50,7 +50,7 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
         }
     }
 
-    private List<RCC_WheelCollider> allWheelColliders = new List<RCC_WheelCollider>();      // All wheelcolliders attached to this vehicle.
+    private List<CargoTruck_CC_WheelCollider> allWheelColliders = new List<CargoTruck_CC_WheelCollider>();      // All wheelcolliders attached to this vehicle.
     public Transform wheelModel;        // Wheel model for animating and aligning.
 
     private WheelHit _wheelHit;
@@ -156,7 +156,7 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
 
         get {
 
-            return RCC_Settings.Instance.wheelDeflateClip;
+            return CargoTruck_CC_Settings.Instance.wheelDeflateClip;
 
         }
 
@@ -166,7 +166,7 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
 
         get {
 
-            return RCC_Settings.Instance.wheelInflateClip;
+            return CargoTruck_CC_Settings.Instance.wheelInflateClip;
 
         }
 
@@ -177,7 +177,7 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
 
         get {
 
-            return RCC_Settings.Instance.wheelFlatClip;
+            return CargoTruck_CC_Settings.Instance.wheelFlatClip;
 
         }
 
@@ -188,7 +188,7 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
 
         get {
 
-            return RCC_Settings.Instance.wheelDeflateParticles.GetComponent<ParticleSystem>();
+            return CargoTruck_CC_Settings.Instance.wheelDeflateParticles.GetComponent<ParticleSystem>();
 
         }
 
@@ -197,24 +197,24 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
     void Start() {
 
         // Getting all WheelColliders attached to this vehicle (Except this).
-        allWheelColliders = carController.GetComponentsInChildren<RCC_WheelCollider>(true).ToList();
+        allWheelColliders = carController.GetComponentsInChildren<CargoTruck_CC_WheelCollider>(true).ToList();
 
         CheckBehavior();        //	Checks selected behavior in RCC Settings.
 
         // Increasing WheelCollider mass for avoiding unstable behavior.
-        if (RCC_Settings.Instance.useFixedWheelColliders)
+        if (CargoTruck_CC_Settings.Instance.useFixedWheelColliders)
             wheelCollider.mass = rigid.mass / 15f;
 
         // Creating audiosource for skid SFX.
-        audioSource = NewAudioSource(RCC_Settings.Instance.audioMixer, carController.gameObject, "Skid Sound AudioSource", 5f, 50f, 0f, audioClip, true, true, false);
+        audioSource = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, carController.gameObject, "Skid Sound AudioSource", 5f, 50f, 0f, audioClip, true, true, false);
         audioSource.transform.position = transform.position;
 
         // Creating all ground particles, and adding them to list.
-        if (!RCC_Settings.Instance.dontUseAnyParticleEffects) {
+        if (!CargoTruck_CC_Settings.Instance.dontUseAnyParticleEffects) {
 
-            for (int i = 0; i < RCC_GroundMaterials.Instance.frictions.Length; i++) {
+            for (int i = 0; i < CargoTruck_CC_GroundMaterials.Instance.frictions.Length; i++) {
 
-                GameObject ps = Instantiate(RCC_GroundMaterials.Instance.frictions[i].groundParticles, transform.position, transform.rotation);
+                GameObject ps = Instantiate(CargoTruck_CC_GroundMaterials.Instance.frictions[i].groundParticles, transform.position, transform.rotation);
                 emission = ps.GetComponent<ParticleSystem>().emission;
                 emission.enabled = false;
                 ps.transform.SetParent(transform, false);
@@ -228,7 +228,7 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
 
         //	Creating pivot position of the wheel at correct position and rotation.
         GameObject newPivot = new GameObject("Pivot_" + wheelModel.transform.name);
-        newPivot.transform.position = RCC_GetBounds.GetBoundsCenter(wheelModel.transform);
+        newPivot.transform.position = CargoTruck_CC_GetBounds.GetBoundsCenter(wheelModel.transform);
         newPivot.transform.rotation = transform.rotation;
         newPivot.transform.SetParent(wheelModel.transform.parent, true);
 
@@ -269,7 +269,7 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
     void OnEnable() {
 
         // Listening an event when main behavior changed.
-        RCC_SceneManager.OnBehaviorChanged += CheckBehavior;
+        CargoTruck_CC_SceneManager.OnBehaviorChanged += CheckBehavior;
 
         if (wheelModel && !wheelModel.gameObject.activeSelf)
             wheelModel.gameObject.SetActive(true);
@@ -287,7 +287,7 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
         sidewaysFrictionCurve_Org = sidewaysFrictionCurve = wheelCollider.sidewaysFriction;
 
         //	Getting behavior if selected.
-        RCC_Settings.BehaviorType behavior = RCC_Settings.Instance.selectedBehaviorType;
+        CargoTruck_CC_Settings.BehaviorType behavior = CargoTruck_CC_Settings.Instance.selectedBehaviorType;
 
         //	If there is a selected behavior, override friction curves.
         if (behavior != null) {
@@ -345,17 +345,17 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
 
             switch (carController.wheelTypeChoise) {
 
-                case RCC_CarControllerV3.WheelType.AWD:
+                case CargoTruck_CC_CarControllerV3.WheelType.AWD:
                     canPower = true;
 
                     break;
 
-                case RCC_CarControllerV3.WheelType.BIASED:
+                case CargoTruck_CC_CarControllerV3.WheelType.BIASED:
                     canPower = true;
 
                     break;
 
-                case RCC_CarControllerV3.WheelType.FWD:
+                case CargoTruck_CC_CarControllerV3.WheelType.FWD:
 
                     if (this == carController.FrontLeftWheelCollider || this == carController.FrontRightWheelCollider)
                         canPower = true;
@@ -364,7 +364,7 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
 
                     break;
 
-                case RCC_CarControllerV3.WheelType.RWD:
+                case CargoTruck_CC_CarControllerV3.WheelType.RWD:
 
                     if (this == carController.RearLeftWheelCollider || this == carController.RearRightWheelCollider)
                         canPower = true;
@@ -472,15 +472,15 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
             return;
 
         // If scene has skidmarks manager...
-        if (!RCC_Settings.Instance.dontUseSkidmarks) {
+        if (!CargoTruck_CC_Settings.Instance.dontUseSkidmarks) {
 
             // If slips are bigger than target value...
-            if (totalSlip > RCC_GroundMaterials.Instance.frictions[groundIndex].slip) {
+            if (totalSlip > CargoTruck_CC_GroundMaterials.Instance.frictions[groundIndex].slip) {
 
                 Vector3 skidPoint = wheelHit.point + 1f * (rigid.velocity) * Time.deltaTime;
 
                 if (rigid.velocity.magnitude > 1f && isGrounded && wheelHit.normal != Vector3.zero && wheelHit.point != Vector3.zero && skidPoint != Vector3.zero && Mathf.Abs(skidPoint.x) > 1f && Mathf.Abs(skidPoint.z) > 1f)
-                    lastSkidmark = RCC_SkidmarksManager.Instance.AddSkidMark(skidPoint, wheelHit.normal, totalSlip - RCC_GroundMaterials.Instance.frictions[groundIndex].slip, wheelWidth, lastSkidmark, groundIndex);
+                    lastSkidmark = CargoTruck_CC_SkidmarksManager.Instance.AddSkidMark(skidPoint, wheelHit.normal, totalSlip - CargoTruck_CC_GroundMaterials.Instance.frictions[groundIndex].slip, wheelWidth, lastSkidmark, groundIndex);
                 else
                     lastSkidmark = -1;
 
@@ -508,8 +508,8 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
             hbInput = 1f;
 
         // Setting wheel stiffness to ground physic material stiffness.
-        forwardFrictionCurve.stiffness = RCC_GroundMaterials.Instance.frictions[groundIndex].forwardStiffness;
-        sidewaysFrictionCurve.stiffness = (RCC_GroundMaterials.Instance.frictions[groundIndex].sidewaysStiffness * hbInput * tractionHelpedSidewaysStiffness);
+        forwardFrictionCurve.stiffness = CargoTruck_CC_GroundMaterials.Instance.frictions[groundIndex].forwardStiffness;
+        sidewaysFrictionCurve.stiffness = (CargoTruck_CC_GroundMaterials.Instance.frictions[groundIndex].sidewaysStiffness * hbInput * tractionHelpedSidewaysStiffness);
 
         if (deflated) {
 
@@ -552,7 +552,7 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
         }
 
         // If drift mode is selected, apply specific frictions.
-        if (RCC_Settings.Instance.selectedBehaviorType != null && RCC_Settings.Instance.selectedBehaviorType.applyExternalWheelFrictions)
+        if (CargoTruck_CC_Settings.Instance.selectedBehaviorType != null && CargoTruck_CC_Settings.Instance.selectedBehaviorType.applyExternalWheelFrictions)
             Drift();
 
         // Setting new friction curves to wheels.
@@ -560,11 +560,11 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
         wheelCollider.sidewaysFriction = sidewaysFrictionCurve;
 
         // Also damp too.
-        wheelCollider.wheelDampingRate = RCC_GroundMaterials.Instance.frictions[groundIndex].damp;
+        wheelCollider.wheelDampingRate = CargoTruck_CC_GroundMaterials.Instance.frictions[groundIndex].damp;
 
         // Set audioclip to ground physic material sound.
-        audioClip = RCC_GroundMaterials.Instance.frictions[groundIndex].groundSound;
-        audioVolume = RCC_GroundMaterials.Instance.frictions[groundIndex].volume;
+        audioClip = CargoTruck_CC_GroundMaterials.Instance.frictions[groundIndex].groundSound;
+        audioVolume = CargoTruck_CC_GroundMaterials.Instance.frictions[groundIndex].volume;
 
     }
 
@@ -573,13 +573,13 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
     /// </summary>
     private void Particles() {
 
-        if (RCC_Settings.Instance.dontUseAnyParticleEffects)
+        if (CargoTruck_CC_Settings.Instance.dontUseAnyParticleEffects)
             return;
 
         // If wheel slip is bigger than ground physic material slip, enable particles. Otherwise, disable particles.
         for (int i = 0; i < allWheelParticles.Count; i++) {
 
-            if (totalSlip > RCC_GroundMaterials.Instance.frictions[groundIndex].slip) {
+            if (totalSlip > CargoTruck_CC_GroundMaterials.Instance.frictions[groundIndex].slip) {
 
                 if (i != groundIndex) {
 
@@ -624,7 +624,7 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
         if (wheelHit.forwardSlip > 0)
             sqrVel += (Mathf.Abs(wheelHit.forwardSlip));
 
-        if (carController.wheelTypeChoise == RCC_CarControllerV3.WheelType.RWD) {
+        if (carController.wheelTypeChoise == CargoTruck_CC_CarControllerV3.WheelType.RWD) {
 
             // Forward
             if (wheelCollider == carController.FrontLeftWheelCollider.wheelCollider || wheelCollider == carController.FrontRightWheelCollider.wheelCollider) {
@@ -672,7 +672,7 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
     private void Audio() {
 
         // If total slip is high enough...
-        if (totalSlip > RCC_GroundMaterials.Instance.frictions[groundIndex].slip) {
+        if (totalSlip > CargoTruck_CC_GroundMaterials.Instance.frictions[groundIndex].slip) {
 
             // Assigning corresponding audio clip.
             if (audioSource.clip != audioClip)
@@ -711,7 +711,7 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
         if ((bumpForce) >= 5000f) {
 
             // Creating and playing audiosource for bump SFX.
-            AudioSource bumpSound = NewAudioSource(RCC_Settings.Instance.audioMixer, carController.gameObject, "Bump Sound AudioSource", 5f, 50f, (bumpForce - 5000f) / 3000f, RCC_Settings.Instance.bumpClip, false, true, true);
+            AudioSource bumpSound = NewAudioSource(CargoTruck_CC_Settings.Instance.audioMixer, carController.gameObject, "Bump Sound AudioSource", 5f, 50f, (bumpForce - 5000f) / 3000f, CargoTruck_CC_Settings.Instance.bumpClip, false, true, true);
             bumpSound.pitch = Random.Range(.9f, 1.1f);
 
         }
@@ -728,7 +728,7 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
 
         for (int i = 0; i < allWheelColliders.Count; i++) {
 
-            if (allWheelColliders[i].totalSlip > RCC_GroundMaterials.Instance.frictions[groundIndex].slip)
+            if (allWheelColliders[i].totalSlip > CargoTruck_CC_GroundMaterials.Instance.frictions[groundIndex].slip)
                 return true;
 
         }
@@ -748,7 +748,7 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
 
             if (Mathf.Abs(wheelCollider.rpm) >= 1) {
 
-                if (Mathf.Abs(wheelSlipAmountForward) > RCC_GroundMaterials.Instance.frictions[groundIndex].slip) {
+                if (Mathf.Abs(wheelSlipAmountForward) > CargoTruck_CC_GroundMaterials.Instance.frictions[groundIndex].slip) {
 
                     carController.TCSAct = true;
 
@@ -883,9 +883,9 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
 
         int ret = 0;
 
-        for (int i = 0; i < RCC_GroundMaterials.Instance.frictions.Length; i++) {
+        for (int i = 0; i < CargoTruck_CC_GroundMaterials.Instance.frictions.Length; i++) {
 
-            if (wheelHit.collider.sharedMaterial == RCC_GroundMaterials.Instance.frictions[i].groundMaterial) {
+            if (wheelHit.collider.sharedMaterial == CargoTruck_CC_GroundMaterials.Instance.frictions[i].groundMaterial) {
 
                 contacted = true;
                 ret = i;
@@ -897,20 +897,20 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
         // If ground pyhsic material is not one of the ground material in Configurable Ground Materials, check if we are on terrain collider...
         if (!contacted) {
 
-            if (!RCC_SceneManager.Instance.terrainsInitialized)
+            if (!CargoTruck_CC_SceneManager.Instance.terrainsInitialized)
                 return 0;
 
-            for (int i = 0; i < RCC_GroundMaterials.Instance.terrainFrictions.Length; i++) {
+            for (int i = 0; i < CargoTruck_CC_GroundMaterials.Instance.terrainFrictions.Length; i++) {
 
-                if (wheelHit.collider.sharedMaterial == RCC_GroundMaterials.Instance.terrainFrictions[i].groundMaterial) {
+                if (wheelHit.collider.sharedMaterial == CargoTruck_CC_GroundMaterials.Instance.terrainFrictions[i].groundMaterial) {
 
-                    RCC_SceneManager.Terrains currentTerrain = null;
+                    CargoTruck_CC_SceneManager.Terrains currentTerrain = null;
 
-                    for (int l = 0; l < RCC_SceneManager.Instance.terrains.Length; l++) {
+                    for (int l = 0; l < CargoTruck_CC_SceneManager.Instance.terrains.Length; l++) {
 
-                        if (RCC_SceneManager.Instance.terrains[l].terrainCollider == RCC_GroundMaterials.Instance.terrainFrictions[i].groundMaterial) {
+                        if (CargoTruck_CC_SceneManager.Instance.terrains[l].terrainCollider == CargoTruck_CC_GroundMaterials.Instance.terrainFrictions[i].groundMaterial) {
 
-                            currentTerrain = RCC_SceneManager.Instance.terrains[l];
+                            currentTerrain = CargoTruck_CC_SceneManager.Instance.terrains[l];
                             break;
 
                         }
@@ -930,7 +930,7 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
 
                         }
 
-                        ret = RCC_GroundMaterials.Instance.terrainFrictions[i].splatmapIndexes[ret].index;
+                        ret = CargoTruck_CC_GroundMaterials.Instance.terrainFrictions[i].splatmapIndexes[ret].index;
 
                     }
 
@@ -949,11 +949,11 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
         if (!isGrounded || wheelHit.point == Vector3.zero || wheelHit.collider == null)
             return;
 
-        for (int i = 0; i < RCC_GroundMaterials.Instance.frictions.Length; i++) {
+        for (int i = 0; i < CargoTruck_CC_GroundMaterials.Instance.frictions.Length; i++) {
 
-            if (wheelHit.collider.sharedMaterial == RCC_GroundMaterials.Instance.frictions[i].groundMaterial) {
+            if (wheelHit.collider.sharedMaterial == CargoTruck_CC_GroundMaterials.Instance.frictions[i].groundMaterial) {
 
-                if (RCC_GroundMaterials.Instance.frictions[i].deflate)
+                if (CargoTruck_CC_GroundMaterials.Instance.frictions[i].deflate)
                     Deflate();
 
             }
@@ -1043,7 +1043,7 @@ public class CargoTruck_CC_WheelCollider : RCC_Core {
 
     void OnDisable() {
 
-        RCC_SceneManager.OnBehaviorChanged -= CheckBehavior;
+        CargoTruck_CC_SceneManager.OnBehaviorChanged -= CheckBehavior;
 
         if (wheelModel)
             wheelModel.gameObject.SetActive(false);

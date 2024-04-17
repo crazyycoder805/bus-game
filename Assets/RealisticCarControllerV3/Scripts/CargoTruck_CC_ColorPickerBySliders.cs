@@ -15,7 +15,7 @@ using System.Collections;
 /// Color Picker with UI Sliders.
 /// </summary>
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/UI/RCC Color Picker By UI Sliders")]
-public class RCC_ColorPickerBySliders : MonoBehaviour {
+public class CargoTruck_CC_ColorPickerBySliders : MonoBehaviour {
 
     public Color color;     // Main color.
 

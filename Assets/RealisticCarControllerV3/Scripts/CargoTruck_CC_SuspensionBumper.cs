@@ -16,7 +16,7 @@ using UnityEngine;
 /// </summary>
 public class CargoTruck_CC_SuspensionBumper : MonoBehaviour {
 
-    private RCC_CarControllerV3 carController;
+    private CargoTruck_CC_CarControllerV3 carController;
 
     public string inputHorizontalID = "Suspension_Horizontal";
     public string inputVerticalID = "Suspension_Vertical";
@@ -54,7 +54,7 @@ public class CargoTruck_CC_SuspensionBumper : MonoBehaviour {
 
     void Start() {
 
-        carController = GetComponent<RCC_CarControllerV3>();
+        carController = GetComponent<CargoTruck_CC_CarControllerV3>();
 
         if (!carController)
             return;

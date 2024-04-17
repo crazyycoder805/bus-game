@@ -11,7 +11,8 @@ using UnityEngine;
 using System.Collections;
 
 [System.Serializable]
-public class RCC_Emission {
+public class CargoTruck_CC_Emission
+{
 
     public Renderer lightRenderer;
 

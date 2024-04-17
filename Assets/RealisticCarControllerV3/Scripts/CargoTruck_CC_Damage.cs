@@ -12,9 +12,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class RCC_Damage {
+public class CargoTruck_CC_Damage
+{
 
-    internal RCC_CarControllerV3 carController;
+    internal CargoTruck_CC_CarControllerV3 carController;
     public bool automaticInstallation = true;
 
     // Mesh deformation
@@ -77,19 +78,19 @@ public class RCC_Damage {
 
     [Space()]
     public MeshFilter[] meshFilters;    //  Collected mesh filters.
-    public RCC_DetachablePart[] detachableParts;        //  Collected detachable parts.
-    public RCC_Light[] lights;      //  Collected lights.
-    public RCC_WheelCollider[] wheels;      //  Collected wheels.
+    public CargoTruck_CC_DetachablePart[] detachableParts;        //  Collected detachable parts.
+    public CargoTruck_CC_Light[] lights;      //  Collected lights.
+    public CargoTruck_CC_WheelCollider[] wheels;      //  Collected wheels.
 
     private ContactPoint[] contactPoints = new ContactPoint[0];
 
     //  Damage data.
-    public RCC_DamageData damageData = new RCC_DamageData();
+    public CargoTruck_CC_DamageData damageData = new CargoTruck_CC_DamageData();
 
     /// <summary>
     /// Collecting all meshes and detachable parts of the vehicle.
     /// </summary>
-    public void Initialize(RCC_CarControllerV3 _carController) {
+    public void Initialize(CargoTruck_CC_CarControllerV3 _carController) {
 
         //  Getting the main car controller.
         carController = _carController;
@@ -116,9 +117,9 @@ public class RCC_Damage {
             allMeshFilters = properMeshFilters.ToArray();
 
             GetMeshes(allMeshFilters);
-            GetLights(carController.GetComponentsInChildren<RCC_Light>());
-            GetParts(carController.GetComponentsInChildren<RCC_DetachablePart>());
-            GetWheels(carController.GetComponentsInChildren<RCC_WheelCollider>());
+            GetLights(carController.GetComponentsInChildren<CargoTruck_CC_Light>());
+            GetParts(carController.GetComponentsInChildren<CargoTruck_CC_DetachablePart>());
+            GetWheels(carController.GetComponentsInChildren<CargoTruck_CC_WheelCollider>());
 
         }
 
@@ -140,7 +141,7 @@ public class RCC_Damage {
     /// Gets all lights.
     /// </summary>
     /// <param name="allLights"></param>
-    public void GetLights(RCC_Light[] allLights) {
+    public void GetLights(CargoTruck_CC_Light[] allLights) {
 
         lights = allLights;
 
@@ -150,7 +151,7 @@ public class RCC_Damage {
     /// Gets all detachable parts.
     /// </summary>
     /// <param name="allParts"></param>
-    public void GetParts(RCC_DetachablePart[] allParts) {
+    public void GetParts(CargoTruck_CC_DetachablePart[] allParts) {
 
         detachableParts = allParts;
 
@@ -160,7 +161,7 @@ public class RCC_Damage {
     /// Gets all wheels
     /// </summary>
     /// <param name="allWheels"></param>
-    public void GetWheels(RCC_WheelCollider[] allWheels) {
+    public void GetWheels(CargoTruck_CC_WheelCollider[] allWheels) {
 
         wheels = allWheels;
 
@@ -633,7 +634,7 @@ public class RCC_Damage {
 
     }
 
-    public void DetachWheel(RCC_WheelCollider wheelCollider) {
+    public void DetachWheel(CargoTruck_CC_WheelCollider wheelCollider) {
 
         if (!carController)
             return;
@@ -650,9 +651,9 @@ public class RCC_Damage {
 
         GameObject clonedMeshCollider = new GameObject("Mesh Collider");
         clonedMeshCollider.transform.SetParent(clonedWheel.transform, false);
-        clonedMeshCollider.transform.position = RCC_GetBounds.GetBoundsCenter(clonedWheel.transform);
+        clonedMeshCollider.transform.position = CargoTruck_CC_GetBounds.GetBoundsCenter(clonedWheel.transform);
         MeshCollider mc = clonedMeshCollider.AddComponent<MeshCollider>();
-        MeshFilter biggestMesh = RCC_GetBounds.GetBiggestMesh(clonedWheel.transform);
+        MeshFilter biggestMesh = CargoTruck_CC_GetBounds.GetBiggestMesh(clonedWheel.transform);
         mc.sharedMesh = biggestMesh.mesh;
         mc.convex = true;
 

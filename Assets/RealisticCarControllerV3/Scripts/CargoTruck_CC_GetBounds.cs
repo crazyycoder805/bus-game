@@ -13,7 +13,8 @@ using System.Collections;
 /// <summary>
 /// Gets total bound size of a gameobject.
 /// </summary>
-public class RCC_GetBounds {
+public class CargoTruck_CC_GetBounds
+{
 
     /// <summary>
     /// Gets the center bounds extent of object, including all child renderers,

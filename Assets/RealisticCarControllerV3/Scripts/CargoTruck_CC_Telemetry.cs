@@ -15,7 +15,7 @@ using UnityEngine.UI;
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/UI/RCC Telemetry")]
 public class CargoTruck_CC_Telemetry : MonoBehaviour {
 
-    private RCC_CarControllerV3 carController;
+    private CargoTruck_CC_CarControllerV3 carController;
     public GameObject mainPanel;
 
     public Text RPM_WheelFL;
@@ -79,9 +79,9 @@ public class CargoTruck_CC_Telemetry : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        mainPanel.SetActive(RCC_Settings.Instance.useTelemetry);
+        mainPanel.SetActive(CargoTruck_CC_Settings.Instance.useTelemetry);
 
-        carController = RCC_SceneManager.Instance.activePlayerVehicle;
+        carController = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle;
 
         if (!carController)
             return;
@@ -136,17 +136,17 @@ public class CargoTruck_CC_Telemetry : MonoBehaviour {
 
         switch (carController.wheelTypeChoise) {
 
-            case RCC_CarControllerV3.WheelType.FWD:
+            case CargoTruck_CC_CarControllerV3.WheelType.FWD:
 
                 drivetrain.text = "FWD";
                 break;
 
-            case RCC_CarControllerV3.WheelType.RWD:
+            case CargoTruck_CC_CarControllerV3.WheelType.RWD:
 
                 drivetrain.text = "RWD";
                 break;
 
-            case RCC_CarControllerV3.WheelType.AWD:
+            case CargoTruck_CC_CarControllerV3.WheelType.AWD:
 
                 drivetrain.text = "AWD";
                 break;

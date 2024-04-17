@@ -23,7 +23,7 @@ public class CargoTruck_CC_MobileUIDrag : MonoBehaviour, IDragHandler, IEndDragH
 
     void Awake() {
 
-        if (!RCC_Settings.Instance.mobileControllerEnabled) {
+        if (!CargoTruck_CC_Settings.Instance.mobileControllerEnabled) {
 
             gameObject.SetActive(false);
             return;
@@ -34,18 +34,18 @@ public class CargoTruck_CC_MobileUIDrag : MonoBehaviour, IDragHandler, IEndDragH
 
     public void OnDrag(PointerEventData data) {
 
-        if (!RCC_Settings.Instance.mobileControllerEnabled)
+        if (!CargoTruck_CC_Settings.Instance.mobileControllerEnabled)
             return;
 
         isPressing = true;
 
-        RCC_SceneManager.Instance.activePlayerCamera.OnDrag(data);
+        CargoTruck_CC_SceneManager.Instance.activePlayerCamera.OnDrag(data);
 
     }
 
     public void OnEndDrag(PointerEventData data) {
 
-        if (!RCC_Settings.Instance.mobileControllerEnabled)
+        if (!CargoTruck_CC_Settings.Instance.mobileControllerEnabled)
             return;
 
         isPressing = false;

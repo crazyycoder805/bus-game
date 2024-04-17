@@ -20,7 +20,7 @@ public class CargoTruck_CC_ShadowRotConst : MonoBehaviour {
 
     void Start() {
 
-        root = GetComponentInParent<RCC_CarControllerV3>().transform;
+        root = GetComponentInParent<CargoTruck_CC_CarControllerV3>().transform;
 
     }
 

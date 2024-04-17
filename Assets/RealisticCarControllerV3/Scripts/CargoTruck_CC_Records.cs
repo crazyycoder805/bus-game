@@ -14,10 +14,10 @@ using UnityEngine;
 public class CargoTruck_CC_Records : ScriptableObject {
 
     #region singleton
-    private static RCC_Records instance;
-    public static RCC_Records Instance { get { if (instance == null) instance = Resources.Load("RCC Assets/RCC_Records") as RCC_Records; return instance; } }
+    private static CargoTruck_CC_Records instance;
+    public static CargoTruck_CC_Records Instance { get { if (instance == null) instance = Resources.Load("RCC Assets/CargoTruck_CC_Records") as CargoTruck_CC_Records; return instance; } }
     #endregion
 
-    public List<RCC_Recorder.Recorded> records = new List<RCC_Recorder.Recorded>();
+    public List<CargoTruck_CC_Recorder.Recorded> records = new List<CargoTruck_CC_Recorder.Recorded>();
 
 }

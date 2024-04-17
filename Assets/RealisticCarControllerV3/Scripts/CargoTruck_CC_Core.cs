@@ -13,7 +13,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using System;
 
-public class RCC_Core : MonoBehaviour {
+public class CargoTruck_CC_Core : MonoBehaviour {
 
     #region Create AudioSource
 
@@ -294,7 +294,7 @@ public class RCC_Core : MonoBehaviour {
     /// <summary>
     /// Creates the wheel colliders.
     /// </summary>
-    public void CreateWheelColliders(RCC_CarControllerV3 carController) {
+    public void CreateWheelColliders(CargoTruck_CC_CarControllerV3 carController) {
 
         // Creating a list for all wheel models.
         List<Transform> allWheelModels = new List<Transform>();
@@ -334,7 +334,7 @@ public class RCC_Core : MonoBehaviour {
 
             GameObject wheelcollider = new GameObject(wheel.transform.name);
 
-            wheelcollider.transform.position = RCC_GetBounds.GetBoundsCenter(wheel.transform);
+            wheelcollider.transform.position = CargoTruck_CC_GetBounds.GetBoundsCenter(wheel.transform);
             wheelcollider.transform.rotation = transform.rotation;
             wheelcollider.transform.name = wheel.transform.name;
             wheelcollider.transform.SetParent(WheelColliders.transform);
@@ -352,7 +352,7 @@ public class RCC_Core : MonoBehaviour {
             }
 
             wheelcollider.GetComponent<WheelCollider>().radius = (biggestBound.extents.y) / transform.localScale.y;
-            wheelcollider.AddComponent<RCC_WheelCollider>();
+            wheelcollider.AddComponent<CargoTruck_CC_WheelCollider>();
             JointSpring spring = wheelcollider.GetComponent<WheelCollider>().suspensionSpring;
 
             spring.spring = 40000f;
@@ -388,15 +388,15 @@ public class RCC_Core : MonoBehaviour {
 
         }
 
-        RCC_WheelCollider[] allWheelColliders = new RCC_WheelCollider[allWheelModels.Count];
-        allWheelColliders = GetComponentsInChildren<RCC_WheelCollider>();
+        CargoTruck_CC_WheelCollider[] allWheelColliders = new CargoTruck_CC_WheelCollider[allWheelModels.Count];
+        allWheelColliders = GetComponentsInChildren<CargoTruck_CC_WheelCollider>();
 
         carController.FrontLeftWheelCollider = allWheelColliders[0];
         carController.FrontRightWheelCollider = allWheelColliders[1];
         carController.RearLeftWheelCollider = allWheelColliders[2];
         carController.RearRightWheelCollider = allWheelColliders[3];
 
-        carController.ExtraRearWheelsCollider = new RCC_WheelCollider[carController.ExtraRearWheelsTransform.Length];
+        carController.ExtraRearWheelsCollider = new CargoTruck_CC_WheelCollider[carController.ExtraRearWheelsTransform.Length];
 
         for (int i = 0; i < carController.ExtraRearWheelsTransform.Length; i++) {
             carController.ExtraRearWheelsCollider[i] = allWheelColliders[i + 4];
@@ -413,12 +413,12 @@ public class RCC_Core : MonoBehaviour {
     /// <summary>
     /// Overrides the behavior.
     /// </summary>
-    public void SetBehavior(RCC_CarControllerV3 carController) {
+    public void SetBehavior(CargoTruck_CC_CarControllerV3 carController) {
 
-        if (RCC_Settings.Instance.selectedBehaviorType == null)
+        if (CargoTruck_CC_Settings.Instance.selectedBehaviorType == null)
             return;
 
-        RCC_Settings.BehaviorType currentBehaviorType = RCC_Settings.Instance.selectedBehaviorType;
+        CargoTruck_CC_Settings.BehaviorType currentBehaviorType = CargoTruck_CC_Settings.Instance.selectedBehaviorType;
 
         carController.steeringHelper = currentBehaviorType.steeringHelper;
         carController.tractionHelper = currentBehaviorType.tractionHelper;

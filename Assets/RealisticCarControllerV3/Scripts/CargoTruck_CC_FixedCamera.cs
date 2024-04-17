@@ -15,7 +15,7 @@ using System.Collections.Generic;
 /// Fixed camera system for RCC Camera. It simply parents the RCC Camera, and calculates target position, rotation, FOV, etc...
 /// </summary>
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/Camera/RCC Fixed Camera")]
-public class RCC_FixedCamera : RCC_Singleton<RCC_FixedCamera> {
+public class CargoTruck_CC_FixedCamera : CargoTruck_CC_Singleton<CargoTruck_CC_FixedCamera> {
 
     private Vector3 targetPosition;
     public float maxDistance = 50f;
@@ -31,18 +31,18 @@ public class RCC_FixedCamera : RCC_Singleton<RCC_FixedCamera> {
             return;
 
         // If current camera is null, return.
-        if (!RCC_SceneManager.Instance.activePlayerCamera)
+        if (!CargoTruck_CC_SceneManager.Instance.activePlayerCamera)
             return;
 
-        Transform target = RCC_SceneManager.Instance.activePlayerCamera.cameraTarget.playerVehicle.transform;
-        float speed = RCC_SceneManager.Instance.activePlayerCamera.cameraTarget.speed;
+        Transform target = CargoTruck_CC_SceneManager.Instance.activePlayerCamera.cameraTarget.playerVehicle.transform;
+        float speed = CargoTruck_CC_SceneManager.Instance.activePlayerCamera.cameraTarget.speed;
 
         if (target == null)
             return;
 
         distance = Vector3.Distance(transform.position, target.position);
 
-        RCC_SceneManager.Instance.activePlayerCamera.targetFieldOfView = Mathf.Lerp(distance > maxDistance / 10f ? maximumFOV : 70f, minimumFOV, (distance * 1.5f) / maxDistance);
+        CargoTruck_CC_SceneManager.Instance.activePlayerCamera.targetFieldOfView = Mathf.Lerp(distance > maxDistance / 10f ? maximumFOV : 70f, minimumFOV, (distance * 1.5f) / maxDistance);
 
         targetPosition = target.transform.position;
         targetPosition += target.transform.rotation * Vector3.forward * (speed * .05f);
@@ -61,13 +61,13 @@ public class RCC_FixedCamera : RCC_Singleton<RCC_FixedCamera> {
         if (!canTrackNow)
             return;
 
-        if (!RCC_SceneManager.Instance.activePlayerCamera)
+        if (!CargoTruck_CC_SceneManager.Instance.activePlayerCamera)
             return;
 
         Transform target = null;
 
-        if (RCC_SceneManager.Instance.activePlayerCamera.cameraTarget.playerVehicle)
-            target = RCC_SceneManager.Instance.activePlayerCamera.cameraTarget.playerVehicle.transform;
+        if (CargoTruck_CC_SceneManager.Instance.activePlayerCamera.cameraTarget.playerVehicle)
+            target = CargoTruck_CC_SceneManager.Instance.activePlayerCamera.cameraTarget.playerVehicle.transform;
 
         if (target == null)
             return;

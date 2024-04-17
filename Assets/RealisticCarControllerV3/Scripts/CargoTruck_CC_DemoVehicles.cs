@@ -11,13 +11,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RCC_DemoVehicles : ScriptableObject {
+public class CargoTruck_CC_DemoVehicles : ScriptableObject {
 
-    public RCC_CarControllerV3[] vehicles;
+    public CargoTruck_CC_CarControllerV3[] vehicles;
 
     #region singleton
-    private static RCC_DemoVehicles instance;
-    public static RCC_DemoVehicles Instance { get { if (instance == null) instance = Resources.Load("RCC Assets/RCC_DemoVehicles") as RCC_DemoVehicles; return instance; } }
+    private static CargoTruck_CC_DemoVehicles instance;
+    public static CargoTruck_CC_DemoVehicles Instance { get { if (instance == null) instance = Resources.Load("RCC Assets/CargoTruck_CC_DemoVehicles") as CargoTruck_CC_DemoVehicles; return instance; } }
     #endregion
 
 }

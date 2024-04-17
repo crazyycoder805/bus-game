@@ -11,21 +11,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RCC_AssetPaths {
+public class CargoTruck_CC_AssetPaths
+{
 
     public const string BCGSharedAssetsPath = "Assets/RealisticCarControllerV3/Addon Packages/For BCG Shared Assets (Enter-Exit)/BCG Shared Assets.unitypackage";
     public const string PUN2AssetsPath = "Assets/RealisticCarControllerV3/Addon Packages/For Photon PUN 2/Photon PUN 2 Scripts and Photon Vehicles.unitypackage";
     public const string ProFlareAssetsPath = "Assets/RealisticCarControllerV3/Addon Packages/For ProFlares/Pro Flares Integration.unitypackage";
     public const string LogiAssetsPath = "Assets/RealisticCarControllerV3/Addon Packages/For Logitech Steering Wheel/Logitech Integration.unitypackage";
-    public const string projectSettingsPath = "Assets/RealisticCarControllerV3/Addon Packages/Project Settings/RCC_ProjectSettings.unitypackage";
-    public const string editorPreferences = "Assets/RealisticCarControllerV3/Editor/RCC_Preferences.asset";
+    public const string projectSettingsPath = "Assets/RealisticCarControllerV3/Addon Packages/Project Settings/CargoTruck_CC_ProjectSettings.unitypackage";
+    public const string editorPreferences = "Assets/RealisticCarControllerV3/Editor/CargoTruck_CC_Preferences.asset";
 
     public const string assetStorePath = "https://assetstore.unity.com/packages/tools/physics/realistic-car-controller-16296#content";
     public const string photonPUN2 = "https://assetstore.unity.com/packages/tools/network/pun-2-free-119922";
     public const string logitech = "https://assetstore.unity.com/packages/tools/integration/logitech-gaming-sdk-6630";
     public const string proFlares = "https://assetstore.unity.com/packages/tools/particles-effects/proflares-ultimate-lens-flares-for-unity3d-12845";
 
-    public const string documentations = "https://www.bonecrackergames.com/bonecrackergames.com/admin/AssetStoreDocs/RCC_Documentations.rar";
+    public const string documentations = "https://www.bonecrackergames.com/bonecrackergames.com/admin/AssetStoreDocs/CargoTruck_CC_Documentations.rar";
     public const string YTVideos = "https://www.youtube.com/playlist?list=PLRXTqAVrLDpoW58lKf8XA1AWD6kDkoKb1";
     public const string otherAssets = "https://assetstore.unity.com/publishers/5425";
 

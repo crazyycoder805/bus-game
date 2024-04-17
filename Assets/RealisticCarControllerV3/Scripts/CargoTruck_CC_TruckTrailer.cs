@@ -19,7 +19,7 @@ using System.Collections.Generic;
 [RequireComponent(typeof(ConfigurableJoint))]
 public class CargoTruck_CC_TruckTrailer : MonoBehaviour {
 
-    private RCC_CarControllerV3 carController;
+    private CargoTruck_CC_CarControllerV3 carController;
     private Rigidbody rigid;
     private ConfigurableJoint joint;
 
@@ -102,7 +102,7 @@ public class CargoTruck_CC_TruckTrailer : MonoBehaviour {
 
     }
     private JointRestrictions jointRestrictions = new JointRestrictions();
-    private RCC_Light[] lights;
+    private CargoTruck_CC_Light[] lights;
 
     void Start() {
 
@@ -118,7 +118,7 @@ public class CargoTruck_CC_TruckTrailer : MonoBehaviour {
         //	If joint is connected as default, attach the trailer. Otherwise detach.
         if (joint.connectedBody) {
 
-            AttachTrailer(joint.connectedBody.gameObject.GetComponent<RCC_CarControllerV3>());
+            AttachTrailer(joint.connectedBody.gameObject.GetComponent<CargoTruck_CC_CarControllerV3>());
 
         } else {
 
@@ -214,8 +214,8 @@ public class CargoTruck_CC_TruckTrailer : MonoBehaviour {
         if (legs)
             legs.SetActive(true);
 
-        if (RCC_SceneManager.Instance.activePlayerCamera && RCC_SceneManager.Instance.activePlayerCamera.TPSAutoFocus)
-            StartCoroutine(RCC_SceneManager.Instance.activePlayerCamera.AutoFocus());
+        if (CargoTruck_CC_SceneManager.Instance.activePlayerCamera && CargoTruck_CC_SceneManager.Instance.activePlayerCamera.TPSAutoFocus)
+            StartCoroutine(CargoTruck_CC_SceneManager.Instance.activePlayerCamera.AutoFocus());
 
     }
 
@@ -223,14 +223,14 @@ public class CargoTruck_CC_TruckTrailer : MonoBehaviour {
     /// Attach the trailer.
     /// </summary>
     /// <param name="vehicle"></param>
-    public void AttachTrailer(RCC_CarControllerV3 vehicle) {
+    public void AttachTrailer(CargoTruck_CC_CarControllerV3 vehicle) {
 
         // If delay is short, return.
         if (timer > 0)
             return;
 
         carController = vehicle;        //	Assigning car controller.
-        lights = gameObject.GetComponentsInChildren<RCC_Light>();       //	Getting parent car controller lights.
+        lights = gameObject.GetComponentsInChildren<CargoTruck_CC_Light>();       //	Getting parent car controller lights.
         timer = 1f;     //	Setting timer.
 
         joint.connectedBody = vehicle.rigid;        //	Connecting joint.
@@ -245,7 +245,7 @@ public class CargoTruck_CC_TruckTrailer : MonoBehaviour {
             legs.SetActive(false);
 
         //	Initializing lights of the trailer. Parent car controller will take control of them.
-        foreach (RCC_Light item in lights) {
+        foreach (CargoTruck_CC_Light item in lights) {
 
             item.carController = carController;
             item.Init();
@@ -257,8 +257,8 @@ public class CargoTruck_CC_TruckTrailer : MonoBehaviour {
         rigid.isKinematic = false;
 
         // If autofocus is enabled on RCC Camera, run it.
-        if (RCC_SceneManager.Instance.activePlayerCamera && RCC_SceneManager.Instance.activePlayerCamera.TPSAutoFocus)
-            StartCoroutine(RCC_SceneManager.Instance.activePlayerCamera.AutoFocus(transform, carController.transform));
+        if (CargoTruck_CC_SceneManager.Instance.activePlayerCamera && CargoTruck_CC_SceneManager.Instance.activePlayerCamera.TPSAutoFocus)
+            StartCoroutine(CargoTruck_CC_SceneManager.Instance.activePlayerCamera.AutoFocus(transform, carController.transform));
 
     }
 

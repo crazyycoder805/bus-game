@@ -12,14 +12,14 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-[CustomEditor(typeof(RCC_AIBrakeZonesContainer))]
-public class RCC_AIBZEditor : Editor {
+[CustomEditor(typeof(CargoTruck_CC_AIBrakeZonesContainer))]
+public class CargoTruck_CC_AIBZEditor : Editor {
 
-    RCC_AIBrakeZonesContainer bzScript;
+    CargoTruck_CC_AIBrakeZonesContainer bzScript;
 
     public override void OnInspectorGUI() {
 
-        bzScript = (RCC_AIBrakeZonesContainer)target;
+        bzScript = (CargoTruck_CC_AIBrakeZonesContainer)target;
         serializedObject.Update();
 
         if (GUILayout.Button("Delete Brake Zones")) {
@@ -42,7 +42,7 @@ public class RCC_AIBZEditor : Editor {
     void OnSceneGUI() {
 
         Event e = Event.current;
-        bzScript = (RCC_AIBrakeZonesContainer)target;
+        bzScript = (CargoTruck_CC_AIBrakeZonesContainer)target;
 
         if (e != null) {
 
@@ -58,7 +58,7 @@ public class RCC_AIBZEditor : Editor {
 
                     wp.transform.position = newTilePosition;
                     wp.transform.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
-                    wp.AddComponent<RCC_AIBrakeZone>();
+                    wp.AddComponent<CargoTruck_CC_AIBrakeZone>();
                     wp.AddComponent<BoxCollider>();
                     wp.GetComponent<BoxCollider>().isTrigger = true;
                     wp.GetComponent<BoxCollider>().size = new Vector3(1, 1, 1);

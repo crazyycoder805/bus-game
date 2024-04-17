@@ -12,7 +12,7 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.EventSystems;
 
-public class RCC_CameraCarSelection : MonoBehaviour {
+public class CargoTruck_CC_CameraCarSelection : MonoBehaviour {
 
     public Transform target;
     public float distance = 10.0f;

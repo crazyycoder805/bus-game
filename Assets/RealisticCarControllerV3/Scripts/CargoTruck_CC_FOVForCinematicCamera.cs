@@ -13,14 +13,14 @@ using System.Collections;
 /// <summary>
 /// Animation attached to "Animation Pivot" of the Cinematic Camera is feeding FOV float value.
 /// </summary>
-public class RCC_FOVForCinematicCamera : MonoBehaviour {
+public class CargoTruck_CC_FOVForCinematicCamera : MonoBehaviour {
 
-    private RCC_CinematicCamera cinematicCamera;
+    private CargoTruck_CC_CinematicCamera cinematicCamera;
     public float FOV = 30f;
 
     void Awake() {
 
-        cinematicCamera = GetComponentInParent<RCC_CinematicCamera>();
+        cinematicCamera = GetComponentInParent<CargoTruck_CC_CinematicCamera>();
 
     }
 

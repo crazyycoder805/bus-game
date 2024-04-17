@@ -80,83 +80,83 @@ public class CargoTruck_CC_UIDashboardButton : MonoBehaviour, IPointerClickHandl
 
             case ButtonType.Record:
 
-                RCC.StartStopRecord();
+                CargoTruck_CC.StartStopRecord();
 
                 break;
 
             case ButtonType.Replay:
 
-                RCC.StartStopReplay();
+                CargoTruck_CC.StartStopReplay();
 
                 break;
 
             case ButtonType.Neutral:
 
-                RCC.StopRecordReplay();
+                CargoTruck_CC.StopRecordReplay();
 
                 break;
 
             case ButtonType.ChangeCamera:
 
-                RCC.ChangeCamera();
+                CargoTruck_CC.ChangeCamera();
 
                 break;
 
 
             case ButtonType.Start:
 
-                if (RCC_SceneManager.Instance.activePlayerVehicle)
-                    RCC_SceneManager.Instance.activePlayerVehicle.KillOrStartEngine();
+                if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle)
+                    CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.KillOrStartEngine();
 
                 break;
 
             case ButtonType.ABS:
 
-                if (RCC_SceneManager.Instance.activePlayerVehicle)
-                    RCC_SceneManager.Instance.activePlayerVehicle.ABS = !RCC_SceneManager.Instance.activePlayerVehicle.ABS;
+                if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle)
+                    CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.ABS = !CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.ABS;
 
                 break;
 
             case ButtonType.ESP:
 
-                if (RCC_SceneManager.Instance.activePlayerVehicle)
-                    RCC_SceneManager.Instance.activePlayerVehicle.ESP = !RCC_SceneManager.Instance.activePlayerVehicle.ESP;
+                if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle)
+                    CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.ESP = !CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.ESP;
 
                 break;
 
             case ButtonType.TCS:
 
-                if (RCC_SceneManager.Instance.activePlayerVehicle)
-                    RCC_SceneManager.Instance.activePlayerVehicle.TCS = !RCC_SceneManager.Instance.activePlayerVehicle.TCS;
+                if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle)
+                    CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.TCS = !CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.TCS;
 
                 break;
 
             case ButtonType.SH:
 
-                if (RCC_SceneManager.Instance.activePlayerVehicle)
-                    RCC_SceneManager.Instance.activePlayerVehicle.steeringHelper = !RCC_SceneManager.Instance.activePlayerVehicle.steeringHelper;
+                if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle)
+                    CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.steeringHelper = !CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.steeringHelper;
 
                 break;
 
             case ButtonType.Headlights:
 
-                if (RCC_SceneManager.Instance.activePlayerVehicle) {
+                if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle) {
 
-                    if (!RCC_SceneManager.Instance.activePlayerVehicle.highBeamHeadLightsOn && RCC_SceneManager.Instance.activePlayerVehicle.lowBeamHeadLightsOn) {
+                    if (!CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.highBeamHeadLightsOn && CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.lowBeamHeadLightsOn) {
 
-                        RCC_SceneManager.Instance.activePlayerVehicle.highBeamHeadLightsOn = true;
-                        RCC_SceneManager.Instance.activePlayerVehicle.lowBeamHeadLightsOn = true;
+                        CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.highBeamHeadLightsOn = true;
+                        CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.lowBeamHeadLightsOn = true;
                         break;
 
                     }
 
-                    if (!RCC_SceneManager.Instance.activePlayerVehicle.lowBeamHeadLightsOn)
-                        RCC_SceneManager.Instance.activePlayerVehicle.lowBeamHeadLightsOn = true;
+                    if (!CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.lowBeamHeadLightsOn)
+                        CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.lowBeamHeadLightsOn = true;
 
-                    if (RCC_SceneManager.Instance.activePlayerVehicle.highBeamHeadLightsOn) {
+                    if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.highBeamHeadLightsOn) {
 
-                        RCC_SceneManager.Instance.activePlayerVehicle.lowBeamHeadLightsOn = false;
-                        RCC_SceneManager.Instance.activePlayerVehicle.highBeamHeadLightsOn = false;
+                        CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.lowBeamHeadLightsOn = false;
+                        CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.highBeamHeadLightsOn = false;
 
                     }
 
@@ -166,12 +166,12 @@ public class CargoTruck_CC_UIDashboardButton : MonoBehaviour, IPointerClickHandl
 
             case ButtonType.LeftIndicator:
 
-                if (RCC_SceneManager.Instance.activePlayerVehicle) {
+                if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle) {
 
-                    if (RCC_SceneManager.Instance.activePlayerVehicle.indicatorsOn != RCC_CarControllerV3.IndicatorsOn.Left)
-                        RCC_SceneManager.Instance.activePlayerVehicle.indicatorsOn = RCC_CarControllerV3.IndicatorsOn.Left;
+                    if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.indicatorsOn != CargoTruck_CC_CarControllerV3.IndicatorsOn.Left)
+                        CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.indicatorsOn = CargoTruck_CC_CarControllerV3.IndicatorsOn.Left;
                     else
-                        RCC_SceneManager.Instance.activePlayerVehicle.indicatorsOn = RCC_CarControllerV3.IndicatorsOn.Off;
+                        CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.indicatorsOn = CargoTruck_CC_CarControllerV3.IndicatorsOn.Off;
 
                 }
 
@@ -179,12 +179,12 @@ public class CargoTruck_CC_UIDashboardButton : MonoBehaviour, IPointerClickHandl
 
             case ButtonType.RightIndicator:
 
-                if (RCC_SceneManager.Instance.activePlayerVehicle) {
+                if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle) {
 
-                    if (RCC_SceneManager.Instance.activePlayerVehicle.indicatorsOn != RCC_CarControllerV3.IndicatorsOn.Right)
-                        RCC_SceneManager.Instance.activePlayerVehicle.indicatorsOn = RCC_CarControllerV3.IndicatorsOn.Right;
+                    if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.indicatorsOn != CargoTruck_CC_CarControllerV3.IndicatorsOn.Right)
+                        CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.indicatorsOn = CargoTruck_CC_CarControllerV3.IndicatorsOn.Right;
                     else
-                        RCC_SceneManager.Instance.activePlayerVehicle.indicatorsOn = RCC_CarControllerV3.IndicatorsOn.Off;
+                        CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.indicatorsOn = CargoTruck_CC_CarControllerV3.IndicatorsOn.Off;
 
                 }
 
@@ -192,12 +192,12 @@ public class CargoTruck_CC_UIDashboardButton : MonoBehaviour, IPointerClickHandl
 
             case ButtonType.HazardLights:
 
-                if (RCC_SceneManager.Instance.activePlayerVehicle) {
+                if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle) {
 
-                    if (RCC_SceneManager.Instance.activePlayerVehicle.indicatorsOn != RCC_CarControllerV3.IndicatorsOn.All)
-                        RCC_SceneManager.Instance.activePlayerVehicle.indicatorsOn = RCC_CarControllerV3.IndicatorsOn.All;
+                    if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.indicatorsOn != CargoTruck_CC_CarControllerV3.IndicatorsOn.All)
+                        CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.indicatorsOn = CargoTruck_CC_CarControllerV3.IndicatorsOn.All;
                     else
-                        RCC_SceneManager.Instance.activePlayerVehicle.indicatorsOn = RCC_CarControllerV3.IndicatorsOn.Off;
+                        CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.indicatorsOn = CargoTruck_CC_CarControllerV3.IndicatorsOn.Off;
 
                 }
 
@@ -205,15 +205,15 @@ public class CargoTruck_CC_UIDashboardButton : MonoBehaviour, IPointerClickHandl
 
             case ButtonType.GearUp:
 
-                if (RCC_SceneManager.Instance.activePlayerVehicle)
-                    RCC_SceneManager.Instance.activePlayerVehicle.GearShiftUp();
+                if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle)
+                    CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.GearShiftUp();
 
                 break;
 
             case ButtonType.GearDown:
 
-                if (RCC_SceneManager.Instance.activePlayerVehicle)
-                    RCC_SceneManager.Instance.activePlayerVehicle.GearShiftDown();
+                if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle)
+                    CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.GearShiftDown();
 
                 break;
 
@@ -228,14 +228,14 @@ public class CargoTruck_CC_UIDashboardButton : MonoBehaviour, IPointerClickHandl
         if (!GetComponent<Image>())
             return;
 
-        if (!RCC_SceneManager.Instance.activePlayerVehicle)
+        if (!CargoTruck_CC_SceneManager.Instance.activePlayerVehicle)
             return;
 
         switch (_buttonType) {
 
             case ButtonType.ABS:
 
-                if (RCC_SceneManager.Instance.activePlayerVehicle.ABS)
+                if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.ABS)
                     GetComponent<Image>().color = new Color(1, 1, 1, 1);
                 else
                     GetComponent<Image>().color = new Color(.25f, .25f, .25f, 1);
@@ -244,7 +244,7 @@ public class CargoTruck_CC_UIDashboardButton : MonoBehaviour, IPointerClickHandl
 
             case ButtonType.ESP:
 
-                if (RCC_SceneManager.Instance.activePlayerVehicle.ESP)
+                if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.ESP)
                     GetComponent<Image>().color = new Color(1, 1, 1, 1);
                 else
                     GetComponent<Image>().color = new Color(.25f, .25f, .25f, 1);
@@ -253,7 +253,7 @@ public class CargoTruck_CC_UIDashboardButton : MonoBehaviour, IPointerClickHandl
 
             case ButtonType.TCS:
 
-                if (RCC_SceneManager.Instance.activePlayerVehicle.TCS)
+                if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.TCS)
                     GetComponent<Image>().color = new Color(1, 1, 1, 1);
                 else
                     GetComponent<Image>().color = new Color(.25f, .25f, .25f, 1);
@@ -262,7 +262,7 @@ public class CargoTruck_CC_UIDashboardButton : MonoBehaviour, IPointerClickHandl
 
             case ButtonType.SH:
 
-                if (RCC_SceneManager.Instance.activePlayerVehicle.steeringHelper)
+                if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.steeringHelper)
                     GetComponent<Image>().color = new Color(1, 1, 1, 1);
                 else
                     GetComponent<Image>().color = new Color(.25f, .25f, .25f, 1);
@@ -271,7 +271,7 @@ public class CargoTruck_CC_UIDashboardButton : MonoBehaviour, IPointerClickHandl
 
             case ButtonType.Headlights:
 
-                if (RCC_SceneManager.Instance.activePlayerVehicle.lowBeamHeadLightsOn || RCC_SceneManager.Instance.activePlayerVehicle.highBeamHeadLightsOn)
+                if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.lowBeamHeadLightsOn || CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.highBeamHeadLightsOn)
                     GetComponent<Image>().color = new Color(1, 1, 1, 1);
                 else
                     GetComponent<Image>().color = new Color(.25f, .25f, .25f, 1);
@@ -284,7 +284,7 @@ public class CargoTruck_CC_UIDashboardButton : MonoBehaviour, IPointerClickHandl
 
     public void ChangeGear() {
 
-        if (!RCC_SceneManager.Instance.activePlayerVehicle)
+        if (!CargoTruck_CC_SceneManager.Instance.activePlayerVehicle)
             return;
 
         if (gearDirection == Mathf.CeilToInt(gearSlider.value * 2))
@@ -292,22 +292,22 @@ public class CargoTruck_CC_UIDashboardButton : MonoBehaviour, IPointerClickHandl
 
         gearDirection = Mathf.CeilToInt(gearSlider.value * 2);
 
-        RCC_SceneManager.Instance.activePlayerVehicle.semiAutomaticGear = true;
+        CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.semiAutomaticGear = true;
 
         switch (gearDirection) {
 
             case 0:
-                RCC_SceneManager.Instance.activePlayerVehicle.StartCoroutine("ChangeGear", 0);
-                RCC_SceneManager.Instance.activePlayerVehicle.NGear = false;
+                CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.StartCoroutine("ChangeGear", 0);
+                CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.NGear = false;
                 break;
 
             case 1:
-                RCC_SceneManager.Instance.activePlayerVehicle.NGear = true;
+                CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.NGear = true;
                 break;
 
             case 2:
-                RCC_SceneManager.Instance.activePlayerVehicle.StartCoroutine("ChangeGear", -1);
-                RCC_SceneManager.Instance.activePlayerVehicle.NGear = false;
+                CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.StartCoroutine("ChangeGear", -1);
+                CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.NGear = false;
                 break;
 
         }
@@ -316,12 +316,12 @@ public class CargoTruck_CC_UIDashboardButton : MonoBehaviour, IPointerClickHandl
 
     void OnDisable() {
 
-        //		if (!RCC_SceneManager.Instance.activePlayerVehicle)
+        //		if (!CargoTruck_CC_SceneManager.Instance.activePlayerVehicle)
         //			return;
         //
         //		if(_buttonType == ButtonType.Gear){
         //
-        //			RCC_SceneManager.Instance.activePlayerVehicle.semiAutomaticGear = false;
+        //			CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.semiAutomaticGear = false;
         //
         //		}
 

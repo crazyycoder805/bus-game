@@ -16,10 +16,10 @@ using UnityEngine.UI;
 /// Handles RCC Canvas dashboard elements.
 /// </summary>
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/UI/RCC UI Dashboard Displayer")]
-[RequireComponent(typeof(RCC_DashboardInputs))]
+[RequireComponent(typeof(CargoTruck_CC_DashboardInputs))]
 public class CargoTruck_CC_UIDashboardDisplay : MonoBehaviour {
 
-    private RCC_DashboardInputs inputs;
+    private CargoTruck_CC_DashboardInputs inputs;
 
     public DisplayType displayType;
     public enum DisplayType { Full, Customization, TopButtonsOnly, Off }
@@ -48,7 +48,7 @@ public class CargoTruck_CC_UIDashboardDisplay : MonoBehaviour {
 
     void Awake() {
 
-        inputs = GetComponent<RCC_DashboardInputs>();
+        inputs = GetComponent<CargoTruck_CC_DashboardInputs>();
 
         if (!inputs) {
 
@@ -68,7 +68,7 @@ public class CargoTruck_CC_UIDashboardDisplay : MonoBehaviour {
     private void CheckController() {
 
         if (mobileControllers)
-            mobileControllers.interactable = RCC_Settings.Instance.mobileControllerEnabled;
+            mobileControllers.interactable = CargoTruck_CC_Settings.Instance.mobileControllerEnabled;
 
     }
 
@@ -146,14 +146,14 @@ public class CargoTruck_CC_UIDashboardDisplay : MonoBehaviour {
 
     void LateUpdate() {
 
-        if (RCC_SceneManager.Instance.activePlayerVehicle) {
+        if (CargoTruck_CC_SceneManager.Instance.activePlayerVehicle) {
 
             if (RPMLabel)
                 RPMLabel.text = inputs.RPM.ToString("0");
 
             if (KMHLabel) {
 
-                if (RCC_Settings.Instance.units == RCC_Settings.Units.KMH)
+                if (CargoTruck_CC_Settings.Instance.units == CargoTruck_CC_Settings.Units.KMH)
                     KMHLabel.text = inputs.KMH.ToString("0") + "\nKMH";
                 else
                     KMHLabel.text = (inputs.KMH * 0.62f).ToString("0") + "\nMPH";
@@ -171,9 +171,9 @@ public class CargoTruck_CC_UIDashboardDisplay : MonoBehaviour {
 
             if (recordingLabel) {
 
-                switch (RCC_SceneManager.Instance.recordMode) {
+                switch (CargoTruck_CC_SceneManager.Instance.recordMode) {
 
-                    case RCC_SceneManager.RecordMode.Neutral:
+                    case CargoTruck_CC_SceneManager.RecordMode.Neutral:
 
                         if (recordingLabel.gameObject.activeInHierarchy)
                             recordingLabel.gameObject.SetActive(false);
@@ -182,7 +182,7 @@ public class CargoTruck_CC_UIDashboardDisplay : MonoBehaviour {
 
                         break;
 
-                    case RCC_SceneManager.RecordMode.Play:
+                    case CargoTruck_CC_SceneManager.RecordMode.Play:
 
                         if (!recordingLabel.gameObject.activeInHierarchy)
                             recordingLabel.gameObject.SetActive(true);
@@ -192,7 +192,7 @@ public class CargoTruck_CC_UIDashboardDisplay : MonoBehaviour {
 
                         break;
 
-                    case RCC_SceneManager.RecordMode.Record:
+                    case CargoTruck_CC_SceneManager.RecordMode.Record:
 
                         if (!recordingLabel.gameObject.activeInHierarchy)
                             recordingLabel.gameObject.SetActive(true);
@@ -215,29 +215,29 @@ public class CargoTruck_CC_UIDashboardDisplay : MonoBehaviour {
             if (Headlights)
                 Headlights.color = inputs.Headlights == true ? Color.green : Color.white;
             if (heatIndicator)
-                heatIndicator.color = RCC_SceneManager.Instance.activePlayerVehicle.engineHeat >= 100f ? Color.red : new Color(.1f, 0f, 0f);
+                heatIndicator.color = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.engineHeat >= 100f ? Color.red : new Color(.1f, 0f, 0f);
             if (fuelIndicator)
-                fuelIndicator.color = RCC_SceneManager.Instance.activePlayerVehicle.fuelTank < 10f ? Color.red : new Color(.1f, 0f, 0f);
+                fuelIndicator.color = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.fuelTank < 10f ? Color.red : new Color(.1f, 0f, 0f);
             if (rpmIndicator)
-                rpmIndicator.color = RCC_SceneManager.Instance.activePlayerVehicle.engineRPM >= RCC_SceneManager.Instance.activePlayerVehicle.maxEngineRPM - 500f ? Color.red : new Color(.1f, 0f, 0f);
+                rpmIndicator.color = CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.engineRPM >= CargoTruck_CC_SceneManager.Instance.activePlayerVehicle.maxEngineRPM - 500f ? Color.red : new Color(.1f, 0f, 0f);
 
             if (leftIndicator && rightIndicator) {
 
                 switch (inputs.indicators) {
 
-                    case RCC_CarControllerV3.IndicatorsOn.Left:
+                    case CargoTruck_CC_CarControllerV3.IndicatorsOn.Left:
                         leftIndicator.color = new Color(1f, .5f, 0f);
                         rightIndicator.color = new Color(.5f, .25f, 0f);
                         break;
-                    case RCC_CarControllerV3.IndicatorsOn.Right:
+                    case CargoTruck_CC_CarControllerV3.IndicatorsOn.Right:
                         leftIndicator.color = new Color(.5f, .25f, 0f);
                         rightIndicator.color = new Color(1f, .5f, 0f);
                         break;
-                    case RCC_CarControllerV3.IndicatorsOn.All:
+                    case CargoTruck_CC_CarControllerV3.IndicatorsOn.All:
                         leftIndicator.color = new Color(1f, .5f, 0f);
                         rightIndicator.color = new Color(1f, .5f, 0f);
                         break;
-                    case RCC_CarControllerV3.IndicatorsOn.Off:
+                    case CargoTruck_CC_CarControllerV3.IndicatorsOn.Off:
                         leftIndicator.color = new Color(.5f, .25f, 0f);
                         rightIndicator.color = new Color(.5f, .25f, 0f);
                         break;

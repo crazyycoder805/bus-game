@@ -16,7 +16,7 @@ using System.Collections;
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/Misc/RCC Visual Axle (Suspension Distance Based)")]
 public class CargoTruck_CC_SuspensionArm : MonoBehaviour {
 
-    public RCC_WheelCollider wheelcollider;
+    public CargoTruck_CC_WheelCollider wheelcollider;
 
     public SuspensionType suspensionType;
     public enum SuspensionType { Position, Rotation }

@@ -11,7 +11,7 @@ public class CargoTruck_CC_LOD : MonoBehaviour {
     public class LODGroup {
 
         public List<GameObject> group = new List<GameObject>();
-        internal RCC_WheelCollider[] wheelColliderGroup;
+        internal CargoTruck_CC_WheelCollider[] wheelColliderGroup;
         public bool active = false;
 
         public void Add(GameObject add) {
@@ -90,17 +90,17 @@ public class CargoTruck_CC_LOD : MonoBehaviour {
         if (transform.Find("All Audio Sources"))
             lodGroup[1].Add(transform.Find("All Audio Sources").gameObject);
 
-        RCC_Light[] allLights = GetComponentsInChildren<RCC_Light>();
+        CargoTruck_CC_Light[] allLights = GetComponentsInChildren<CargoTruck_CC_Light>();
 
-        foreach (RCC_Light item in allLights)
+        foreach (CargoTruck_CC_Light item in allLights)
             lodGroup[0].Add(item.gameObject);
 
-        RCC_HoodCamera hoodCamera = GetComponentInChildren<RCC_HoodCamera>();
+        CargoTruck_CC_HoodCamera hoodCamera = GetComponentInChildren<CargoTruck_CC_HoodCamera>();
 
         if (hoodCamera)
             lodGroup[1].Add(hoodCamera.gameObject);
 
-        RCC_WheelCamera wheelCamera = GetComponentInChildren<RCC_WheelCamera>();
+        CargoTruck_CC_WheelCamera wheelCamera = GetComponentInChildren<CargoTruck_CC_WheelCamera>();
 
         if (wheelCamera)
             lodGroup[1].Add(wheelCamera.gameObject);
@@ -110,14 +110,14 @@ public class CargoTruck_CC_LOD : MonoBehaviour {
         foreach (ParticleSystem item in allParticles)
             lodGroup[1].Add(item.gameObject);
 
-        lodGroup[0].wheelColliderGroup = GetComponentsInChildren<RCC_WheelCollider>();
+        lodGroup[0].wheelColliderGroup = GetComponentsInChildren<CargoTruck_CC_WheelCollider>();
 
     }
 
     void Update() {
 
-        if (RCC_SceneManager.Instance.activeMainCamera)
-            distanceToCamera = Vector3.Distance(transform.position, RCC_SceneManager.Instance.activeMainCamera.transform.position);
+        if (CargoTruck_CC_SceneManager.Instance.activeMainCamera)
+            distanceToCamera = Vector3.Distance(transform.position, CargoTruck_CC_SceneManager.Instance.activeMainCamera.transform.position);
 
         if (distanceToCamera < 25f * lodBias)
             level = 2;

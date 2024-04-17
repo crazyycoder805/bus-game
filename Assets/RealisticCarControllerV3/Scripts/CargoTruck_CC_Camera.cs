@@ -16,19 +16,19 @@ using UnityEngine.EventSystems;
 /// Also supports collision detection.
 /// </summary>
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/Camera/RCC Camera")]
-public class RCC_Camera : MonoBehaviour {
+public class CargoTruck_CC_Camera : MonoBehaviour {
 
     [System.Serializable]
     public class CameraTarget {
 
-        public RCC_CarControllerV3 playerVehicle;
+        public CargoTruck_CC_CarControllerV3 playerVehicle;
 
         public float speed { get { if (!playerVehicle) return 0f; return playerVehicle.speed; } }
 
         public Vector3 localVelocity { get { if (!playerVehicle) return Vector3.zero; return playerVehicle.transform.InverseTransformDirection(playerVehicle.rigid.velocity); } }
 
-        private RCC_HoodCamera _hoodCamera;
-        public RCC_HoodCamera hoodCamera {
+        private CargoTruck_CC_HoodCamera _hoodCamera;
+        public CargoTruck_CC_HoodCamera hoodCamera {
 
             get {
 
@@ -36,7 +36,7 @@ public class RCC_Camera : MonoBehaviour {
                     return null;
 
                 if (!_hoodCamera)
-                    _hoodCamera = playerVehicle.GetComponentInChildren<RCC_HoodCamera>();
+                    _hoodCamera = playerVehicle.GetComponentInChildren<CargoTruck_CC_HoodCamera>();
 
                 return _hoodCamera;
 
@@ -44,8 +44,8 @@ public class RCC_Camera : MonoBehaviour {
 
         }
 
-        private RCC_WheelCamera _wheelCamera;
-        public RCC_WheelCamera wheelCamera {
+        private CargoTruck_CC_WheelCamera _wheelCamera;
+        public CargoTruck_CC_WheelCamera wheelCamera {
 
             get {
 
@@ -53,7 +53,7 @@ public class RCC_Camera : MonoBehaviour {
                     return null;
 
                 if (!_wheelCamera)
-                    _wheelCamera = playerVehicle.GetComponentInChildren<RCC_WheelCamera>();
+                    _wheelCamera = playerVehicle.GetComponentInChildren<CargoTruck_CC_WheelCamera>();
 
                 return _wheelCamera;
 
@@ -68,7 +68,7 @@ public class RCC_Camera : MonoBehaviour {
     // Currently rendering?
     public bool isRendering = true;
 
-    public RCC_Inputs inputs;
+    public CargoTruck_CC_Inputs inputs;
 
     public Camera actualCamera;          // Camera is not attached to this main gameobject. Camera is parented to pivot gameobject. Therefore, we can apply additional position and rotation changes.
     public GameObject pivot;        // Pivot center of the camera. Used for making offsets and collision movements.
@@ -78,8 +78,8 @@ public class RCC_Camera : MonoBehaviour {
     public CameraMode cameraMode;
     private CameraMode lastCameraMode;
 
-    private RCC_FixedCamera fixedCamera { get { return RCC_FixedCamera.Instance; } }
-    private RCC_CinematicCamera cinematicCamera { get { return RCC_CinematicCamera.Instance; } }
+    private CargoTruck_CC_FixedCamera fixedCamera { get { return CargoTruck_CC_FixedCamera.Instance; } }
+    private CargoTruck_CC_CinematicCamera cinematicCamera { get { return CargoTruck_CC_CinematicCamera.Instance; } }
 
     public bool TPSLockX = true;
     public bool TPSLockY = true;
@@ -213,27 +213,27 @@ public class RCC_Camera : MonoBehaviour {
             OnBCGCameraSpawned(gameObject);
 
         // Listening player vehicle collisions for crashing effects.
-        RCC_CarControllerV3.OnRCCPlayerCollision += RCC_CarControllerV3_OnRCCPlayerCollision;
+        CargoTruck_CC_CarControllerV3.OnRCCPlayerCollision += CargoTruck_CC_CarControllerV3_OnRCCPlayerCollision;
 
         // Listening input events.
-        RCC_InputManager.OnChangeCamera += RCC_InputManager_OnChangeCamera;
-        RCC_InputManager.OnLookBack += RCC_InputManager_OnLookBack;
+        CargoTruck_CC_InputManager.OnChangeCamera += CargoTruck_CC_InputManager_OnChangeCamera;
+        CargoTruck_CC_InputManager.OnLookBack += CargoTruck_CC_InputManager_OnLookBack;
 
     }
 
-    void RCC_CarControllerV3_OnRCCPlayerCollision(RCC_CarControllerV3 RCC, Collision collision) {
+    void CargoTruck_CC_CarControllerV3_OnRCCPlayerCollision(CargoTruck_CC_CarControllerV3 RCC, Collision collision) {
 
         Collision(collision);
 
     }
 
-    private void RCC_InputManager_OnLookBack(bool state) {
+    private void CargoTruck_CC_InputManager_OnLookBack(bool state) {
 
         lookBack = state;
 
     }
 
-    private void RCC_InputManager_OnChangeCamera() {
+    private void CargoTruck_CC_InputManager_OnChangeCamera() {
 
         ChangeCamera();
 
@@ -242,7 +242,7 @@ public class RCC_Camera : MonoBehaviour {
     public void SetTarget(GameObject player) {
 
         cameraTarget = new CameraTarget {
-            playerVehicle = player.GetComponent<RCC_CarControllerV3>()
+            playerVehicle = player.GetComponent<CargoTruck_CC_CarControllerV3>()
         };
 
         if (TPSAutoFocus)
@@ -373,7 +373,7 @@ public class RCC_Camera : MonoBehaviour {
 
     private void Inputs() {
 
-        inputs = RCC_InputManager.GetInputs();
+        inputs = CargoTruck_CC_InputManager.GetInputs();
 
         orbitX += inputs.orbitX;
         orbitY -= inputs.orbitY;
@@ -872,7 +872,7 @@ public class RCC_Camera : MonoBehaviour {
     public IEnumerator AutoFocus() {
 
         float timer = 3f;
-        float bounds = RCC_GetBounds.MaxBoundsExtent(cameraTarget.playerVehicle.transform);
+        float bounds = CargoTruck_CC_GetBounds.MaxBoundsExtent(cameraTarget.playerVehicle.transform);
 
         while (timer > 0f) {
 
@@ -891,7 +891,7 @@ public class RCC_Camera : MonoBehaviour {
     public IEnumerator AutoFocus(Transform transformBounds) {
 
         float timer = 3f;
-        float bounds = RCC_GetBounds.MaxBoundsExtent(transformBounds);
+        float bounds = CargoTruck_CC_GetBounds.MaxBoundsExtent(transformBounds);
 
         while (timer > 0f) {
 
@@ -910,7 +910,7 @@ public class RCC_Camera : MonoBehaviour {
     public IEnumerator AutoFocus(Transform transformBounds1, Transform transformBounds2) {
 
         float timer = 3f;
-        float bounds = (RCC_GetBounds.MaxBoundsExtent(transformBounds1) + RCC_GetBounds.MaxBoundsExtent(transformBounds2));
+        float bounds = (CargoTruck_CC_GetBounds.MaxBoundsExtent(transformBounds1) + CargoTruck_CC_GetBounds.MaxBoundsExtent(transformBounds2));
 
         while (timer > 0f) {
 
@@ -929,7 +929,7 @@ public class RCC_Camera : MonoBehaviour {
     public IEnumerator AutoFocus(Transform transformBounds1, Transform transformBounds2, Transform transformBounds3) {
 
         float timer = 3f;
-        float bounds = (RCC_GetBounds.MaxBoundsExtent(transformBounds1) + RCC_GetBounds.MaxBoundsExtent(transformBounds2) + RCC_GetBounds.MaxBoundsExtent(transformBounds3));
+        float bounds = (CargoTruck_CC_GetBounds.MaxBoundsExtent(transformBounds1) + CargoTruck_CC_GetBounds.MaxBoundsExtent(transformBounds2) + CargoTruck_CC_GetBounds.MaxBoundsExtent(transformBounds3));
 
         while (timer > 0f) {
 
@@ -947,11 +947,11 @@ public class RCC_Camera : MonoBehaviour {
 
     void OnDisable() {
 
-        RCC_CarControllerV3.OnRCCPlayerCollision -= RCC_CarControllerV3_OnRCCPlayerCollision;
+        CargoTruck_CC_CarControllerV3.OnRCCPlayerCollision -= CargoTruck_CC_CarControllerV3_OnRCCPlayerCollision;
 
         // Listening input events.
-        RCC_InputManager.OnChangeCamera -= RCC_InputManager_OnChangeCamera;
-        RCC_InputManager.OnLookBack -= RCC_InputManager_OnLookBack;
+        CargoTruck_CC_InputManager.OnChangeCamera -= CargoTruck_CC_InputManager_OnChangeCamera;
+        CargoTruck_CC_InputManager.OnLookBack -= CargoTruck_CC_InputManager_OnLookBack;
 
     }
 

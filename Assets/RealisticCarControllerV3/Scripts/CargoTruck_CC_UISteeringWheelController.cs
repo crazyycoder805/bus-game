@@ -47,7 +47,7 @@ public class CargoTruck_CC_UISteeringWheelController : MonoBehaviour {
     void LateUpdate() {
 
         //	No need to go further if current controller is not mobile controller.
-        if (RCC_Settings.Instance.mobileController != RCC_Settings.MobileController.SteeringWheel)
+        if (CargoTruck_CC_Settings.Instance.mobileController != CargoTruck_CC_Settings.MobileController.SteeringWheel)
             return;
 
         //	Visual steering wheel controlling.
@@ -125,7 +125,7 @@ public class CargoTruck_CC_UISteeringWheelController : MonoBehaviour {
 
     private void SteeringWheelControlling() {
 
-        if (!steeringWheelCanvasGroup || !steeringWheelRect || RCC_Settings.Instance.mobileController != RCC_Settings.MobileController.SteeringWheel) {
+        if (!steeringWheelCanvasGroup || !steeringWheelRect || CargoTruck_CC_Settings.Instance.mobileController != CargoTruck_CC_Settings.MobileController.SteeringWheel) {
 
             if (steeringWheelGameObject)
                 steeringWheelGameObject.SetActive(false);

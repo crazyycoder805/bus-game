@@ -13,10 +13,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-[CustomEditor(typeof(RCC_Settings))]
-public class RCC_SettingsEditor : Editor {
+[CustomEditor(typeof(CargoTruck_CC_Settings))]
+public class CargoTruck_CC_SettingsEditor : Editor {
 
-    RCC_Settings RCCSettingsAsset;
+    CargoTruck_CC_Settings RCCSettingsAsset;
 
     Color originalGUIColor;
     Vector2 scrollPos;
@@ -33,32 +33,32 @@ public class RCC_SettingsEditor : Editor {
 
     void OnEnable() {
 
-        foldGeneralSettings = RCC_Settings.Instance.foldGeneralSettings;
-        foldBehaviorSettings = RCC_Settings.Instance.foldBehaviorSettings;
-        foldControllerSettings = RCC_Settings.Instance.foldControllerSettings;
-        foldUISettings = RCC_Settings.Instance.foldUISettings;
-        foldWheelPhysics = RCC_Settings.Instance.foldWheelPhysics;
-        foldSFX = RCC_Settings.Instance.foldSFX;
-        foldOptimization = RCC_Settings.Instance.foldOptimization;
-        foldTagsAndLayers = RCC_Settings.Instance.foldTagsAndLayers;
+        foldGeneralSettings = CargoTruck_CC_Settings.Instance.foldGeneralSettings;
+        foldBehaviorSettings = CargoTruck_CC_Settings.Instance.foldBehaviorSettings;
+        foldControllerSettings = CargoTruck_CC_Settings.Instance.foldControllerSettings;
+        foldUISettings = CargoTruck_CC_Settings.Instance.foldUISettings;
+        foldWheelPhysics = CargoTruck_CC_Settings.Instance.foldWheelPhysics;
+        foldSFX = CargoTruck_CC_Settings.Instance.foldSFX;
+        foldOptimization = CargoTruck_CC_Settings.Instance.foldOptimization;
+        foldTagsAndLayers = CargoTruck_CC_Settings.Instance.foldTagsAndLayers;
 
     }
 
     void OnDestroy() {
 
-        RCC_Settings.Instance.foldBehaviorSettings = foldBehaviorSettings;
-        RCC_Settings.Instance.foldControllerSettings = foldControllerSettings;
-        RCC_Settings.Instance.foldUISettings = foldUISettings;
-        RCC_Settings.Instance.foldWheelPhysics = foldWheelPhysics;
-        RCC_Settings.Instance.foldSFX = foldSFX;
-        RCC_Settings.Instance.foldOptimization = foldOptimization;
-        RCC_Settings.Instance.foldTagsAndLayers = foldTagsAndLayers;
+        CargoTruck_CC_Settings.Instance.foldBehaviorSettings = foldBehaviorSettings;
+        CargoTruck_CC_Settings.Instance.foldControllerSettings = foldControllerSettings;
+        CargoTruck_CC_Settings.Instance.foldUISettings = foldUISettings;
+        CargoTruck_CC_Settings.Instance.foldWheelPhysics = foldWheelPhysics;
+        CargoTruck_CC_Settings.Instance.foldSFX = foldSFX;
+        CargoTruck_CC_Settings.Instance.foldOptimization = foldOptimization;
+        CargoTruck_CC_Settings.Instance.foldTagsAndLayers = foldTagsAndLayers;
 
     }
 
     public override void OnInspectorGUI() {
 
-        RCCSettingsAsset = (RCC_Settings)target;
+        RCCSettingsAsset = (CargoTruck_CC_Settings)target;
         serializedObject.Update();
 
         originalGUIColor = GUI.color;
@@ -95,7 +95,7 @@ public class RCC_SettingsEditor : Editor {
             if (RCCSettingsAsset.overrideFPS)
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("maxFPS"), new GUIContent("Maximum FPS"));
 
-            EditorGUILayout.HelpBox("You can find all references to any mode. Open up ''RCC_Settings.cs'' and right click to any mode. Hit ''Find references'' to find all modifications.", MessageType.Info);
+            EditorGUILayout.HelpBox("You can find all references to any mode. Open up ''CargoTruck_CC_Settings.cs'' and right click to any mode. Hit ''Find references'' to find all modifications.", MessageType.Info);
 
             EditorGUILayout.PropertyField(serializedObject.FindProperty("useFixedWheelColliders"), new GUIContent("Use Fixed WheelColliders", "Improves stability by increasing mass of the WheelColliders."));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("lockAndUnlockCursor"), new GUIContent("Locks Cursor", "Locks Cursor."));
@@ -217,15 +217,15 @@ public class RCC_SettingsEditor : Editor {
 
         if (foldWheelPhysics) {
 
-            if (RCC_GroundMaterials.Instance.frictions != null && RCC_GroundMaterials.Instance.frictions.Length > 0) {
+            if (CargoTruck_CC_GroundMaterials.Instance.frictions != null && CargoTruck_CC_GroundMaterials.Instance.frictions.Length > 0) {
 
                 EditorGUILayout.BeginVertical(GUI.skin.box);
                 GUILayout.Label("Ground Physic Materials", EditorStyles.boldLabel);
 
-                physicMaterials = new PhysicMaterial[RCC_GroundMaterials.Instance.frictions.Length];
+                physicMaterials = new PhysicMaterial[CargoTruck_CC_GroundMaterials.Instance.frictions.Length];
 
                 for (int i = 0; i < physicMaterials.Length; i++) {
-                    physicMaterials[i] = RCC_GroundMaterials.Instance.frictions[i].groundMaterial;
+                    physicMaterials[i] = CargoTruck_CC_GroundMaterials.Instance.frictions[i].groundMaterial;
                     EditorGUILayout.BeginVertical(GUI.skin.box);
                     EditorGUILayout.ObjectField("Ground Physic Materials " + i, physicMaterials[i], typeof(PhysicMaterial), false);
                     EditorGUILayout.EndVertical();
@@ -238,7 +238,7 @@ public class RCC_SettingsEditor : Editor {
             GUI.color = new Color(.5f, 1f, 1f, 1f);
 
             if (GUILayout.Button("Configure Ground Physic Materials")) {
-                Selection.activeObject = Resources.Load("RCC Assets/RCC_GroundMaterials") as RCC_GroundMaterials;
+                Selection.activeObject = Resources.Load("RCC Assets/CargoTruck_CC_GroundMaterials") as CargoTruck_CC_GroundMaterials;
             }
 
             GUI.color = originalGUIColor;
@@ -261,7 +261,7 @@ public class RCC_SettingsEditor : Editor {
             GUI.color = new Color(.5f, 1f, 1f, 1f);
 
             if (GUILayout.Button("Configure Wheel Slip Sounds"))
-                Selection.activeObject = Resources.Load("RCC Assets/RCC_GroundMaterials") as RCC_GroundMaterials;
+                Selection.activeObject = Resources.Load("RCC Assets/CargoTruck_CC_GroundMaterials") as CargoTruck_CC_GroundMaterials;
 
             GUI.color = originalGUIColor;
             EditorGUILayout.Space();
@@ -406,7 +406,7 @@ public class RCC_SettingsEditor : Editor {
 
         GUI.color = originalGUIColor;
 
-        EditorGUILayout.LabelField("Realistic Car Controller " + RCC_Version.version + " \nBoneCracker Games", EditorStyles.centeredGreyMiniLabel, GUILayout.MaxHeight(50f));
+        EditorGUILayout.LabelField("Realistic Car Controller " + CargoTruck_CC_Version.version + " \nBoneCracker Games", EditorStyles.centeredGreyMiniLabel, GUILayout.MaxHeight(50f));
 
         EditorGUILayout.LabelField("Created by Buğra Özdoğanlar", EditorStyles.centeredGreyMiniLabel, GUILayout.MaxHeight(50f));
 

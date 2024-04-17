@@ -16,9 +16,9 @@ using UnityEngine.UI;
 /// Receiving inputs from active vehicle on your scene, and feeds visual dashboard needles.
 /// </summary>
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/Misc/RCC Visual Dashboard Objects")]
-public class RCC_DashboardObjects : MonoBehaviour {
+public class CargoTruck_CC_DashboardObjects : MonoBehaviour {
 
-    private RCC_CarControllerV3 carController;
+    private CargoTruck_CC_CarControllerV3 carController;
 
     [System.Serializable]
     public class RPMDial {
@@ -233,7 +233,7 @@ public class RCC_DashboardObjects : MonoBehaviour {
 
         public void Init() {
 
-            if (RCC_Settings.Instance.useLightsAsVertexLights)
+            if (CargoTruck_CC_Settings.Instance.useLightsAsVertexLights)
                 renderMode = LightRenderMode.ForceVertex;
             else
                 renderMode = LightRenderMode.ForcePixel;
@@ -268,7 +268,7 @@ public class RCC_DashboardObjects : MonoBehaviour {
 
     void Awake() {
 
-        carController = GetComponentInParent<RCC_CarControllerV3>();
+        carController = GetComponentInParent<CargoTruck_CC_CarControllerV3>();
 
         rPMDial.Init();
         speedDial.Init();

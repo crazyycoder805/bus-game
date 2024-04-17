@@ -17,7 +17,7 @@ using UnityEngine.UI;
 /// </summary>
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/UI/RCC UI Info Displayer")]
 [RequireComponent(typeof(Text))]
-public class RCC_InfoLabel : RCC_Singleton<RCC_InfoLabel> {
+public class CargoTruck_CC_InfoLabel : CargoTruck_CC_Singleton<CargoTruck_CC_InfoLabel> {
 
     private Text text;
     private float timer = 1f;

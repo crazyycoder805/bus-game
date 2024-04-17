@@ -15,32 +15,32 @@ using UnityEngine.EventSystems;
 ///<summary>
 /// Main Customization Class For RCC.
 ///</summary>
-public class RCC_Customization : MonoBehaviour {
+public class CargoTruck_CC_Customization : MonoBehaviour {
 
     /// <summary>
     /// Set Customization Mode. This will enable / disable controlling the vehicle, and enable / disable orbit camera mode.
     /// </summary>
-    public static void SetCustomizationMode(RCC_CarControllerV3 vehicle, bool state) {
+    public static void SetCustomizationMode(CargoTruck_CC_CarControllerV3 vehicle, bool state) {
 
         if (!vehicle) {
 
-            Debug.LogError("Player vehicle is not selected for customization! Use RCC_Customization.SetCustomizationMode(playerVehicle, true/false); for enabling / disabling customization mode for player vehicle.");
+            Debug.LogError("Player vehicle is not selected for customization! Use CargoTruck_CC_Customization.SetCustomizationMode(playerVehicle, true/false); for enabling / disabling customization mode for player vehicle.");
             return;
 
         }
 
-        RCC_Camera cam = RCC_SceneManager.Instance.activePlayerCamera;
-        RCC_UIDashboardDisplay UI = RCC_SceneManager.Instance.activePlayerCanvas;
+        CargoTruck_CC_Camera cam = CargoTruck_CC_SceneManager.Instance.activePlayerCamera;
+        CargoTruck_CC_UIDashboardDisplay UI = CargoTruck_CC_SceneManager.Instance.activePlayerCanvas;
 
         if (state) {
 
             vehicle.SetCanControl(false);
 
             if (cam)
-                cam.ChangeCamera(RCC_Camera.CameraMode.TPS);
+                cam.ChangeCamera(CargoTruck_CC_Camera.CameraMode.TPS);
 
             if (UI)
-                UI.SetDisplayType(RCC_UIDashboardDisplay.DisplayType.Customization);
+                UI.SetDisplayType(CargoTruck_CC_UIDashboardDisplay.DisplayType.Customization);
 
         } else {
 
@@ -49,10 +49,10 @@ public class RCC_Customization : MonoBehaviour {
             vehicle.SetCanControl(true);
 
             if (cam)
-                cam.ChangeCamera(RCC_Camera.CameraMode.TPS);
+                cam.ChangeCamera(CargoTruck_CC_Camera.CameraMode.TPS);
 
             if (UI)
-                UI.SetDisplayType(RCC_UIDashboardDisplay.DisplayType.Full);
+                UI.SetDisplayType(CargoTruck_CC_UIDashboardDisplay.DisplayType.Full);
 
         }
 
@@ -61,7 +61,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     ///	 Updates RCC while vehicle is inactive.
     /// </summary>
-    public static void OverrideRCC(RCC_CarControllerV3 vehicle) {
+    public static void OverrideRCC(CargoTruck_CC_CarControllerV3 vehicle) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -71,7 +71,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     ///	 Enable / Disable Smoke Particles. You can use it for previewing current wheel smokes.
     /// </summary>
-    public static void SetSmokeParticle(RCC_CarControllerV3 vehicle, bool state) {
+    public static void SetSmokeParticle(CargoTruck_CC_CarControllerV3 vehicle, bool state) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -83,14 +83,14 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Set Smoke Color.
     /// </summary>
-    public static void SetSmokeColor(RCC_CarControllerV3 vehicle, int indexOfGroundMaterial, Color color) {
+    public static void SetSmokeColor(CargoTruck_CC_CarControllerV3 vehicle, int indexOfGroundMaterial, Color color) {
 
         if (!CheckVehicle(vehicle))
             return;
 
-        RCC_WheelCollider[] wheels = vehicle.GetComponentsInChildren<RCC_WheelCollider>();
+        CargoTruck_CC_WheelCollider[] wheels = vehicle.GetComponentsInChildren<CargoTruck_CC_WheelCollider>();
 
-        foreach (RCC_WheelCollider wheel in wheels) {
+        foreach (CargoTruck_CC_WheelCollider wheel in wheels) {
 
             for (int i = 0; i < wheel.allWheelParticles.Count; i++) {
 
@@ -108,17 +108,17 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Set Headlights Color.
     /// </summary>
-    public static void SetHeadlightsColor(RCC_CarControllerV3 vehicle, Color color) {
+    public static void SetHeadlightsColor(CargoTruck_CC_CarControllerV3 vehicle, Color color) {
 
         if (!CheckVehicle(vehicle))
             return;
 
         vehicle.lowBeamHeadLightsOn = true;
-        RCC_Light[] lights = vehicle.GetComponentsInChildren<RCC_Light>();
+        CargoTruck_CC_Light[] lights = vehicle.GetComponentsInChildren<CargoTruck_CC_Light>();
 
-        foreach (RCC_Light l in lights) {
+        foreach (CargoTruck_CC_Light l in lights) {
 
-            if (l.lightType == RCC_Light.LightType.HeadLight || l.lightType == RCC_Light.LightType.HighBeamHeadLight || l.lightType == RCC_Light.LightType.ParkLight)
+            if (l.lightType == CargoTruck_CC_Light.LightType.HeadLight || l.lightType == CargoTruck_CC_Light.LightType.HighBeamHeadLight || l.lightType == CargoTruck_CC_Light.LightType.ParkLight)
                 l.GetComponent<Light>().color = color;
 
         }
@@ -128,14 +128,14 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Enable / Disable Exhaust Flame Particles.
     /// </summary>
-    public static void SetExhaustFlame(RCC_CarControllerV3 vehicle, bool state) {
+    public static void SetExhaustFlame(CargoTruck_CC_CarControllerV3 vehicle, bool state) {
 
         if (!CheckVehicle(vehicle))
             return;
 
-        RCC_Exhaust[] exhausts = vehicle.GetComponentsInChildren<RCC_Exhaust>();
+        CargoTruck_CC_Exhaust[] exhausts = vehicle.GetComponentsInChildren<CargoTruck_CC_Exhaust>();
 
-        foreach (RCC_Exhaust exhaust in exhausts)
+        foreach (CargoTruck_CC_Exhaust exhaust in exhausts)
             exhaust.previewFlames = state;
 
     }
@@ -143,14 +143,14 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Set Front Wheel Cambers.
     /// </summary>
-    public static void SetFrontCambers(RCC_CarControllerV3 vehicle, float camberAngle) {
+    public static void SetFrontCambers(CargoTruck_CC_CarControllerV3 vehicle, float camberAngle) {
 
         if (!CheckVehicle(vehicle))
             return;
 
-        RCC_WheelCollider[] wc = vehicle.GetComponentsInChildren<RCC_WheelCollider>();
+        CargoTruck_CC_WheelCollider[] wc = vehicle.GetComponentsInChildren<CargoTruck_CC_WheelCollider>();
 
-        foreach (RCC_WheelCollider w in wc) {
+        foreach (CargoTruck_CC_WheelCollider w in wc) {
 
             if (w == vehicle.FrontLeftWheelCollider || w == vehicle.FrontRightWheelCollider)
                 w.camber = camberAngle;
@@ -164,14 +164,14 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Set Rear Wheel Cambers.
     /// </summary>
-    public static void SetRearCambers(RCC_CarControllerV3 vehicle, float camberAngle) {
+    public static void SetRearCambers(CargoTruck_CC_CarControllerV3 vehicle, float camberAngle) {
 
         if (!CheckVehicle(vehicle))
             return;
 
-        RCC_WheelCollider[] wc = vehicle.GetComponentsInChildren<RCC_WheelCollider>();
+        CargoTruck_CC_WheelCollider[] wc = vehicle.GetComponentsInChildren<CargoTruck_CC_WheelCollider>();
 
-        foreach (RCC_WheelCollider w in wc) {
+        foreach (CargoTruck_CC_WheelCollider w in wc) {
 
             if (w != vehicle.FrontLeftWheelCollider && w != vehicle.FrontRightWheelCollider)
                 w.camber = camberAngle;
@@ -185,7 +185,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Change Wheel Models. You can find your wheel models array in Tools --> BCG --> RCC --> Configure Changable Wheels.
     /// </summary>
-    public static void ChangeWheels(RCC_CarControllerV3 vehicle, GameObject wheel, bool applyRadius) {
+    public static void ChangeWheels(CargoTruck_CC_CarControllerV3 vehicle, GameObject wheel, bool applyRadius) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -204,7 +204,7 @@ public class RCC_Customization : MonoBehaviour {
                 newWheel.transform.localScale = new Vector3(newWheel.transform.localScale.x * -1f, newWheel.transform.localScale.y, newWheel.transform.localScale.z);
 
             if (applyRadius)
-                vehicle.allWheelColliders[i].wheelCollider.radius = RCC_GetBounds.MaxBoundsExtent(wheel.transform);
+                vehicle.allWheelColliders[i].wheelCollider.radius = CargoTruck_CC_GetBounds.MaxBoundsExtent(wheel.transform);
 
         }
 
@@ -215,7 +215,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Set Front Suspension targetPositions. It changes targetPosition of the front WheelColliders.
     /// </summary>
-    public static void SetFrontSuspensionsTargetPos(RCC_CarControllerV3 vehicle, float targetPosition) {
+    public static void SetFrontSuspensionsTargetPos(CargoTruck_CC_CarControllerV3 vehicle, float targetPosition) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -239,7 +239,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Set Rear Suspension targetPositions. It changes targetPosition of the rear WheelColliders.
     /// </summary>
-    public static void SetRearSuspensionsTargetPos(RCC_CarControllerV3 vehicle, float targetPosition) {
+    public static void SetRearSuspensionsTargetPos(CargoTruck_CC_CarControllerV3 vehicle, float targetPosition) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -263,7 +263,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Set All Suspension targetPositions. It changes targetPosition of the all WheelColliders.
     /// </summary>
-    public static void SetAllSuspensionsTargetPos(RCC_CarControllerV3 vehicle, float targetPosition) {
+    public static void SetAllSuspensionsTargetPos(CargoTruck_CC_CarControllerV3 vehicle, float targetPosition) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -297,7 +297,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Set Front Suspension Distances.
     /// </summary>
-    public static void SetFrontSuspensionsDistances(RCC_CarControllerV3 vehicle, float distance) {
+    public static void SetFrontSuspensionsDistances(CargoTruck_CC_CarControllerV3 vehicle, float distance) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -315,7 +315,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Set Rear Suspension Distances.
     /// </summary>
-    public static void SetRearSuspensionsDistances(RCC_CarControllerV3 vehicle, float distance) {
+    public static void SetRearSuspensionsDistances(CargoTruck_CC_CarControllerV3 vehicle, float distance) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -328,7 +328,7 @@ public class RCC_Customization : MonoBehaviour {
 
         if (vehicle.ExtraRearWheelsCollider != null && vehicle.ExtraRearWheelsCollider.Length > 0) {
 
-            foreach (RCC_WheelCollider wc in vehicle.ExtraRearWheelsCollider)
+            foreach (CargoTruck_CC_WheelCollider wc in vehicle.ExtraRearWheelsCollider)
                 wc.wheelCollider.suspensionDistance = distance;
 
         }
@@ -340,7 +340,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Set Drivetrain Mode.
     /// </summary>
-    public static void SetDrivetrainMode(RCC_CarControllerV3 vehicle, RCC_CarControllerV3.WheelType mode) {
+    public static void SetDrivetrainMode(CargoTruck_CC_CarControllerV3 vehicle, CargoTruck_CC_CarControllerV3.WheelType mode) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -354,7 +354,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Set Gear Shifting Threshold. Automatic gear will shift up at earlier rpm on lower values. Automatic gear will shift up at later rpm on higher values. 
     /// </summary>
-    public static void SetGearShiftingThreshold(RCC_CarControllerV3 vehicle, float targetValue) {
+    public static void SetGearShiftingThreshold(CargoTruck_CC_CarControllerV3 vehicle, float targetValue) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -368,7 +368,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Set Clutch Threshold. Automatic gear will shift up at earlier rpm on lower values. Automatic gear will shift up at later rpm on higher values. 
     /// </summary>
-    public static void SetClutchThreshold(RCC_CarControllerV3 vehicle, float targetValue) {
+    public static void SetClutchThreshold(CargoTruck_CC_CarControllerV3 vehicle, float targetValue) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -382,7 +382,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Enable / Disable Counter Steering while vehicle is drifting. Useful for avoid spinning.
     /// </summary>
-    public static void SetCounterSteering(RCC_CarControllerV3 vehicle, bool state) {
+    public static void SetCounterSteering(CargoTruck_CC_CarControllerV3 vehicle, bool state) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -396,7 +396,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Enable / Disable Steering Limiter while vehicle is drifting. Useful for avoid spinning.
     /// </summary>
-    public static void SetSteeringLimit(RCC_CarControllerV3 vehicle, bool state) {
+    public static void SetSteeringLimit(CargoTruck_CC_CarControllerV3 vehicle, bool state) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -410,7 +410,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Enable / Disable NOS.
     /// </summary>
-    public static void SetNOS(RCC_CarControllerV3 vehicle, bool state) {
+    public static void SetNOS(CargoTruck_CC_CarControllerV3 vehicle, bool state) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -424,7 +424,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Enable / Disable Turbo.
     /// </summary>
-    public static void SetTurbo(RCC_CarControllerV3 vehicle, bool state) {
+    public static void SetTurbo(CargoTruck_CC_CarControllerV3 vehicle, bool state) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -438,7 +438,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Enable / Disable Exhaust Flames.
     /// </summary>
-    public static void SetUseExhaustFlame(RCC_CarControllerV3 vehicle, bool state) {
+    public static void SetUseExhaustFlame(CargoTruck_CC_CarControllerV3 vehicle, bool state) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -452,7 +452,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Enable / Disable Rev Limiter.
     /// </summary>
-    public static void SetRevLimiter(RCC_CarControllerV3 vehicle, bool state) {
+    public static void SetRevLimiter(CargoTruck_CC_CarControllerV3 vehicle, bool state) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -466,7 +466,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Set Front Suspension Spring Force.
     /// </summary>
-    public static void SetFrontSuspensionsSpringForce(RCC_CarControllerV3 vehicle, float targetValue) {
+    public static void SetFrontSuspensionsSpringForce(CargoTruck_CC_CarControllerV3 vehicle, float targetValue) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -483,7 +483,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Set Rear Suspension Spring Force.
     /// </summary>
-    public static void SetRearSuspensionsSpringForce(RCC_CarControllerV3 vehicle, float targetValue) {
+    public static void SetRearSuspensionsSpringForce(CargoTruck_CC_CarControllerV3 vehicle, float targetValue) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -500,7 +500,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Set Front Suspension Spring Damper.
     /// </summary>
-    public static void SetFrontSuspensionsSpringDamper(RCC_CarControllerV3 vehicle, float targetValue) {
+    public static void SetFrontSuspensionsSpringDamper(CargoTruck_CC_CarControllerV3 vehicle, float targetValue) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -517,7 +517,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Set Rear Suspension Spring Damper.
     /// </summary>
-    public static void SetRearSuspensionsSpringDamper(RCC_CarControllerV3 vehicle, float targetValue) {
+    public static void SetRearSuspensionsSpringDamper(CargoTruck_CC_CarControllerV3 vehicle, float targetValue) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -534,7 +534,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Set Maximum Speed of the vehicle.
     /// </summary>
-    public static void SetMaximumSpeed(RCC_CarControllerV3 vehicle, float targetValue) {
+    public static void SetMaximumSpeed(CargoTruck_CC_CarControllerV3 vehicle, float targetValue) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -548,7 +548,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Set Maximum Engine Torque of the vehicle.
     /// </summary>
-    public static void SetMaximumTorque(RCC_CarControllerV3 vehicle, float targetValue) {
+    public static void SetMaximumTorque(CargoTruck_CC_CarControllerV3 vehicle, float targetValue) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -562,7 +562,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Set Maximum Brake of the vehicle.
     /// </summary>
-    public static void SetMaximumBrake(RCC_CarControllerV3 vehicle, float targetValue) {
+    public static void SetMaximumBrake(CargoTruck_CC_CarControllerV3 vehicle, float targetValue) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -576,7 +576,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Repair vehicle.
     /// </summary>
-    public static void Repair(RCC_CarControllerV3 vehicle) {
+    public static void Repair(CargoTruck_CC_CarControllerV3 vehicle) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -588,7 +588,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Enable / Disable ESP.
     /// </summary>
-    public static void SetESP(RCC_CarControllerV3 vehicle, bool state) {
+    public static void SetESP(CargoTruck_CC_CarControllerV3 vehicle, bool state) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -600,7 +600,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Enable / Disable ABS.
     /// </summary>
-    public static void SetABS(RCC_CarControllerV3 vehicle, bool state) {
+    public static void SetABS(CargoTruck_CC_CarControllerV3 vehicle, bool state) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -612,7 +612,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Enable / Disable TCS.
     /// </summary>
-    public static void SetTCS(RCC_CarControllerV3 vehicle, bool state) {
+    public static void SetTCS(CargoTruck_CC_CarControllerV3 vehicle, bool state) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -624,7 +624,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Enable / Disable Steering Helper.
     /// </summary>
-    public static void SetSH(RCC_CarControllerV3 vehicle, bool state) {
+    public static void SetSH(CargoTruck_CC_CarControllerV3 vehicle, bool state) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -636,7 +636,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Set Steering Helper strength.
     /// </summary>
-    public static void SetSHStrength(RCC_CarControllerV3 vehicle, float value) {
+    public static void SetSHStrength(CargoTruck_CC_CarControllerV3 vehicle, float value) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -652,14 +652,14 @@ public class RCC_Customization : MonoBehaviour {
     /// </summary>
     public static void SetTransmission(bool automatic) {
 
-        RCC_Settings.Instance.useAutomaticGear = automatic;
+        CargoTruck_CC_Settings.Instance.useAutomaticGear = automatic;
 
     }
 
     /// <summary>
     /// Save all stats with PlayerPrefs.
     /// </summary>
-    public static void SaveStats(RCC_CarControllerV3 vehicle) {
+    public static void SaveStats(CargoTruck_CC_CarControllerV3 vehicle) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -685,13 +685,13 @@ public class RCC_Customization : MonoBehaviour {
         PlayerPrefs.SetFloat(vehicle.transform.name + "_GearShiftingThreshold", vehicle.gearShiftingThreshold);
         PlayerPrefs.SetFloat(vehicle.transform.name + "_ClutchingThreshold", vehicle.clutchInertia);
 
-        RCC_PlayerPrefsX.SetBool(vehicle.transform.name + "_CounterSteering", vehicle.useCounterSteering);
+        CargoTruck_CC_PlayerPrefsX.SetBool(vehicle.transform.name + "_CounterSteering", vehicle.useCounterSteering);
 
-        foreach (RCC_Light _light in vehicle.GetComponentsInChildren<RCC_Light>()) {
+        foreach (CargoTruck_CC_Light _light in vehicle.GetComponentsInChildren<CargoTruck_CC_Light>()) {
 
-            if (_light.lightType == RCC_Light.LightType.HeadLight) {
+            if (_light.lightType == CargoTruck_CC_Light.LightType.HeadLight) {
 
-                RCC_PlayerPrefsX.SetColor(vehicle.transform.name + "_HeadlightsColor", _light.GetComponentInChildren<Light>().color);
+                CargoTruck_CC_PlayerPrefsX.SetColor(vehicle.transform.name + "_HeadlightsColor", _light.GetComponentInChildren<Light>().color);
                 break;
 
             }
@@ -701,24 +701,24 @@ public class RCC_Customization : MonoBehaviour {
         ParticleSystem ps = vehicle.RearLeftWheelCollider.allWheelParticles[0];
         ParticleSystem.MainModule psmain = ps.main;
 
-        RCC_PlayerPrefsX.SetColor(vehicle.transform.name + "_WheelsSmokeColor", psmain.startColor.color);
+        CargoTruck_CC_PlayerPrefsX.SetColor(vehicle.transform.name + "_WheelsSmokeColor", psmain.startColor.color);
 
-        RCC_PlayerPrefsX.SetBool(vehicle.transform.name + "_ABS", vehicle.ABS);
-        RCC_PlayerPrefsX.SetBool(vehicle.transform.name + "_ESP", vehicle.ESP);
-        RCC_PlayerPrefsX.SetBool(vehicle.transform.name + "_TCS", vehicle.TCS);
-        RCC_PlayerPrefsX.SetBool(vehicle.transform.name + "_SH", vehicle.steeringHelper);
+        CargoTruck_CC_PlayerPrefsX.SetBool(vehicle.transform.name + "_ABS", vehicle.ABS);
+        CargoTruck_CC_PlayerPrefsX.SetBool(vehicle.transform.name + "_ESP", vehicle.ESP);
+        CargoTruck_CC_PlayerPrefsX.SetBool(vehicle.transform.name + "_TCS", vehicle.TCS);
+        CargoTruck_CC_PlayerPrefsX.SetBool(vehicle.transform.name + "_SH", vehicle.steeringHelper);
 
-        RCC_PlayerPrefsX.SetBool(vehicle.transform.name + "NOS", vehicle.useNOS);
-        RCC_PlayerPrefsX.SetBool(vehicle.transform.name + "Turbo", vehicle.useTurbo);
-        RCC_PlayerPrefsX.SetBool(vehicle.transform.name + "ExhaustFlame", vehicle.useExhaustFlame);
-        RCC_PlayerPrefsX.SetBool(vehicle.transform.name + "RevLimiter", vehicle.useRevLimiter);
+        CargoTruck_CC_PlayerPrefsX.SetBool(vehicle.transform.name + "NOS", vehicle.useNOS);
+        CargoTruck_CC_PlayerPrefsX.SetBool(vehicle.transform.name + "Turbo", vehicle.useTurbo);
+        CargoTruck_CC_PlayerPrefsX.SetBool(vehicle.transform.name + "ExhaustFlame", vehicle.useExhaustFlame);
+        CargoTruck_CC_PlayerPrefsX.SetBool(vehicle.transform.name + "RevLimiter", vehicle.useRevLimiter);
 
     }
 
     /// <summary>
     /// Load all stats with PlayerPrefs.
     /// </summary>
-    public static void LoadStats(RCC_CarControllerV3 vehicle) {
+    public static void LoadStats(CargoTruck_CC_CarControllerV3 vehicle) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -744,15 +744,15 @@ public class RCC_Customization : MonoBehaviour {
         switch (drvtrn) {
 
             case "FWD":
-                vehicle.wheelTypeChoise = RCC_CarControllerV3.WheelType.FWD;
+                vehicle.wheelTypeChoise = CargoTruck_CC_CarControllerV3.WheelType.FWD;
                 break;
 
             case "RWD":
-                vehicle.wheelTypeChoise = RCC_CarControllerV3.WheelType.RWD;
+                vehicle.wheelTypeChoise = CargoTruck_CC_CarControllerV3.WheelType.RWD;
                 break;
 
             case "AWD":
-                vehicle.wheelTypeChoise = RCC_CarControllerV3.WheelType.AWD;
+                vehicle.wheelTypeChoise = CargoTruck_CC_CarControllerV3.WheelType.AWD;
                 break;
 
         }
@@ -760,23 +760,23 @@ public class RCC_Customization : MonoBehaviour {
         SetGearShiftingThreshold(vehicle, PlayerPrefs.GetFloat(vehicle.transform.name + "_GearShiftingThreshold", vehicle.gearShiftingThreshold));
         SetClutchThreshold(vehicle, PlayerPrefs.GetFloat(vehicle.transform.name + "_ClutchingThreshold", vehicle.clutchInertia));
 
-        SetCounterSteering(vehicle, RCC_PlayerPrefsX.GetBool(vehicle.transform.name + "_CounterSteering", vehicle.useCounterSteering));
+        SetCounterSteering(vehicle, CargoTruck_CC_PlayerPrefsX.GetBool(vehicle.transform.name + "_CounterSteering", vehicle.useCounterSteering));
 
-        SetABS(vehicle, RCC_PlayerPrefsX.GetBool(vehicle.transform.name + "_ABS", vehicle.ABS));
-        SetESP(vehicle, RCC_PlayerPrefsX.GetBool(vehicle.transform.name + "_ESP", vehicle.ESP));
-        SetTCS(vehicle, RCC_PlayerPrefsX.GetBool(vehicle.transform.name + "_TCS", vehicle.TCS));
-        SetSH(vehicle, RCC_PlayerPrefsX.GetBool(vehicle.transform.name + "_SH", vehicle.steeringHelper));
+        SetABS(vehicle, CargoTruck_CC_PlayerPrefsX.GetBool(vehicle.transform.name + "_ABS", vehicle.ABS));
+        SetESP(vehicle, CargoTruck_CC_PlayerPrefsX.GetBool(vehicle.transform.name + "_ESP", vehicle.ESP));
+        SetTCS(vehicle, CargoTruck_CC_PlayerPrefsX.GetBool(vehicle.transform.name + "_TCS", vehicle.TCS));
+        SetSH(vehicle, CargoTruck_CC_PlayerPrefsX.GetBool(vehicle.transform.name + "_SH", vehicle.steeringHelper));
 
-        SetNOS(vehicle, RCC_PlayerPrefsX.GetBool(vehicle.transform.name + "NOS", vehicle.useNOS));
-        SetTurbo(vehicle, RCC_PlayerPrefsX.GetBool(vehicle.transform.name + "Turbo", vehicle.useTurbo));
-        SetUseExhaustFlame(vehicle, RCC_PlayerPrefsX.GetBool(vehicle.transform.name + "ExhaustFlame", vehicle.useExhaustFlame));
-        SetRevLimiter(vehicle, RCC_PlayerPrefsX.GetBool(vehicle.transform.name + "RevLimiter", vehicle.useRevLimiter));
+        SetNOS(vehicle, CargoTruck_CC_PlayerPrefsX.GetBool(vehicle.transform.name + "NOS", vehicle.useNOS));
+        SetTurbo(vehicle, CargoTruck_CC_PlayerPrefsX.GetBool(vehicle.transform.name + "Turbo", vehicle.useTurbo));
+        SetUseExhaustFlame(vehicle, CargoTruck_CC_PlayerPrefsX.GetBool(vehicle.transform.name + "ExhaustFlame", vehicle.useExhaustFlame));
+        SetRevLimiter(vehicle, CargoTruck_CC_PlayerPrefsX.GetBool(vehicle.transform.name + "RevLimiter", vehicle.useRevLimiter));
 
         if (PlayerPrefs.HasKey(vehicle.transform.name + "_WheelsSmokeColor"))
-            SetSmokeColor(vehicle, 0, RCC_PlayerPrefsX.GetColor(vehicle.transform.name + "_WheelsSmokeColor"));
+            SetSmokeColor(vehicle, 0, CargoTruck_CC_PlayerPrefsX.GetColor(vehicle.transform.name + "_WheelsSmokeColor"));
 
         if (PlayerPrefs.HasKey(vehicle.transform.name + "_HeadlightsColor"))
-            SetHeadlightsColor(vehicle, RCC_PlayerPrefsX.GetColor(vehicle.transform.name + "_HeadlightsColor"));
+            SetHeadlightsColor(vehicle, CargoTruck_CC_PlayerPrefsX.GetColor(vehicle.transform.name + "_HeadlightsColor"));
 
         OverrideRCC(vehicle);
 
@@ -785,7 +785,7 @@ public class RCC_Customization : MonoBehaviour {
     /// <summary>
     /// Resets all stats and saves default values with PlayerPrefs.
     /// </summary>
-    public static void ResetStats(RCC_CarControllerV3 vehicle, RCC_CarControllerV3 defaultCar) {
+    public static void ResetStats(CargoTruck_CC_CarControllerV3 vehicle, CargoTruck_CC_CarControllerV3 defaultCar) {
 
         if (!CheckVehicle(vehicle))
             return;
@@ -814,15 +814,15 @@ public class RCC_Customization : MonoBehaviour {
         switch (drvtrn) {
 
             case "FWD":
-                vehicle.wheelTypeChoise = RCC_CarControllerV3.WheelType.FWD;
+                vehicle.wheelTypeChoise = CargoTruck_CC_CarControllerV3.WheelType.FWD;
                 break;
 
             case "RWD":
-                vehicle.wheelTypeChoise = RCC_CarControllerV3.WheelType.RWD;
+                vehicle.wheelTypeChoise = CargoTruck_CC_CarControllerV3.WheelType.RWD;
                 break;
 
             case "AWD":
-                vehicle.wheelTypeChoise = RCC_CarControllerV3.WheelType.AWD;
+                vehicle.wheelTypeChoise = CargoTruck_CC_CarControllerV3.WheelType.AWD;
                 break;
 
         }
@@ -851,7 +851,7 @@ public class RCC_Customization : MonoBehaviour {
 
     }
 
-    public static bool CheckVehicle(RCC_CarControllerV3 vehicle) {
+    public static bool CheckVehicle(CargoTruck_CC_CarControllerV3 vehicle) {
 
         if (!vehicle) {
 

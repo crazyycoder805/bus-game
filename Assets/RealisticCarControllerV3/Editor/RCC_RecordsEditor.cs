@@ -13,17 +13,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-[CustomEditor(typeof(RCC_Records))]
-public class RCC_RecordsEditor : Editor {
+[CustomEditor(typeof(CargoTruck_CC_Records))]
+public class CargoTruck_CC_RecordsEditor : Editor {
 
-    RCC_Records prop;
+    CargoTruck_CC_Records prop;
 
     Color originalGUIColor;
 
     public override void OnInspectorGUI() {
 
         originalGUIColor = GUI.color;
-        prop = (RCC_Records)target;
+        prop = (CargoTruck_CC_Records)target;
         serializedObject.Update();
 
         EditorGUILayout.Space();
@@ -89,7 +89,7 @@ public class RCC_RecordsEditor : Editor {
 
     }
 
-    void DeleteRecord(RCC_Recorder.Recorded record) {
+    void DeleteRecord(CargoTruck_CC_Recorder.Recorded record) {
 
         prop.records.Remove(record);
 
@@ -106,7 +106,7 @@ public class RCC_RecordsEditor : Editor {
     //		if (!prop.gameObject.activeInHierarchy)
     //			return;
     //
-    //		Vector3 relativePos = prop.GetComponentInParent<RCC_CarControllerV3>().transform.InverseTransformPoint (prop.transform.position);
+    //		Vector3 relativePos = prop.GetComponentInParent<CargoTruck_CC_CarControllerV3>().transform.InverseTransformPoint (prop.transform.position);
     //
     //		if (relativePos.z > 0f) {
     //			

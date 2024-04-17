@@ -14,7 +14,7 @@ using UnityEngine;
 [AddComponentMenu("BoneCracker Games/Realistic Car Controller/Misc/RCC Police Siren")]
 public class CargoTruck_CC_PoliceSiren : MonoBehaviour {
 
-    private RCC_AICarController AI;
+    private CargoTruck_CC_AICarController AI;
 
     public SirenMode sirenMode;
     public enum SirenMode { Off, On }
@@ -24,7 +24,7 @@ public class CargoTruck_CC_PoliceSiren : MonoBehaviour {
 
     void Start() {
 
-        AI = GetComponentInParent<RCC_AICarController>();
+        AI = GetComponentInParent<CargoTruck_CC_AICarController>();
 
     }
 
